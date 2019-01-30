@@ -15,7 +15,6 @@ classes:
 TODO: remove dependency on pygame
 TODO: refactor binary writer helper methods
 TODO: add a Sprite class
-TODO: are pygame.locals needed?
 
 (c) Daniel Krajzewicz 2016-2019
 daniel@krajzewicz.de
@@ -27,14 +26,14 @@ Available under GPL 3.0, all rights reserved
 # --- imports -------------------------------------------------------
 import pygame
 import pygame.gfxdraw
-from pygame.locals import *
+import pygame.locals
 
 
 # --- Window class --------------------------------------------------
 class Window(object):
   """A plain pygame window. Nothing special about it."""
   
-  def __init__(self, w, h):
+  def __init__(self, w, h, title="c64 draw"):
     """Generates and shows a pygame window.
     
     :param w: window width
@@ -43,7 +42,7 @@ class Window(object):
     pygame.init()
     self.show = True
     self.screen = pygame.display.set_mode((w,h))
-    pygame.display.set_caption("c64 draw")
+    pygame.display.set_caption(title)
     self.background = pygame.Surface(self.screen.get_size())
     self.background = self.background.convert()
     self.background.fill((200,200,10))
@@ -57,10 +56,10 @@ class Window(object):
     Sets the self.show flag to False when being closed.
     """
     for event in pygame.event.get():
-      if event.type == QUIT:
+      if event.type == pygame.locals.QUIT:
         self.show = False
-      if event.type == KEYDOWN:
-        if event.key == K_ESCAPE:
+      if event.type == pygame.locals.KEYDOWN:
+        if event.key == pygame.locals.K_ESCAPE:
           self.show = False
 
 
@@ -108,18 +107,18 @@ class Memory:
         self.data.append([0]*rest)          
 
   
-  def drawAt(self, surface, x, y):
+  def drawAt(self, surface, x, y, cols):
     """Draws this memory at the given surface and the given position.
     
     :param surface: The surface to draw this memory to
     :param x: x-offset for drawing
     :param y: y-offset for drawing
+    :param cols: the number of (character) columns
     """
-    wc = 128 # characters per row
-    hc = 65536/8/wc # rows in chars
+    hc = 65536/8/cols # rows in chars
     for yh in range(0, hc):
-      for xh in range(0, wc):
-        offset = xh*8 + yh*8*wc
+      for xh in range(0, cols):
+        offset = xh*8 + yh*8*cols
         char = Char(self.data[offset:offset+8])
         char.drawAt(surface, x+xh*8, y+yh*8)
 
@@ -174,6 +173,8 @@ class Bitmap:
   def buildFrom(self, surface, x, y):
     """Generates the Bitmap from the given surface, starting at the given position.
     
+    Please note that only white pixels are assumed to be set
+    
     :param surface: The surface to extract the bitmap from
     :param x: x-offset for reading
     :param y: y-offset for reading
@@ -188,6 +189,26 @@ class Bitmap:
             #print surface.get_at((xh*8+xl+x, yh*8+yl+y))
             v = v*2
             if surface.get_at((xh*8+xl+x, yh*8+yl+y))==w:
+              c = 1
+            v = v+c
+          self.data[yh*8*40+xh*8+yl] = v
+
+  
+  def fromC64Screen(self, screen, chars):
+    """Filss the bitmap using the given screen and character set information
+    
+    :param screen: The screen to use
+    :param chars: The character set to use
+    """
+    for yh in range(0, 25):
+      for xh in range(0, 40):
+        char = screen.getCharAt(xh, yh)
+        for yl in range(0, 8):
+          v = 0
+          for xl in range(0, 8):
+            c = 0
+            v = v*2
+            if chars[char].data[yl]&(2**(7-xl)):
               c = 1
             v = v+c
           self.data[yh*8*40+xh*8+yl] = v
