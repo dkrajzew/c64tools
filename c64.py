@@ -122,6 +122,14 @@ class Memory:
         char = Char(self.data[offset:offset+8])
         char.drawAt(surface, x+xh*8, y+yh*8)
 
+  
+  def charAt(self, addr):
+    """Returns the eight bytes at the given address as a char
+    
+    :param addr: The address to read the bytes from
+    """
+    return Char(self.data[addr:addr+8])
+
 
 
 
@@ -266,6 +274,12 @@ class Char:
     :param f: The file to write this character to
     """
     f.write(bytearray(self.data))
+
+
+  def inverse(self):
+    """Inverses the character"""
+    for i,b in enumerate(self.data):
+      self.data[i] ^= 255
       
       
 # --- Screen class --------------------------------------------------
