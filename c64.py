@@ -97,7 +97,7 @@ class Memory:
     """
     f = open(fileName, "rb")
     ba = bytearray(f.read())
-    startingAddress = ba[0] + ba[1] * 8
+    startingAddress = ba[0] + ba[1] * 256
     self.data = []
     if startingAddress!=0:
       self.data = [0] * startingAddress
@@ -107,20 +107,22 @@ class Memory:
         self.data.append([0]*rest)          
 
   
-  def drawAt(self, surface, x, y, cols):
+  def drawAt(self, surface, x, y, cols, fgColor=(255, 255, 255, 255), bgColor=(0, 0, 0, 255)):
     """Draws this memory at the given surface and the given position.
     
     :param surface: The surface to draw this memory to
     :param x: x-offset for drawing
     :param y: y-offset for drawing
     :param cols: the number of (character) columns
+    :param fgColor: foreground color given as a tuple of four integers (rgba), may be None
+    :param bgColor: background color given as a tuple of four integers (rgba), may be None
     """
     hc = 65536/8/cols # rows in chars
     for yh in range(0, hc):
       for xh in range(0, cols):
         offset = xh*8 + yh*8*cols
         char = Char(self.data[offset:offset+8])
-        char.drawAt(surface, x+xh*8, y+yh*8)
+        char.drawAt(surface, x+xh*8, y+yh*8, fgColor, bgColor)
 
   
   def charAt(self, addr):
@@ -160,22 +162,24 @@ class Bitmap:
     return Char(self.data[off:off+8])
 
   
-  def drawAt(self, surface, x, y):
+  def drawAt(self, surface, x, y, fgColor=(255, 255, 255, 255), bgColor=(0, 0, 0, 255)):
     """Draws this bitmap at the given surface and the given position.
 
     :param surface: The surface to draw this memory to
     :param x: x-offset for drawing
     :param y: y-offset for drawing
+    :param fgColor: foreground color given as a tuple of four integers (rgba), may be None
+    :param bgColor: background color given as a tuple of four integers (rgba), may be None
     """
     for yh in range(0, 25):
       for xh in range(0, 40):
         for yl in range(0, 8):
           b = self.data[yh*8*40+xh*8+yl]
           for xl in range(0, 8):
-            c = (0, 0, 0, 255)
+            c = bgColor
             if b&(2**(7-xl))!=0:
-              c = (255, 255, 255, 255)
-            surface.set_at((xh*8+xl+x, yh*8+yl+y), c)
+              c = fgColor
+            if c: surface.set_at((xh*8+xl+x, yh*8+yl+y), c)
 
   
   def buildFrom(self, surface, x, y):
@@ -241,20 +245,48 @@ class Char:
       self.data = [0]*8
 
   
-  def drawAt(self, surface, x, y):
-    """Draws this character at the given surface and the given position.
+  def drawAt(self, surface, x, y, fgColor=(255, 255, 255, 255), bgColor=(0, 0, 0, 255)):
+    """Draws this character (in hires) at the given surface and the given position.
 
     :param surface: The surface to draw this memory to
     :param x: x-offset for drawing
     :param y: y-offset for drawing
+    :param fgColor: foreground color given as a tuple of four integers (rgba), may be None
+    :param bgColor: background color given as a tuple of four integers (rgba), may be None
     """
     for yl in range(0, 8):
       b = self.data[yl]
       for xl in range(0, 8):
-        c = (0, 0, 0, 255)
+        c = bgColor
         if b&(2**(7-xl))!=0:
-          c = (255, 255, 255, 255)
-          surface.set_at((xl+x, yl+y), c)
+          c = fgColor
+        if c: surface.set_at((xl+x, yl+y), c)
+
+  
+  def drawMulticolorAt(self, surface, x, y, fgColor=(255, 255, 255, 255), bgColor=(0, 0, 0, 255), multi1Color=(192, 192, 192, 255), multi2Color=(128, 128, 128, 255)):
+    """Draws this character in multicolor at the given surface and the given position.
+
+    :param surface: The surface to draw this memory to
+    :param x: x-offset for drawing
+    :param y: y-offset for drawing
+    :param fgColor: foreground color given as a tuple of four integers (rgba), may be None
+    :param bgColor: background color given as a tuple of four integers (rgba), may be None
+    :param multi1Color: multi1 color given as a tuple of four integers (rgba), may be None
+    :param multi2Color: multi2 color given as a tuple of four integers (rgba), may be None
+    """
+    for yl in range(0, 8):
+      b = self.data[yl]
+      for xl in range(0, 4):
+        c = bgColor
+        if b&(2**(7-xl*2))!=0 and b&(2**(7-xl*2-1))!=0:
+          c = fgColor
+        elif b&(2**(7-xl*2))!=0 and b&(2**(7-xl*2-1))==0:
+          c = multi1Color
+        elif b&(2**(7-xl*2))==0 and b&(2**(7-xl*2-1))!=0:
+          c = multi2Color
+        if c:
+          surface.set_at((xl*2+x, yl+y), c)
+          surface.set_at((xl*2+x+1, yl+y), c)
 
 
   def same(self, c):
