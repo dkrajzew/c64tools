@@ -10,11 +10,14 @@ Extracts a character set at a given address from a given memory dump.
 :param --width/-w: the width of the image to generate to build
 :param --divider/-d: the height of a divider space between the lines
 :param --inverse/-i: invert the characters
-:param --background/-b: set the background color (as hexadecimal triple, e.g. #ff0000)
-:param --foreground/-c: set the foreground color (as hexadecimal triple, e.g. #ff0000)
+:param --background/-b: set the background color, default: #000000
+:param --foreground/-c: set the foreground color, default: #ffffff
+:param --multicolor1/-1: Sets the multi color 1, default: #c0c0c0
+:param --multicolor2/-2: Sets the multi color 2, default: #808080
+:param --multicolor/-m: Uses multicolor mode
 :param --quiet/-q: do not show a window, just write the image
 
-(c) Daniel Krajzewicz 2019
+(c) Daniel Krajzewicz 2019-2020
 daniel@krajzewicz.de
 
 Available under GPL 3.0, all rights reserved

@@ -9,7 +9,7 @@ Either one argument - the file to load - must be supported or the following opti
 :param --width/-w: the width of the window / image in characters
 
 
-(c) Daniel Krajzewicz 2019
+(c) Daniel Krajzewicz 2019-2020
 daniel@krajzewicz.de
 
 Available under GPL 3.0, all rights reserved

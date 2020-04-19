@@ -16,7 +16,7 @@ TODO: remove dependency on pygame
 TODO: refactor binary writer helper methods
 TODO: add a Sprite class
 
-(c) Daniel Krajzewicz 2016-2019
+(c) Daniel Krajzewicz 2016-2020
 daniel@krajzewicz.de
 
 Available under GPL 3.0, all rights reserved
