@@ -27,7 +27,7 @@ Available under GPL 3.0, all rights reserved
 # --- imports -------------------------------------------------------
 import pygame
 import pygame.gfxdraw
-import c64
+import c64tools
 import sys
 import math
 
@@ -67,7 +67,7 @@ def main(args):
     print "Missing options; Please start with --help for advice."
     return
   # load the memory dump
-  mem = c64.Memory()
+  mem = c64tools.Memory()
   mem.load(ifile)
                       
   # build the surface to fill and save
@@ -106,7 +106,7 @@ def main(args):
   pygame.image.save(s, ofile)
   print "Written %s chars to %s" % (options.num, ofile)
   if not options.quiet:  
-    w = c64.Window(width, height, "charset")
+    w = c64tools.Window(width, height, "charset")
     w.screen.blit(s, (0, 0))
     while (w.show):
       pygame.display.flip()

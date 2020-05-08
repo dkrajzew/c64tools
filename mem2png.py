@@ -21,7 +21,7 @@ import sys
 import pygame
 import pygame.gfxdraw
 import pygame.image
-import c64
+import c64tools
 
 
 # --- methods -------------------------------------------------------
@@ -61,9 +61,9 @@ def main(args):
   INFO = 40
   ys = 65536/xs
   xs = xs*8
-  w = c64.Window(xs, ys+INFO)
+  w = c64tools.Window(xs, ys+INFO)
   w.background.fill((0,0,0))
-  mem = c64.Memory()
+  mem = c64tools.Memory()
   mem.load(ifile)
   mem.drawAt(w.background, 0, 0, xs/8)
   pygame.gfxdraw.line(w.background, 0, ys, xs, ys, (255,0,0))

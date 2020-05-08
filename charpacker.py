@@ -19,7 +19,7 @@ Available under GPL 3.0, all rights reserved
 # --- imports -------------------------------------------------------
 import pygame
 import pygame.gfxdraw
-import c64
+import c64tools
 import sys
 
 
@@ -35,7 +35,7 @@ def charpack(bitmap, ret=None):
   :param ret: optional charpack result for continuing 
   """
   if ret==None:
-    ret = [[], c64.Screen()]
+    ret = [[], c64tools.Screen()]
   for row in range(0, 25):
     for col in range(0, 40):
       found = False
@@ -68,12 +68,12 @@ def main(args):
     print "Missing options; Please start with --help for advice."
     return
   
-  w = c64.Window(320, 600, "charpacker")
+  w = c64tools.Window(320, 600, "charpacker")
   # load and show the original image
   pic = pygame.image.load(ifile)
   w.screen.blit(pic, (0, 0))
   # build and draw the bitmap
-  bo = c64.Bitmap()
+  bo = c64tools.Bitmap()
   bo.buildFrom(w.screen, 0, 0) # 
   bo.drawAt(w.screen, 0, 200)
   # charpack
@@ -82,19 +82,19 @@ def main(args):
     print "Charpacking succesfull, needed %s chars." % len(chars)
     if ofileScreen:
       print "saving screen..."
-      f = c64.open2Write(ofileScreen)
+      f = c64tools.open2Write(ofileScreen)
       f.write(bytearray(screen.data))
       f.close()
     if ofileCharset:
       print "saving charset..."
-      f = c64.open2Write(ofileCharset)
+      f = c64tools.open2Write(ofileCharset)
       for c in chars:
         f.write(bytearray(c.data))
       f.close()
   else:
     print "Charpacking failed, needed %s chars." % len(chars)
   # rebuild the bitmap and show it
-  bn = c64.Bitmap()
+  bn = c64tools.Bitmap()
   bn.fromC64Screen(screen, chars)
   bn.drawAt(w.screen, 0, 400)
   # show all
