@@ -18,8 +18,10 @@ TODO: add a Sprite class
 
 (c) Daniel Krajzewicz 2016-2020
 daniel@krajzewicz.de
+http://www.krajzewicz.de/blog/c64-python-helper.php
+https://github.com/dkrajzew/c64tools
 
-Available under GPL 3.0, all rights reserved
+Available under LGPL 3.0, all rights reserved
 """
 
 
@@ -182,7 +184,7 @@ class Bitmap:
             if c: surface.set_at((xh*8+xl+x, yh*8+yl+y), c)
 
   
-  def buildFrom(self, surface, x, y):
+  def fromSurface(self, surface, x, y):
     """Generates the Bitmap from the given surface, starting at the given position.
     
     Please note that only white pixels are assumed to be set
@@ -331,7 +333,7 @@ class Screen:
       self.data = [0]*(40*25)
 
 
-  def getCharAt(self, col, row):
+  def charAt(self, col, row):
     """Returns the caracter at the given position
     
     :param col: The column to get the character from 

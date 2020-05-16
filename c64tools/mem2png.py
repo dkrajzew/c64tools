@@ -11,6 +11,8 @@ Either one argument - the file to load - must be supported or the following opti
 
 (c) Daniel Krajzewicz 2019-2020
 daniel@krajzewicz.de
+http://www.krajzewicz.de/blog/c64-python-helper.php
+https://github.com/dkrajzew/c64tools
 
 Available under GPL 3.0, all rights reserved
 """

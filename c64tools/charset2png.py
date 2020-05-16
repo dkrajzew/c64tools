@@ -19,6 +19,8 @@ Extracts a character set at a given address from a given memory dump.
 
 (c) Daniel Krajzewicz 2019-2020
 daniel@krajzewicz.de
+http://www.krajzewicz.de/blog/c64-python-helper.php
+https://github.com/dkrajzew/c64tools
 
 Available under GPL 3.0, all rights reserved
 """

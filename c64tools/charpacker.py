@@ -11,6 +11,8 @@ Either one argument - the file to load - must be supported or the following opti
 
 (c) Daniel Krajzewicz 2019-2020
 daniel@krajzewicz.de
+http://www.krajzewicz.de/blog/c64-python-helper.php
+https://github.com/dkrajzew/c64tools
 
 Available under GPL 3.0, all rights reserved
 """
@@ -74,7 +76,7 @@ def main(args):
   w.screen.blit(pic, (0, 0))
   # build and draw the bitmap
   bo = c64tools.Bitmap()
-  bo.buildFrom(w.screen, 0, 0) # 
+  bo.fromSurface(w.screen, 0, 0) # 
   bo.drawAt(w.screen, 0, 200)
   # charpack
   chars, screen = charpack(bo)
