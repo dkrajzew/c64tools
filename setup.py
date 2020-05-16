@@ -6,8 +6,8 @@ This is the setup file for
 
 (c) Daniel Krajzewicz 2016-2020
 daniel@krajzewicz.de
-http://www.krajzewicz.de
 http://www.krajzewicz.de/blog/c64-python-helper.php
+https://github.com/dkrajzew/c64tools
 
 Available under GPL 3.0, all rights reserved
 """
@@ -33,7 +33,7 @@ setuptools.setup(
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Programming Language :: Python :: 2.7",
-        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
         "Operating System :: OS Independent",
     ],
     python_requires='>=2.7, <3',
