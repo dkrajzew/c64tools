@@ -5,5 +5,6 @@ python:
   - "3.8"
 # command to install dependencies
 install:
+  - pip install pygame
   - pip install .
   
