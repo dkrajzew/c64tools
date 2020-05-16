@@ -1,3 +1,4 @@
+from __future__ import print_function
 """mem2png.py
 
 A c64 memory dump visualiser that can export the dump to an image.
@@ -38,7 +39,7 @@ def main(args):
   xs = 128
   # parse arguments
   if len(args)==1:
-    print "You have to give the name of the memory dump to load (or use further options)"
+    print ("You have to give the name of the memory dump to load (or use further options)")
     return
   elif len(args)==2:
     ifile = args[1]

@@ -1,3 +1,4 @@
+from __future__ import print_function
 """charset2png.py
 
 Extracts a character set at a given address from a given memory dump.
@@ -66,7 +67,7 @@ def main(args):
   ofile = options.output
   address = options.address
   if not ifile or not ofile or not address:
-    print "Missing options; Please start with --help for advice."
+    optParser.error("missing options; Please start with --help for advice.")
     return
   # load the memory dump
   mem = c64tools.Memory()
@@ -106,7 +107,7 @@ def main(args):
         oX += 8
       dstY += 8
   pygame.image.save(s, ofile)
-  print "Written %s chars to %s" % (options.num, ofile)
+  print ("Written %s chars to %s" % (options.num, ofile))
   if not options.quiet:  
     w = c64tools.Window(width, height, "charset")
     w.screen.blit(s, (0, 0))

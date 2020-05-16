@@ -200,7 +200,6 @@ class Bitmap:
           v = 0
           for xl in range(0, 8):
             c = 0
-            #print surface.get_at((xh*8+xl+x, yh*8+yl+y))
             v = v*2
             if surface.get_at((xh*8+xl+x, yh*8+yl+y))==w:
               c = 1

@@ -1,3 +1,4 @@
+from __future__ import print_function
 """mem2png.py
 
 A c64 memory dump visualiser that can export the dump to an image.
@@ -67,7 +68,7 @@ def main(args):
   ofileScreen = options.screen
   ofileCharset = options.charset
   if not ifile:
-    print "Missing options; Please start with --help for advice."
+    print ("Missing options; Please start with --help for advice.")
     return
   
   w = c64tools.Window(320, 600, "charpacker")
@@ -81,20 +82,20 @@ def main(args):
   # charpack
   chars, screen = charpack(bo)
   if len(chars)<257:
-    print "Charpacking succesfull, needed %s chars." % len(chars)
+    print ("Charpacking succesfull, needed %s chars." % len(chars))
     if ofileScreen:
-      print "saving screen..."
+      print ("saving screen...")
       f = c64tools.open2Write(ofileScreen)
       f.write(bytearray(screen.data))
       f.close()
     if ofileCharset:
-      print "saving charset..."
+      print ("saving charset...")
       f = c64tools.open2Write(ofileCharset)
       for c in chars:
         f.write(bytearray(c.data))
       f.close()
   else:
-    print "Charpacking failed, needed %s chars." % len(chars)
+    print ("Charpacking failed, needed %s chars." % len(chars))
   # rebuild the bitmap and show it
   bn = c64tools.Bitmap()
   bn.fromC64Screen(screen, chars)
