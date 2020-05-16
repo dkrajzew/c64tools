@@ -22,7 +22,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="c64tools",
-    version="0.6",
+    version="0.8",
     author="dkrajzew",
     author_email="d.krajzewicz@gmail.com",
     description="Python helper for dealing with Commodore c64 graphics",
