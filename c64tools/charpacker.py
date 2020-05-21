@@ -15,7 +15,7 @@ daniel@krajzewicz.de
 http://www.krajzewicz.de/blog/c64-python-helper.php
 https://github.com/dkrajzew/c64tools
 
-Available under GPL 3.0, all rights reserved
+Available under LGPL 3.0, all rights reserved
 """
 
 
@@ -68,8 +68,8 @@ def main(args):
   ofileScreen = options.screen
   ofileCharset = options.charset
   if not ifile:
-    print ("Missing options; Please start with --help for advice.")
-    return
+    optParser.error("no input file(s) given...")
+    sys.exit()
   
   w = c64tools.Window(320, 600, "charpacker")
   # load and show the original image

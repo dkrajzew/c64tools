@@ -15,7 +15,7 @@ daniel@krajzewicz.de
 http://www.krajzewicz.de/blog/c64-python-helper.php
 https://github.com/dkrajzew/c64tools
 
-Available under GPL 3.0, all rights reserved
+Available under LGPL 3.0, all rights reserved
 """
 
 
