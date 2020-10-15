@@ -62,13 +62,13 @@ def main(args):
 
   # build window and load and draw dump
   INFO = 40
-  ys = 65536/xs
+  ys = int(65536/xs)
   xs = xs*8
   w = c64tools.Window(xs, ys+INFO)
   w.background.fill((0,0,0))
   mem = c64tools.Memory()
   mem.load(ifile)
-  mem.drawAt(w.background, 0, 0, xs/8)
+  mem.drawAt(w.background, 0, 0, int(xs/8))
   pygame.gfxdraw.line(w.background, 0, ys, xs, ys, (255,0,0))
   w.screen.blit(w.background, (0, 0))
   pygame.font.init()
@@ -84,7 +84,7 @@ def main(args):
   while (w.show):
     pygame.display.update()
     mx,my = pygame.mouse.get_pos()
-    char = (int(mx / 8) + (int(my/8)*(xs/8))) * 8
+    char = (int(mx / 8) + (int(my/8)*int(xs/8))) * 8
     pygame.gfxdraw.filled_polygon(w.screen, [[0,ys+1], [xs,ys+1], [xs,ys+INFO], [0,ys+INFO], [0,ys+1]], (0,0,0))
     textsurface = myfont.render('x=%s, y=%s' % (mx,my), False, (255,255,255))
     w.screen.blit(textsurface, (0, ys))

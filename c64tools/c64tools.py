@@ -119,7 +119,7 @@ class Memory:
     :param fgColor: foreground color given as a tuple of four integers (rgba), may be None
     :param bgColor: background color given as a tuple of four integers (rgba), may be None
     """
-    hc = 65536/8/cols # rows in chars
+    hc = int(65536/8/cols) # rows in chars
     for yh in range(0, hc):
       for xh in range(0, cols):
         offset = xh*8 + yh*8*cols
