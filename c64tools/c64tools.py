@@ -208,14 +208,14 @@ class Bitmap:
 
   
   def fromC64Screen(self, screen, chars):
-    """Filss the bitmap using the given screen and character set information
+    """Fills the bitmap using the given screen and character set information
     
     :param screen: The screen to use
     :param chars: The character set to use
     """
     for yh in range(0, 25):
       for xh in range(0, 40):
-        char = screen.getCharAt(xh, yh)
+        char = screen.charAt(xh, yh)
         for yl in range(0, 8):
           v = 0
           for xl in range(0, 8):
