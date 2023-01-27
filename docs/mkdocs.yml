@@ -1,0 +1,56 @@
+site_name: c64tools
+site_url: https://github.com/dkrajzew/c64tools
+site_description: Python helper for c64 graphics. 
+site_author: Daniel Krajzewicz
+docs_dir: ./mkdocs
+
+repo_url: https://github.com/dkrajzew/c64tools.git
+edit_uri: ""
+
+theme:
+    name: material
+    highlightjs: true
+    hljs_languages:
+        - yaml
+    palette:
+        primary: light green
+        
+nav:
+    - Home: index.md
+    - Installation: install.md
+    - Usage: 
+        - charpacker: use_charpacker.md
+        - charset2png: use_charset2png.md
+        - mem2png: use_mem2png.md
+        - filemerge: use_filemerge.md
+    - Links: links.md
+    - Code Docs:
+        - c64tools: api_c64tools.md
+        - filemerge: api_filemerge.md
+        - charpacker: api_charpacker.md
+        - charset2png: api_charset2png.md
+        - mem2png: api_mem2png.md
+    - Developer Docs:
+        - How To Release: release.md
+    - ChangeLog: changes.md
+    - License (BSD): license.md
+    - Legal: legal.md
+
+markdown_extensions:
+    - admonition
+    - sane_lists
+  
+copyright: "&copy; Copyright 2020&ndash;2023 Daniel Krajzewicz."
+
+use_directory_urls: false
+
+plugins:
+    - search
+    - mkdocstrings:
+        handlers:
+            python:
+                paths: [..]
+                options:
+                    filters: [""]
+                    show_source: False
+                    docstring_style: "google"
