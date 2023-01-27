@@ -1,28 +1,27 @@
-"""c64
-
-Some classes that represent c64 structures.
-
-This file can also be imported as a module and contains the following
-classes:
-
-    * Window - a basic pygame window for displaying stuff
-    * Memory - a basic pygame window for displaying stuff
-    * Bitmap - A c64 bitmap representation
-    * Char - The representation of a single c64 character
-    * Screen - The representation of c64 screen
-    * Methods for writing binary contents
-
-TODO: remove dependency on pygame
-TODO: refactor binary writer helper methods
-TODO: add a Sprite class
-
-(c) Daniel Krajzewicz 2016-2020
-daniel@krajzewicz.de
-http://www.krajzewicz.de/blog/c64-python-helper.php
-https://github.com/dkrajzew/c64tools
-
-Available under LGPL 3.0, all rights reserved
-"""
+from __future__ import print_function
+# ===================================================================
+# c64tools - c64 Python helper
+#
+# Some classes that represent c64 structures.
+# This file can also be imported as a module.
+# It contains the following classes:
+# - Window - a basic pygame window for displaying stuff
+# - Memory - a basic pygame window for displaying stuff
+# - Bitmap - A c64 bitmap representation
+# - Char - The representation of a single c64 character
+# - Screen - The representation of c64 screen
+# - Methods for writing binary contents
+#
+# TODO: remove dependency on pygame
+# TODO: refactor binary writer helper methods
+# TODO: add a Sprite class
+#
+# (c) Daniel Krajzewicz 2016-2023
+# daniel@krajzewicz.de
+# http://www.krajzewicz.de/blog/c64-python-helper.php
+# https://github.com/dkrajzew/c64tools
+# Available under the BSD license.
+# ===================================================================
 
 
 # --- imports -------------------------------------------------------
@@ -38,8 +37,9 @@ class Window(object):
   def __init__(self, w, h, title="c64 draw"):
     """Generates and shows a pygame window.
     
-    :param w: window width
-    :param h: window height
+    Args:
+        w (int): window width
+        h (int): window height
     """
     pygame.init()
     self.show = True
@@ -50,6 +50,7 @@ class Window(object):
     self.background.fill((200,200,10))
     self.screen.blit(self.background, (0, 0))
     pygame.display.update()
+        
         
   def run(self):        
     """Processes the pygame window events.
@@ -77,7 +78,8 @@ class Memory:
     Assigns the given data. If no data is given, the data (memory)
     is initialiased with zeros.
     
-    :param data: The memory data (should be 65536 bytes long) 
+    Args:
+        data (int array): The memory data (should be 65536 bytes long) 
     """
     self.data = data
     if self.data==None:
@@ -93,7 +95,8 @@ class Memory:
     
     Loading assures that the memory is complete (is 65536 bytes long)
     
-    :param fileName: The file to load
+    Args:
+        fileName (string): The file to load
      
     TODO: check destination byte order (not spent a thought on it)
     """
@@ -106,18 +109,19 @@ class Memory:
     self.data.extend(list(ba[2:]))
     rest = 65536 - (startingAddress + len(ba) - 2)
     if rest>0: 
-        self.data.append([0]*rest)          
+        self.data.extend([0]*rest)          
 
   
   def drawAt(self, surface, x, y, cols, fgColor=(255, 255, 255, 255), bgColor=(0, 0, 0, 255)):
     """Draws this memory at the given surface and the given position.
     
-    :param surface: The surface to draw this memory to
-    :param x: x-offset for drawing
-    :param y: y-offset for drawing
-    :param cols: the number of (character) columns
-    :param fgColor: foreground color given as a tuple of four integers (rgba), may be None
-    :param bgColor: background color given as a tuple of four integers (rgba), may be None
+    Args:
+        surface (pygame surface): The surface to draw this memory to
+        x (int): x-offset for drawing
+        y (int): y-offset for drawing
+        cols (int): the number of (character) columns
+        fgColor (RGBA tuple): foreground color given as a tuple of four integers (rgba), may be None
+        bgColor (RGBA tuple): background color given as a tuple of four integers (rgba), may be None
     """
     hc = int(65536/8/cols) # rows in chars
     for yh in range(0, hc):
@@ -130,7 +134,8 @@ class Memory:
   def charAt(self, addr):
     """Returns the eight bytes at the given address as a char
     
-    :param addr: The address to read the bytes from
+    Args:
+        addr (int): The address to read the bytes from
     """
     return Char(self.data[addr:addr+8])
 
@@ -147,7 +152,8 @@ class Bitmap:
     Assigns the given data. If no data is given, the data (bitmap)
     is initialiased with zeros.
     
-    :param data: The bitmap data 
+    Args:
+        data (int array): The bitmap data 
     """
     self.data = data
     if self.data==None:
@@ -157,8 +163,9 @@ class Bitmap:
   def charAt(self, col, row):
     """Returns the Char representation of the character at the given position.
 
-    :param col: The column (in characters) to read the char from 
-    :param row: The row (in characters) to read the char from
+    Args:
+        col (int): The column (in characters) to read the char from 
+        row (int): The row (in characters) to read the char from
     """
     off = row*40*8+col*8
     return Char(self.data[off:off+8])
@@ -167,11 +174,12 @@ class Bitmap:
   def drawAt(self, surface, x, y, fgColor=(255, 255, 255, 255), bgColor=(0, 0, 0, 255)):
     """Draws this bitmap at the given surface and the given position.
 
-    :param surface: The surface to draw this memory to
-    :param x: x-offset for drawing
-    :param y: y-offset for drawing
-    :param fgColor: foreground color given as a tuple of four integers (rgba), may be None
-    :param bgColor: background color given as a tuple of four integers (rgba), may be None
+    Args:
+        surface (pygame surface): The surface to draw this memory to
+        x (int): x-offset for drawing
+        y (int): y-offset for drawing
+        fgColor (RGBA tuple): foreground color given as a tuple of four integers (rgba), may be None
+        bgColor (RGBA tuple): background color given as a tuple of four integers (rgba), may be None
     """
     for yh in range(0, 25):
       for xh in range(0, 40):
@@ -189,9 +197,10 @@ class Bitmap:
     
     Please note that only white pixels are assumed to be set
     
-    :param surface: The surface to extract the bitmap from
-    :param x: x-offset for reading
-    :param y: y-offset for reading
+    Args:
+        surface (pygame surface): The surface to extract the bitmap from
+        x (int): x-offset for reading
+        y (int): y-offset for reading
     """
     w = (255,255,255,255)
     for yh in range(0, 25):
@@ -210,8 +219,9 @@ class Bitmap:
   def fromC64Screen(self, screen, chars):
     """Fills the bitmap using the given screen and character set information
     
-    :param screen: The screen to use
-    :param chars: The character set to use
+    Args:
+        screen (Screen instance): The screen to use
+        chars (character array): The character set to use
     """
     for yh in range(0, 25):
       for xh in range(0, 40):
@@ -239,7 +249,8 @@ class Char:
     Assigns the given data. If no data is given, the data (character)
     is initialiased with zeros.
     
-    :param data: The character data (should be 8 bytes long) 
+    Args:
+        data (int[8]): The character data (should be 8 bytes long) 
     """
     self.data = data
     if self.data==None:
@@ -249,11 +260,12 @@ class Char:
   def drawAt(self, surface, x, y, fgColor=(255, 255, 255, 255), bgColor=(0, 0, 0, 255)):
     """Draws this character (in hires) at the given surface and the given position.
 
-    :param surface: The surface to draw this memory to
-    :param x: x-offset for drawing
-    :param y: y-offset for drawing
-    :param fgColor: foreground color given as a tuple of four integers (rgba), may be None
-    :param bgColor: background color given as a tuple of four integers (rgba), may be None
+    Args:
+        surface (pygame surface): The surface to draw this memory to
+        x (int): x-offset for drawing
+        y (int): y-offset for drawing
+        fgColor (RGBA tuple): foreground color given as a tuple of four integers (rgba), may be None
+        bgColor (RGBA tuple): background color given as a tuple of four integers (rgba), may be None
     """
     for yl in range(0, 8):
       b = self.data[yl]
@@ -267,13 +279,14 @@ class Char:
   def drawMulticolorAt(self, surface, x, y, fgColor=(255, 255, 255, 255), bgColor=(0, 0, 0, 255), multi1Color=(192, 192, 192, 255), multi2Color=(128, 128, 128, 255)):
     """Draws this character in multicolor at the given surface and the given position.
 
-    :param surface: The surface to draw this memory to
-    :param x: x-offset for drawing
-    :param y: y-offset for drawing
-    :param fgColor: foreground color given as a tuple of four integers (rgba), may be None
-    :param bgColor: background color given as a tuple of four integers (rgba), may be None
-    :param multi1Color: multi1 color given as a tuple of four integers (rgba), may be None
-    :param multi2Color: multi2 color given as a tuple of four integers (rgba), may be None
+    Args:
+        surface (pygame surface): The surface to draw this memory to
+        x (int): x-offset for drawing
+        y (int9: y-offset for drawing
+        fgColor (RGBA tuple): foreground color given as a tuple of four integers (rgba), may be None
+        bgColor (RGBA tuple): background color given as a tuple of four integers (rgba), may be None
+        multi1Color (RGBA tuple): multi1 color given as a tuple of four integers (rgba), may be None
+        multi2Color (RGBA tuple): multi2 color given as a tuple of four integers (rgba), may be None
     """
     for yl in range(0, 8):
       b = self.data[yl]
@@ -293,7 +306,8 @@ class Char:
   def same(self, c):
     """Returns whether the given character is same as this one.
     
-    :param c: The character to compare this character to
+    Args:
+        c (int): The character to compare this character to
     """
     for i,x in enumerate(self.data):
       if self.data[i]!=c.data[i]:
@@ -304,7 +318,8 @@ class Char:
   def writeInto(self, f):
     """Writes this character to a file.
     
-    :param f: The file to write this character to
+    Args:
+        f (file descriptor): The file to write this character to
     """
     f.write(bytearray(self.data))
 
@@ -325,7 +340,8 @@ class Screen:
     Assigns the given data. If no data is given, the data (screen)
     is initialiased with zeros.
     
-    :param data: The screen data (should be 1000 bytes long) 
+    Args:
+        data (int array): The screen data (should be 1000 bytes long) 
     """
     self.data = data
     if self.data==None:
@@ -335,8 +351,9 @@ class Screen:
   def charAt(self, col, row):
     """Returns the caracter at the given position
     
-    :param col: The column to get the character from 
-    :param row: The row to get the character from 
+    Args:
+        col (int): The column to get the character from 
+        row (int): The row to get the character from 
     """
     return self.data[col+row*40]
 
@@ -356,7 +373,8 @@ class Screen:
 def open2Write(fileName):
   """Opens a file for writing.
   
-  :param fileName: The name of the file to open for writing 
+  Args:
+    fileName (string): The name of the file to open for writing 
   """
   return open(fileName, "wb")
 
@@ -364,9 +382,10 @@ def open2Write(fileName):
 def saveChars(fileName, pos, chars):
   """Saves the given characters.
 
-  :param fileName: The name of the file to write the given characters to 
-  :param pos: unused! 
-  :param chars: The characters to save
+  Args:
+    fileName (string): The name of the file to write the given characters to 
+    pos (int): unused! 
+    chars (Char[]) : The characters to save
   
   TODO: remove the pos-parameter 
   """
@@ -379,8 +398,9 @@ def saveChars(fileName, pos, chars):
 def writeByte(f, b):
   """Writes the given byte as a one-byte-bytearray.
 
-  :param f: The file to write the byte to 
-  :param b: The byte to write 
+  Args:
+    f (file descriptor): The file to write the byte to 
+    b (int): The byte to write 
   """
   f.write(bytearray([b]))
 
@@ -388,8 +408,9 @@ def writeByte(f, b):
 def writeBytes(f, bs):
   """Writes the given array as a bytearray.
   
-  :param f: The file to write the bytes to 
-  :param bs: The bytes to write 
+  Args:
+    f (file descriptor): The file to write the bytes to 
+    bs (int[]): The bytes to write 
   """
   f.write(bytearray(bs))
 

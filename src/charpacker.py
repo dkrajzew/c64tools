@@ -1,22 +1,23 @@
 from __future__ import print_function
-"""mem2png.py
-
-A c64 memory dump visualiser that can export the dump to an image.
-
-Either one argument - the file to load - must be supported or the following options
-
-:param --file/-f: the memory dump to load
-:param --output/-o: the image file to write
-:param --width/-w: the width of the window / image in characters
-
-
-(c) Daniel Krajzewicz 2019-2020
-daniel@krajzewicz.de
-http://www.krajzewicz.de/blog/c64-python-helper.php
-https://github.com/dkrajzew/c64tools
-
-Available under LGPL 3.0, all rights reserved
-"""
+# ===================================================================
+# c64tools - c64 Python helper / mem2png
+#
+# A c64 memory dump visualiser that can export the dump to an image.
+#
+# Either one argument - the file to load - must be supported
+# or the following options
+#
+# --file/-f: the memory dump to load
+# --output/-o: the image file to write
+# --width/-w: the width of the window / image in characters
+#
+#
+# (c) Daniel Krajzewicz 2016-2023
+# daniel@krajzewicz.de
+# http://www.krajzewicz.de/blog/c64-python-helper.php
+# https://github.com/dkrajzew/c64tools
+# Available under the BSD license.
+# ===================================================================
 
 
 # --- imports -------------------------------------------------------
@@ -34,8 +35,9 @@ def charpack(bitmap, ret=None):
   It is possible to continue a charpacking by supporting a tuple of 
   a character list and a screen as the second parameter.
   
-  :param bitmap: the c64 bitmap to charpack 
-  :param ret: optional charpack result for continuing 
+  Args:
+    bitmap (Bitmap instance): the c64 bitmap to charpack 
+    ret: optional charpack result for continuing 
   """
   if ret==None:
     ret = [[], c64tools.Screen()]
@@ -57,6 +59,9 @@ def main(args):
   """Loads an image file, charpacks it, saves the obtained screen and character
   set and shows the original image, its bitmap representation, and the charpacking
   result.
+
+  Args:
+    args (string[]): The command line arguments
   """
   from optparse import OptionParser
   optParser = OptionParser(usage="""usage:\n  %prog <MEMORY_DUMP>\n  %prog [options]""")

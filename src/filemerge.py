@@ -1,24 +1,23 @@
 from __future__ import print_function
-"""filemerge.py
-
-Joins a set of files into one.
-
-Loads the files given and stores them at the designated 
-(described by the first two bytes) position in memory.
-Saves the so obtained memory part, together with the
-starting address.
-
-:param --file/-f: the file(s) to load, separated by a ','
-:param --output/-o: the `name of the file to write
-
-
-(c) Daniel Krajzewicz 2020
-daniel@krajzewicz.de
-http://www.krajzewicz.de/blog/c64-python-helper.php
-https://github.com/dkrajzew/c64tools
-
-Available under LGPL 3.0, all rights reserved
-"""
+# ===================================================================
+# c64tools - c64 Python helper / filemerge
+#
+# Joins a set of files into one.
+# 
+# Loads the files given and stores them at the designated 
+# (described by the first two bytes) position in memory.
+# Saves the so obtained memory part, together with the
+# starting address.
+# 
+# --file/-f: the file(s) to load, separated by a ','
+# --output/-o: the `name of the file to write
+#
+# (c) Daniel Krajzewicz 2016-2023
+# daniel@krajzewicz.de
+# http://www.krajzewicz.de/blog/c64-python-helper.php
+# https://github.com/dkrajzew/c64tools
+# Available under the BSD license.
+# ===================================================================
 
 
 # --- imports -------------------------------------------------------
@@ -32,7 +31,11 @@ from optparse import OptionParser
 def main(args):
   """Initialises an empty memory, loads subsequently the defined files
   to their addresses and writes the memory as occupied by the loaded
-  contents."""
+  contents.
+  
+  Args:
+    args (string[]): The command line arguments
+  """
   optParser = OptionParser(usage="""usage:\n  %prog <MEMORY_DUMP>\n  %prog [options]""")
   optParser.add_option("-f", "--file", dest="file", default=None, help="Defines the files to load, separated by a ','")
   optParser.add_option("-o", "--output", dest="output", default=None, help="Defines the name of the file to write")

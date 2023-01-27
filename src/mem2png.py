@@ -1,22 +1,21 @@
 from __future__ import print_function
-"""mem2png.py
-
-A c64 memory dump visualiser that can export the dump to an image.
-
-Either one argument - the file to load - must be supported or the following options
-
-:param --file/-f: the memory dump to load
-:param --output/-o: the image file to write
-:param --width/-w: the width of the window / image in characters
-
-
-(c) Daniel Krajzewicz 2019-2020
-daniel@krajzewicz.de
-http://www.krajzewicz.de/blog/c64-python-helper.php
-https://github.com/dkrajzew/c64tools
-
-Available under LGPL 3.0, all rights reserved
-"""
+# ===================================================================
+# c64tools - c64 Python helper / mem2png
+#
+# A c64 memory dump visualiser that can export the dump to an image.
+# 
+# Either one argument - the file to load - must be supported or the following options
+#
+# --file/-f: the memory dump to load
+# --output/-o: the image file to write
+# --width/-w: the width of the window / image in characters
+#
+# (c) Daniel Krajzewicz 2016-2023
+# daniel@krajzewicz.de
+# http://www.krajzewicz.de/blog/c64-python-helper.php
+# https://github.com/dkrajzew/c64tools
+# Available under the BSD license.
+# ===================================================================
 
 
 # --- imports -------------------------------------------------------
@@ -30,7 +29,11 @@ import c64tools
 # --- methods -------------------------------------------------------
 # -- main
 def main(args):
-  """Loads the memory dump, saves its display and shows it."""
+  """Loads the memory dump, saves its display and shows it.
+  
+  Args:
+    args (string[]): The command line arguments
+  """
   # check arguments
   # set defaults
   ifile = None

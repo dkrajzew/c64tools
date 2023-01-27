@@ -1,30 +1,30 @@
 from __future__ import print_function
-"""charset2png.py
-
-Extracts a character set at a given address from a given memory dump.
-
-:param --file/-f: the memory dump to load
-:param --output/-o: the name of the file to write the character set to
-:param --address/-a: the address to extract the character set from
-:param --number/-n: the number of characters to extract 
-:param --pattern/-p: pattern of multi-char character sets
-:param --width/-w: the width of the image to generate to build
-:param --divider/-d: the height of a divider space between the lines
-:param --inverse/-i: invert the characters
-:param --background/-b: set the background color, default: #000000
-:param --foreground/-c: set the foreground color, default: #ffffff
-:param --multicolor1/-1: Sets the multi color 1, default: #c0c0c0
-:param --multicolor2/-2: Sets the multi color 2, default: #808080
-:param --multicolor/-m: Uses multicolor mode
-:param --quiet/-q: do not show a window, just write the image
-
-(c) Daniel Krajzewicz 2019-2020
-daniel@krajzewicz.de
-http://www.krajzewicz.de/blog/c64-python-helper.php
-https://github.com/dkrajzew/c64tools
-
-Available under LGPL 3.0, all rights reserved
-"""
+# ===================================================================
+# c64tools - c64 Python helper / charset2png
+#
+# Extracts a character set at a given address from a given memory dump.
+#
+# --file/-f: the memory dump to load
+# --output/-o: the name of the file to write the character set to
+# --address/-a: the address to extract the character set from
+# --number/-n: the number of characters to extract 
+# --pattern/-p: pattern of multi-char character sets
+# --width/-w: the width of the image to generate to build
+# --divider/-d: the height of a divider space between the lines
+# --inverse/-i: invert the characters
+# --background/-b: set the background color, default: #000000
+# --foreground/-c: set the foreground color, default: #ffffff
+# --multicolor1/-1: Sets the multi color 1, default: #c0c0c0
+# --multicolor2/-2: Sets the multi color 2, default: #808080
+# --multicolor/-m: Uses multicolor mode
+# --quiet/-q: do not show a window, just write the image
+#
+# (c) Daniel Krajzewicz 2016-2023
+# daniel@krajzewicz.de
+# http://www.krajzewicz.de/blog/c64-python-helper.php
+# https://github.com/dkrajzew/c64tools
+# Available under the BSD license.
+# ===================================================================
 
 
 # --- imports -------------------------------------------------------
@@ -36,16 +36,25 @@ import math
 
 
 # --- methods -------------------------------------------------------
-# converts a given color
 def convertColor(color):
+  """Converts a given color
+  
+  Args:
+    color (string): The hex color string
+  """
   if not color: return None
   color = color.strip("#")
   if len(color)==0: return None
   return tuple(int(color[i:i+2], 16) for i in (0, 2 ,4))
 
+
 # -- main
 def main(args):
-  """Loads the memory dump, extracts the character set saves its display and shows it."""
+  """Loads the memory dump, extracts the character set saves its display and shows it.
+  
+  Args:
+    args (string[]): The command line arguments
+  """
   from optparse import OptionParser
   optParser = OptionParser(usage="""usage:\n  %prog [options]""")
   optParser.add_option("-f", "--file", dest="file", default=None, help="Defines the memory to extract the charset from")
