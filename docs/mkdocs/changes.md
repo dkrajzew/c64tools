@@ -13,6 +13,8 @@ to come: c64tools-0.10.0
 
 * using mkdocs for documentation
 * added requirements.txt
+* moved to BSD license
+* improved inline documentation
 
 
 c64tools-0.8 (16.05.2020)
