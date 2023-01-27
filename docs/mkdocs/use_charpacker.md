@@ -14,7 +14,3 @@ The tool has to be started with the following options set:
 * __--charset-output/-c _&lt;CHARSET_OUTPUT_FILENAME&gt;___: the name of the file to write the charset
 
 
-Further documentation
----------------------
-
-* There is a !!!

@@ -22,8 +22,3 @@ The tool has to be started with the following options set:
 * __--multicolor/-m__: use multicolor mode
 * __--quiet/-q__: do not show a window, just write the image
 
-
-Further documentation
----------------------
-
-* There is a !!!

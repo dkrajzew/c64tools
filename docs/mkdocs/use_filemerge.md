@@ -8,7 +8,3 @@ The tool has to be started with the following options set:
 * __--file/-f _&lt;FILE&gt;[,&lt;FILE&gt;]*___: the file(s) to load, separated by ‘,’
 * __--output/-o _&lt;FILE&gt;___: the name of the file to write the memory to
 
-Further documentation
----------------------
-
-* There is a !!!

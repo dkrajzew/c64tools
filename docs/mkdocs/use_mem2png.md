@@ -9,8 +9,3 @@ The tool has to be started with either one option â€” the memory dump to load â€
 * __--output/-o _&lt;IMAGE_TO_SAVE&gt;___: the file name to save the memory image to
 * __--width/-w _&lt;DISPLAY_WIDTH_IN_CHARACTERS&gt;___: the width of the display in characters (the default is 128)
 
-
-Further documentation
----------------------
-
-* There is a !!!
