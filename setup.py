@@ -1,16 +1,12 @@
-"""setup.py
-
-This is the setup file for 
-
- c64tools - Python helper for dealing with Commodore c64 graphics.
-
-(c) Daniel Krajzewicz 2016-2020
-daniel@krajzewicz.de
-http://www.krajzewicz.de/blog/c64-python-helper.php
-https://github.com/dkrajzew/c64tools
-
-Available under GPL 3.0, all rights reserved
-"""
+# ===================================================================
+# c64tools - c64 Python helper / setup
+#
+# (c) Daniel Krajzewicz 2016-2023
+# daniel@krajzewicz.de
+# http://www.krajzewicz.de/blog/c64-python-helper.php
+# https://github.com/dkrajzew/c64tools
+# Available under the BSD license.
+# ===================================================================
 
 # --- imports -------------------------------------------------------
 import setuptools
@@ -22,10 +18,10 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
   name="c64tools",
-  version="0.8",
+  version="0.10.0",
   author="dkrajzew",
   author_email="d.krajzewicz@gmail.com",
-  description="Python helper for dealing with Commodore c64 graphics",
+  description="c64 Python helper",
   long_description=long_description,
   long_description_content_type="text/markdown",
   url="https://github.com/dkrajzew/c64tools",
@@ -35,7 +31,7 @@ setuptools.setup(
     "Development Status :: 4 - Beta",
     "Programming Language :: Python :: 2.7",
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
+    "License :: OSI Approved :: BSD License",
     "Operating System :: OS Independent",
     "Intended Audience :: Other Audience",
     "Programming Language :: Python",
