@@ -3,8 +3,8 @@
 [![Downloads](https://pepy.tech/badge/c64tools)](https://pepy.tech/project/c64tools)
 
 # c64tools
-A set of Python tools for coding the c64 (Commodore c64) - mainly graphics.
+A set of Python tools for hacking on the c64 (Commodore c64) &mdash; mainly graphics stuff.
 
-You may find more information at http://www.krajzewicz.de/blog/c64-python-helper.php
+You may find more information at http://www.krajzewicz.de/docs/c64tools/index.html
 
 Let me know if you need any further information or advice.
