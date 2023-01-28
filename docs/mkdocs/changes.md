@@ -1,7 +1,7 @@
 ChangeLog for c64tools
 ======================
 
-&copy; Daniel Krajzewicz 2020&ndash;2023
+&copy; Daniel Krajzewicz 2016&ndash;2023
 
 <https://github.com/dkrajzew/c64tools>
 
