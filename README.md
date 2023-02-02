@@ -17,6 +17,7 @@ In addition, you may find some applications which use this module:
 * a [charset from memory dump extractor](http://www.krajzewicz.de/docs/c64tools/use_charset2png.html)
 * a [linking tool](http://www.krajzewicz.de/docs/c64tools/use_filemerge.html)
 
-Let me know if you need any further information or advice.
+Let me know if you need any further information or advice. I am not actively developing __c64tools__ currently.
+
 
 
