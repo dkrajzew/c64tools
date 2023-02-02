@@ -38,6 +38,9 @@ python charset2png.py -f bb_map.bin --foreground #000000 --background #ffffff -o
 
 Extracts the 64 first characters from the character set located at address 32000 within the binary dump file “bb_map.bin”. Sets foreground to black, background to white. Renders the character set with a column width of 32 characters and writes the result to the image “bb_1_1x1.png”.
 
+The resulting image (“bb_1_1x1.png”) looks like that:
+
+![BrainBreak 1×1 charset](bb_1_1x1.png "BrainBreak 1×1 charset")
 
 ```console
 python charset2png.py -f nowonder_6.bin --foreground #000000 --background #ffffff -o nowonder_6_1_2x2.png -a 2048 -n 64 -w 32 -p "0-64;128-192" -i -q
@@ -45,5 +48,13 @@ python charset2png.py -f nowonder_6.bin --foreground #000000 --background #fffff
 
 Extracts the 2×2 character set located at address 2048 within the binary dump file “nowonder_6.bin”. The character is stored in a usual way for a c64 2×2 character set: the upper right part of the character has an offset of 64, the lower left part an offset of 128, and the lower right part an offset of 192. Sets foreground to black, background to white. Renders the character set with a column width of 32 characters and writes the result to the image “nowonder_6_1_2x2.png”.
 
+The resulting image (“nowonder_6_1_2x2.png”) looks like that:
 
+![No Wonder 2×2 charset](nowonder_6_1_2x2.png "No Wonder 2×2 charset")
+
+
+Further Notes
+-------------
+
+* I used it for extracting the fonts I&apos;ve made over time, see my blog post on [c64 Font Sizes](https://www.krajzewicz.de/blog/c64-font-sizes.php).
 

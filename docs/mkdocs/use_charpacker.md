@@ -20,10 +20,20 @@ Examples
 --------
 
 ```console
-python mem2png.py -f logo.png -s screen.bin -c charset.bin 
+python charpacker.py -f logo.png -s screen.bin -c charset.bin 
 ```
 
 Loads an image from “logo.png”, charpacks it, and writes the resulting screen to “screen.bin” and the resulting charset to “charset.bin”.
+
+A window will be shown, similar to the one shown in the following image.
+
+![Charpacker window](charpacker1.gif "Charpacker window")
+
+The window shows the loaded image three-wise. 
+
+* First, the loaded image as-is is shown.
+* Then, the image converted to b/w is shown.
+* Then, the charpacked image is shown.
 
 
 Embedding

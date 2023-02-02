@@ -28,5 +28,10 @@ Loads the memory dump “bb_hex_game.bin” and shows it.
 python mem2png.py -f bb_hex_game.bin -o bb_game.png
 ```
 
-Loads the memory dump “bb_hex_game.bin”, renders it as an image and saves the image to “bb_game.png”. Shows the image.
+Loads the memory dump “bb_hex_game.bin”, renders it as an image and saves the image to “bb_game.png”. Shows the image, which may look as the folowing one:
+
+![mem2png example](mem2png1.gif "mem2png example")
+
+When hovering over the image, the address information will show the memory address the mouse is currently over.
+
 
