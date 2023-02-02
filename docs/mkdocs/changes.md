@@ -5,16 +5,23 @@ ChangeLog for c64tools
 
 <https://github.com/dkrajzew/c64tools>
 
-<http://www.krajzewicz.de/blog/c64-python-tools.php>
+<http://www.krajzewicz.de/docs/c64tools/index.html>
 
 
-to come: c64tools-0.10.0
-------------------------
+c64tools-0.12.0 (02.02.2023)
+----------------------------
+
+* patching / extending documentation
+
+
+c64tools-0.10.0 (28.01.2023)
+----------------------------
 
 * using mkdocs for documentation
 * added requirements.txt
 * moved to BSD license
 * improved inline documentation
+* removed Travis CI support &mdash; tests will be triggered by github actions
 
 
 c64tools-0.8 (16.05.2020)
