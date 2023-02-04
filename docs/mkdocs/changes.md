@@ -12,6 +12,7 @@ c64tools-0.14.0 (04.02.2023)
 ----------------------------
 
 * installing non-library scripts as console applications
+* improving setup.py
 
 
 c64tools-0.12.0 (02.02.2023)
