@@ -53,11 +53,11 @@ def convertColor(color):
 
 
 # -- main
-def main(args):
+def main(arguments=None):
     """Loads the memory dump, extracts the character set saves its display and shows it.
 
     Args:
-        args (string[]): The command line arguments
+        arguments (string[]): The command line arguments
 
     Options
     -------
@@ -93,7 +93,7 @@ def main(args):
     optParser.add_option("-2", "--multicolor2", dest="multicolor2", default="#808080", help="Sets the multi color 2")
     optParser.add_option("-m", "--multicolor", dest="multicolor", action="store_true", help="Uses multicolor mode")
     optParser.add_option("-q", "--quiet", dest="quiet", action="store_true", help="Do not show a window, just convert")
-    options, remaining_args = optParser.parse_args(args=args)
+    options, remaining_args = optParser.parse_args(args=arguments)
     ifile = options.file
     ofile = options.output
     address = options.address

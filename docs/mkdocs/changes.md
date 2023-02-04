@@ -8,6 +8,12 @@ ChangeLog for c64tools
 <http://www.krajzewicz.de/docs/c64tools/index.html>
 
 
+c64tools-0.14.0 (04.02.2023)
+----------------------------
+
+* installing non-library scripts as console applications
+
+
 c64tools-0.12.0 (02.02.2023)
 ----------------------------
 

@@ -20,7 +20,7 @@ Examples
 --------
 
 ```console
-python charpacker.py -f logo.png -s screen.bin -c charset.bin 
+charpacker -f logo.png -s screen.bin -c charset.bin 
 ```
 
 Loads an image from “logo.png”, charpacks it, and writes the resulting screen to “screen.bin” and the resulting charset to “charset.bin”.

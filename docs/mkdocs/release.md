@@ -10,4 +10,4 @@ Release Steps
     * use the script "___&lt;C64TOOLS&gt;_\docs\build_docs.bat__"
     * copy it to the web pages
 * build the github release (tag: ___&lt;VERSION&gt;___, name: __c64tools-_&lt;VERSION&gt;___)
-* build the PyPi release using the script "___&lt;C64TOOLS&gt;_\docs\build_release.bat__"
+* build the PyPI release using the script "___&lt;C64TOOLS&gt;_\docs\build_release.bat__"

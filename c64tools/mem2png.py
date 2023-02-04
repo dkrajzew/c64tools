@@ -28,11 +28,11 @@ import c64tools
 
 # --- methods -------------------------------------------------------
 # -- main
-def main(args):
+def main(arguments=None):
     """Loads the memory dump, saves its display and shows it.
 
     Args:
-        args (string[]): The command line arguments
+        arguments (string[]): The command line arguments
 
     Options
     -------
@@ -48,11 +48,13 @@ def main(args):
     show = False
     xs = 128
     # parse arguments
-    if len(args)==1:
+    if arguments is None:
+        arguments = sys.argv[1:]
+    if len(arguments)==1:
         print ("You have to give the name of the memory dump to load (or use further options)")
         return
-    elif len(args)==2:
-        ifile = args[1]
+    elif len(arguments)==2:
+        ifile = arguments[1]
         show = True
     else:
         from optparse import OptionParser
@@ -61,7 +63,7 @@ def main(args):
         #optParser.add_option("-s", "--show", dest="show", action="store_true", default=False, help="Show the dump after loading")
         optParser.add_option("-o", "--output", dest="store", default=None, help="Defines the name/path of the output file")
         optParser.add_option("-w", "--width", dest="width", type="int", default=128, help="Defines the width of the window in chars")
-        options, remaining_args = optParser.parse_args(args=args)
+        options, remaining_args = optParser.parse_args(args=arguments)
         ifile = options.file
         ofile = options.store
         #show = options.show

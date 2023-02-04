@@ -18,14 +18,14 @@ Examples
 --------
 
 ```console
-python mem2png.py -f bb_hex_game.bin 
+mem2png -f bb_hex_game.bin 
 ```
 
 Loads the memory dump “bb_hex_game.bin” and shows it.
 
 
 ```console
-python mem2png.py -f bb_hex_game.bin -o bb_game.png
+mem2png -f bb_hex_game.bin -o bb_game.png
 ```
 
 Loads the memory dump “bb_hex_game.bin”, renders it as an image and saves the image to “bb_game.png”. Shows the image, which may look as the folowing one:

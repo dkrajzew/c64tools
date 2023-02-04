@@ -58,13 +58,13 @@ def charpack(bitmap, ret=None):
 
 
 # -- main
-def main(args):
+def main(arguments=None):
     """Loads an image file, charpacks it, saves the obtained screen and character
     set and shows the original image, its bitmap representation, and the charpacking
     result.
 
     Args:
-        args (string[]): The command line arguments
+        arguments (string[]): The command line arguments
 
     Options
     -------
@@ -78,7 +78,7 @@ def main(args):
     optParser.add_option("-f", "--file", dest="file", default=None, help="Defines the image to load and charpack")
     optParser.add_option("-s", "--screen-output", dest="screen", default=None, help="Defines the name of the file to save the screen at")
     optParser.add_option("-c", "--charset-output", dest="charset", default=None, help="Defines the name of the file to save the charset at")
-    options, remaining_args = optParser.parse_args(args=args)
+    options, remaining_args = optParser.parse_args(args=arguments)
     ifile = options.file
     ofileScreen = options.screen
     ofileCharset = options.charset

@@ -28,13 +28,13 @@ from optparse import OptionParser
 
 # --- methods -------------------------------------------------------
 # -- main
-def main(args):
+def main(arguments=None):
     """Initialises an empty memory, loads subsequently the defined files
     to their addresses and writes the memory as occupied by the loaded
     contents.
 
     Args:
-        args (string[]): The command line arguments
+        arguments (string[]): The command line arguments
 
     Options
     -------
@@ -45,7 +45,7 @@ def main(args):
     optParser = OptionParser(usage="""usage:\n  %prog <MEMORY_DUMP>\n  %prog [options]""")
     optParser.add_option("-f", "--file", dest="file", default=None, help="Defines the files to load, separated by a ','")
     optParser.add_option("-o", "--output", dest="output", default=None, help="Defines the name of the file to write")
-    options, remaining_args = optParser.parse_args(args=args)
+    options, remaining_args = optParser.parse_args(args=arguments)
     if not options.file:
         optParser.error("no input file(s) given...")
         sys.exit()
