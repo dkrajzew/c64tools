@@ -8,6 +8,13 @@ ChangeLog for c64tools
 <http://www.krajzewicz.de/docs/c64tools/index.html>
 
 
+c64tools-0.16.0 (05.02.2023)
+----------------------------
+
+* Patched documentation (return types)
+* Set proper formatting for [readthedocs](https://c64tools.readthedocs.io/)
+
+
 c64tools-0.14.0 (04.02.2023)
 ----------------------------
 

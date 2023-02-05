@@ -1,6 +1,6 @@
 # ===================================================================
 # c64tools - c64 Python helper / setup
-# Version 0.14.0
+# Version 0.16.0
 #
 # Setup module
 #
@@ -23,7 +23,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="c64tools",
-    version="0.14.0",
+    version="0.16.0",
     author="dkrajzew",
     author_email="d.krajzewicz@gmail.com",
     description="c64 Python helper",
