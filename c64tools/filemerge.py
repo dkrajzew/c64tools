@@ -34,7 +34,7 @@ def main(arguments=None):
     contents.
 
     Args:
-        arguments (string[]): The command line arguments
+        arguments (List[str]): The command line arguments
 
     Options
     -------

@@ -32,7 +32,7 @@ def main(arguments=None):
     """Loads the memory dump, saves its display and shows it.
 
     Args:
-        arguments (string[]): The command line arguments
+        arguments (List[str]): The command line arguments
 
     Options
     -------

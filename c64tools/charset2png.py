@@ -44,7 +44,7 @@ def convertColor(color):
         color (string): The hex color string
 
     Returns:
-        int[3]: The converted color
+        (Tuple[int, int, int]): The converted color
     """
     if not color: return None
     color = color.strip("#")
@@ -57,7 +57,7 @@ def main(arguments=None):
     """Loads the memory dump, extracts the character set saves its display and shows it.
 
     Args:
-        arguments (string[]): The command line arguments
+        arguments (List[str]): The command line arguments
 
     Options
     -------

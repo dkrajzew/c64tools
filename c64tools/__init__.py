@@ -78,7 +78,7 @@ class Memory:
         is initialiased with zeros.
 
         Args:
-            data (int array): The memory data (should be 65536 bytes long)
+            data (List[int]): The memory data (should be 65536 bytes long)
         """
         self.data = data
         if self.data==None:
@@ -95,7 +95,7 @@ class Memory:
         Loading assures that the memory is complete (is 65536 bytes long)
 
         Args:
-            fileName (string): The file to load
+            fileName (str): The file to load
 
         TODO: check destination byte order (not spent a thought on it)
         """
@@ -119,8 +119,8 @@ class Memory:
             x (int): x-offset for drawing
             y (int): y-offset for drawing
             cols (int): the number of (character) columns
-            fgColor (RGBA tuple): foreground color given as a tuple of four integers (rgba), may be None
-            bgColor (RGBA tuple): background color given as a tuple of four integers (rgba), may be None
+            fgColor (Tuple[int, int, int, int]): foreground color given as a tuple of four integers (rgba), may be None
+            bgColor (Tuple[int, int, int, int]): background color given as a tuple of four integers (rgba), may be None
         """
         hc = int(65536/8/cols) # rows in chars
         for yh in range(0, hc):
@@ -137,7 +137,7 @@ class Memory:
             addr (int): The address to read the bytes from
 
         Returns:
-            Char: The character built from the bytes at the given address
+            (Char): The character built from the bytes at the given address
         """
         return Char(self.data[addr:addr+8])
 
@@ -155,7 +155,7 @@ class Bitmap:
         is initialiased with zeros.
 
         Args:
-            data (int array): The bitmap data
+            data (List[int]): The bitmap data
         """
         self.data = data
         if self.data==None:
@@ -170,7 +170,7 @@ class Bitmap:
             row (int): The row (in characters) to read the char from
 
         Returns:
-            Char: The character built from the bytes at the given column and row
+            (Char): The character built from the bytes at the given column and row
         """
         off = row*40*8+col*8
         return Char(self.data[off:off+8])
@@ -183,8 +183,8 @@ class Bitmap:
             surface (pygame surface): The surface to draw this memory to
             x (int): x-offset for drawing
             y (int): y-offset for drawing
-            fgColor (RGBA tuple): foreground color given as a tuple of four integers (rgba), may be None
-            bgColor (RGBA tuple): background color given as a tuple of four integers (rgba), may be None
+            fgColor (Tuple[int, int, int, int]): foreground color given as a tuple of four integers (rgba), may be None
+            bgColor (Tuple[int, int, int, int]): background color given as a tuple of four integers (rgba), may be None
         """
         for yh in range(0, 25):
             for xh in range(0, 40):
@@ -227,7 +227,7 @@ class Bitmap:
 
         Args:
             screen (Screen instance): The screen to use
-            chars (character array): The character set to use
+            chars (List[Char]): The character set to use
         """
         for yh in range(0, 25):
             for xh in range(0, 40):
@@ -256,7 +256,7 @@ class Char:
         is initialiased with zeros.
 
         Args:
-            data (int[8]): The character data (should be 8 bytes long)
+            data (Tuple[int*8]): The character data (should be 8 bytes long)
         """
         self.data = data
         if self.data==None:
@@ -270,8 +270,8 @@ class Char:
             surface (pygame surface): The surface to draw this memory to
             x (int): x-offset for drawing
             y (int): y-offset for drawing
-            fgColor (RGBA tuple): foreground color given as a tuple of four integers (rgba), may be None
-            bgColor (RGBA tuple): background color given as a tuple of four integers (rgba), may be None
+            fgColor (Tuple[int, int, int, int]): foreground color given as a tuple of four integers (rgba), may be None
+            bgColor (Tuple[int, int, int, int]): background color given as a tuple of four integers (rgba), may be None
         """
         for yl in range(0, 8):
             b = self.data[yl]
@@ -289,11 +289,11 @@ class Char:
         Args:
             surface (pygame surface): The surface to draw this memory to
             x (int): x-offset for drawing
-            y (int9: y-offset for drawing
-            fgColor (RGBA tuple): foreground color given as a tuple of four integers (rgba), may be None
-            bgColor (RGBA tuple): background color given as a tuple of four integers (rgba), may be None
-            multi1Color (RGBA tuple): multi1 color given as a tuple of four integers (rgba), may be None
-            multi2Color (RGBA tuple): multi2 color given as a tuple of four integers (rgba), may be None
+            y (int): y-offset for drawing
+            fgColor (Tuple[int, int, int, int]): foreground color given as a tuple of four integers (rgba), may be None
+            bgColor (Tuple[int, int, int, int]): background color given as a tuple of four integers (rgba), may be None
+            multi1Color (Tuple[int, int, int, int]): multi1 color given as a tuple of four integers (rgba), may be None
+            multi2Color (Tuple[int, int, int, int]): multi2 color given as a tuple of four integers (rgba), may be None
         """
         for yl in range(0, 8):
             b = self.data[yl]
@@ -317,7 +317,7 @@ class Char:
             c (int): The character to compare this character to
 
         Returns:
-            bool: Whether the given character is same as self
+            (bool): Whether the given character is same as self
         """
         for i,x in enumerate(self.data):
             if self.data[i]!=c.data[i]:
@@ -366,7 +366,7 @@ class Screen:
             row (int): The row to get the character from
 
         Returns:
-            int: The character at the given row and column
+            (int): The character at the given row and column
         """
         return self.data[col+row*40]
 
@@ -391,7 +391,7 @@ def open2Write(fileName):
         fileName (string): The name of the file to open for writing
 
     Returns:
-        file descriptor: The flle opened for binary writing
+        (file): The flle opened for binary writing
     """
     return open(fileName, "wb")
 

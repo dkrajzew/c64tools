@@ -37,10 +37,10 @@ def charpack(bitmap, ret=None):
 
     Args:
         bitmap (Bitmap instance): the c64 bitmap to charpack
-        ret: optional charpack result for continuing
+        ret (Tuple[List[Char], Screen]): optional charpack result for continuing
 
     Returns:
-        [Char[], Screen]: The obtained characters and the screen
+        (Tuple[List[Char], Screen]): The obtained characters and the screen
     """
     if ret==None:
         ret = [[], c64tools.Screen()]
@@ -64,7 +64,7 @@ def main(arguments=None):
     result.
 
     Args:
-        arguments (string[]): The command line arguments
+        arguments (List[str]): The command line arguments
 
     Options
     -------
