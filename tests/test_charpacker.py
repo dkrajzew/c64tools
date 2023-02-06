@@ -15,6 +15,11 @@ from __future__ import print_function
 import sys
 
 
+# --- helper functions ----------------------------------------------
+def patchName(test):
+    return test.replace("pytest", "charpacker").replace("__main__.py", "charpacker")
+
+
 # --- test functions ------------------------------------------------
 def test_main_empty(capsys):
     """Test behaviour if no arguments are given"""
@@ -26,13 +31,13 @@ def test_main_empty(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert captured.out.replace("__main__.py", "charpacker.py") == """pygame 2.1.2 (SDL 2.0.18, Python 3.8.5)
+    assert patchName(captured.out) == """pygame 2.1.2 (SDL 2.0.18, Python 3.8.5)
 Hello from the pygame community. https://www.pygame.org/contribute.html\n"""
-    assert captured.err.replace("__main__.py", "charpacker.py") == """Usage: usage:
-  pytest <MEMORY_DUMP>
-  pytest [options]
+    assert patchName(captured.err) == """Usage: usage:
+  charpacker <MEMORY_DUMP>
+  charpacker [options]
 
-pytest: error: no input file(s) given...
+charpacker: error: no input file(s) given...
 """
 
 
@@ -46,9 +51,9 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert captured.out.replace("__main__.py", "charpacker.py") == """Usage: usage:
-  pytest <MEMORY_DUMP>
-  pytest [options]
+    assert patchName(captured.out) == """Usage: usage:
+  charpacker <MEMORY_DUMP>
+  charpacker [options]
 
 Options:
   -h, --help            show this help message and exit

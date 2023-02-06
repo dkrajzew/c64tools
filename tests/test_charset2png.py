@@ -15,6 +15,11 @@ from __future__ import print_function
 import sys
 
 
+# --- helper functions ----------------------------------------------
+def patchName(test):
+    return test.replace("pytest", "charset2png").replace("__main__.py", "charset2png")
+
+
 # --- test functions ------------------------------------------------
 def test_main_empty(capsys):
     """Test behaviour if no arguments are given"""
@@ -26,11 +31,11 @@ def test_main_empty(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert captured.out.replace("__main__.py", "charset2png.py") == ""
-    assert captured.err.replace("__main__.py", "charset2png.py") == """Usage: usage:
-  pytest [options]
+    assert patchName(captured.out) == ""
+    assert patchName(captured.err) == """Usage: usage:
+  charset2png [options]
 
-pytest: error: missing options; Please start with --help for advice.
+charset2png: error: missing options; Please start with --help for advice.
 """
 
 
@@ -44,8 +49,8 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert captured.out.replace("__main__.py", "charset2png.py") == """Usage: usage:
-  pytest [options]
+    assert patchName(captured.out) == """Usage: usage:
+  charset2png [options]
 
 Options:
   -h, --help            show this help message and exit

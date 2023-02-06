@@ -15,6 +15,11 @@ from __future__ import print_function
 import sys
 
 
+# --- helper functions ----------------------------------------------
+def patchName(test):
+    return test.replace("pytest", "filemerge").replace("__main__.py", "filemerge")
+
+
 # --- test functions ------------------------------------------------
 def test_main_empty(capsys):
     """Test behaviour if no arguments are given"""
@@ -26,12 +31,12 @@ def test_main_empty(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert captured.out.replace("__main__.py", "filemerge.py") == ""
-    assert captured.err.replace("__main__.py", "filemerge.py") == """Usage: usage:
-  pytest <MEMORY_DUMP>
-  pytest [options]
+    assert patchName(captured.out) == ""
+    assert patchName(captured.err) == """Usage: usage:
+  filemerge <MEMORY_DUMP>
+  filemerge [options]
 
-pytest: error: no input file(s) given...
+filemerge: error: no input file(s) given...
 """
 
 
@@ -45,9 +50,9 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert captured.out.replace("__main__.py", "filemerge.py") == """Usage: usage:
-  pytest <MEMORY_DUMP>
-  pytest [options]
+    assert patchName(captured.out) == """Usage: usage:
+  filemerge <MEMORY_DUMP>
+  filemerge [options]
 
 Options:
   -h, --help            show this help message and exit
