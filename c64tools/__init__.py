@@ -25,9 +25,6 @@ from __future__ import print_function
 
 
 # --- imports -------------------------------------------------------
-import pygame
-import pygame.gfxdraw
-import pygame.locals
 
 
 # --- Window class --------------------------------------------------
@@ -41,6 +38,9 @@ class Window(object):
             w (int): window width
             h (int): window height
         """
+        import pygame
+        import pygame.gfxdraw
+        import pygame.locals
         pygame.init()
         self.show = True
         self.screen = pygame.display.set_mode((w,h))
@@ -58,6 +58,9 @@ class Window(object):
         Should be called in a loop to process the occuring events.
         Sets the self.show flag to False when being closed.
         """
+        import pygame
+        import pygame.gfxdraw
+        import pygame.locals
         for event in pygame.event.get():
             if event.type == pygame.locals.QUIT:
                 self.show = False

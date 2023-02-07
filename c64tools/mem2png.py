@@ -20,9 +20,6 @@ from __future__ import print_function
 
 # --- imports -------------------------------------------------------
 import sys
-import pygame
-import pygame.gfxdraw
-import pygame.image
 import c64tools
 
 
@@ -41,6 +38,7 @@ def main(arguments=None):
     * __--output/-o _&lt;IMAGE_TO_SAVE&gt;___: the file name to save the memory image to
     * __--width/-w _&lt;DISPLAY_WIDTH_IN_CHARACTERS&gt;___: the width of the display in characters (the default is 128)
     """
+    import pygame
     # check arguments
     # set defaults
     ifile = None
@@ -50,10 +48,7 @@ def main(arguments=None):
     # parse arguments
     if arguments is None:
         arguments = sys.argv[1:]
-    if len(arguments)==1:
-        print ("You have to give the name of the memory dump to load (or use further options)")
-        return
-    elif len(arguments)==2:
+    if len(arguments)==2:
         ifile = arguments[1]
         show = True
     else:
@@ -71,7 +66,9 @@ def main(arguments=None):
         #if not ofile and not show:
         #  print "You should either want to display (--show) or to save (--output) the file"
         #  return
-
+        if ifile is None:
+            optParser.error("No input file(s) given...")
+            sys.exit(2)
     # build window and load and draw dump
     INFO = 40
     ys = int(65536/xs)

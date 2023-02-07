@@ -21,8 +21,6 @@ from __future__ import print_function
 
 
 # --- imports -------------------------------------------------------
-import pygame
-import pygame.gfxdraw
 import c64tools
 import sys
 
@@ -73,6 +71,7 @@ def main(arguments=None):
     * __--screen-output/-s _&lt;SCREEN_OUTPUT_FILENAME&gt;___: the name of the file to write the screen to
     * __--charset-output/-c _&lt;CHARSET_OUTPUT_FILENAME&gt;___: the name of the file to write the charset
     """
+    import pygame
     from optparse import OptionParser
     optParser = OptionParser(usage="""usage:\n  %prog <MEMORY_DUMP>\n  %prog [options]""")
     optParser.add_option("-f", "--file", dest="file", default=None, help="Defines the image to load and charpack")

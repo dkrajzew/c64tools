@@ -28,8 +28,6 @@ from __future__ import print_function
 
 
 # --- imports -------------------------------------------------------
-import pygame
-import pygame.gfxdraw
 import c64tools
 import sys
 import math
@@ -77,6 +75,7 @@ def main(arguments=None):
     * __--multicolor/-m__: use multicolor mode
     * __--quiet/-q__: do not show a window, just write the image
     """
+    import pygame
     from optparse import OptionParser
     optParser = OptionParser(usage="""usage:\n  %prog [options]""")
     optParser.add_option("-f", "--file", dest="file", default=None, help="Defines the memory to extract the charset from")
