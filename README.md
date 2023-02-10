@@ -3,6 +3,8 @@
 [![Downloads](https://pepy.tech/badge/c64tools)](https://pepy.tech/project/c64tools)
 [![Documentation Status](https://readthedocs.org/projects/c64tools/badge/?version=latest)](https://c64tools.readthedocs.io/en/latest/?badge=latest)
 
+The docs are failing due to pygame. It would work otherwise.
+
 # c64tools
 
 __c64tools__ is [Python](https://www.python.org/) library that helps in dealing with Commodore c64 graphics and memory.
