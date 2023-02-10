@@ -23,9 +23,6 @@ In addition, you may find some applications which use this module:
 
 ## Links
 
-* A complete documentation is located at:
-    * <https://c64tools.readthedocs.io/en/latest/>
-    * <https://krajzewicz.de/docs/c64tools/index.html> 
 * The github repository is located at: <https://github.com/dkrajzew/c64tools>
 * The discussions communication channel is located at: <https://github.com/dkrajzew/c64tools/discussions>
 * The issue tracker is located at: <https://github.com/dkrajzew/c64tools/issues>
