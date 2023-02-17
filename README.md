@@ -8,7 +8,7 @@ The docs are failing due to pygame. It would work otherwise :-)
 
 # c64tools
 
-__c64tools__ is [Python](https://www.python.org/) library that helps in dealing with Commodore c64 graphics and memory.
+__c64tools__ is a [Python](https://www.python.org/) library that helps in dealing with Commodore c64 graphics and memory.
 
 You may find more information at http://www.krajzewicz.de/docs/c64tools/index.html.
 
