@@ -18,8 +18,10 @@ from __future__ import print_function
 #
 # (c) Daniel Krajzewicz 2016-2023
 # daniel@krajzewicz.de
-# http://www.krajzewicz.de/blog/c64-python-helper.php
-# https://github.com/dkrajzew/c64tools
+# - https://github.com/dkrajzew/c64tools
+# - http://www.krajzewicz.de/docs/c64tools/index.html
+# - http://www.krajzewicz.de
+#
 # Available under the BSD license.
 # ===================================================================
 
