@@ -36,6 +36,7 @@ setuptools.setup(
         'Documentation': 'https://c64tools.readthedocs.io/',
         'Source': 'https://github.com/dkrajzew/c64tools',
         'Tracker': 'https://github.com/dkrajzew/c64tools/issues',
+        'Discussions': 'https://github.com/dkrajzew/c64tools/discussions',
     },
     license='BSD',
     # add modules
