@@ -4,7 +4,11 @@
 [![Coverage](https://img.shields.io/badge/coverage-43%25-success)](https://img.shields.io/badge/coverage-43%25-success)
 [![Documentation Status](https://readthedocs.org/projects/c64tools/badge/?version=latest)](https://c64tools.readthedocs.io/en/latest/?badge=latest)
 
-# c64tools
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVQQWZKB6FDES)
+
+
+c64tools
+========
 
 __c64tools__ is a [Python](https://www.python.org/) library that helps in dealing with Commodore c64 graphics and memory.
 
@@ -19,7 +23,27 @@ In addition, you may find some applications which use this module:
 * a [charset from memory dump extractor](http://www.krajzewicz.de/docs/c64tools/use_charset2png.html)
 * a [linking tool](http://www.krajzewicz.de/docs/c64tools/use_filemerge.html)
 
-## Links
+Download and Installation
+=========================
+
+The __current version__ is [c64tools-0.18.0](https://github.com/dkrajzew/c64tools/releases/tag/0.18.0).
+
+You may __install c64tools__ using
+
+```console
+python -m pip install c64tools
+```
+
+You may __download a copy or fork the code__ at [c64tools&apos;s github page](https://github.com/dkrajzew/c64tools).
+
+Besides, you may __download the current release__ here:
+
+* [c64tools-0.18.0.zip](https://github.com/dkrajzew/c64tools/archive/refs/tags/0.18.0.zip)
+* [c64tools-0.18.0.tar.gz](https://github.com/dkrajzew/c64tools/archive/refs/tags/0.18.0.tar.gz)
+
+
+Links
+=====
 
 * A complete documentation is located at:
    * <https://c64tools.readthedocs.io/en/latest/> and
@@ -28,12 +52,6 @@ In addition, you may find some applications which use this module:
 * The github repository is located at: <https://github.com/dkrajzew/c64tools>
 * The issue tracker is located at: <https://github.com/dkrajzew/c64tools/issues>
 * The PyPI page is located at: <https://pypi.org/project/c64tools/>
-* A pydoc documentation is located at: 
-    * library: <http://www.krajzewicz.de/docs/c64tools.html>
-    * charpacker: <http://www.krajzewicz.de/docs/charpacker.html>
-    * charset2png: <http://www.krajzewicz.de/docs/charset2png.html>
-    * mem2png: <http://www.krajzewicz.de/docs/mem2png.html>
-    * filemerge: <http://www.krajzewicz.de/docs/filemerge.html>
 
 ## Note
 
