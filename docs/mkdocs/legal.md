@@ -1,5 +1,5 @@
-Legal
-=====
+Legal Information
+=================
 
 Impressum
 ---------

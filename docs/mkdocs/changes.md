@@ -8,6 +8,12 @@ ChangeLog for c64tools
 <http://www.krajzewicz.de/docs/c64tools/index.html>
 
 
+c64tools-0.18.0 (26.03.2023)
+----------------------------
+
+* Working on the documentation
+
+
 c64tools-0.16.0 (05.02.2023)
 ----------------------------
 
