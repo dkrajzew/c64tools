@@ -24,7 +24,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="c64tools",
-    version="0.16.0",
+    version="0.18.0",
     author="dkrajzew",
     author_email="d.krajzewicz@gmail.com",
     description="c64 Python helper",
