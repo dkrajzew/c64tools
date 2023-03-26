@@ -13,8 +13,15 @@ theme:
     hljs_languages:
         - yaml
     palette:
-        primary: light green
+        primary: blue
         
+extra_css:
+    - stylesheets/extra.css
+    - stylesheets/prism.css
+
+extra_javascript:
+    - js/prism.js
+
 nav:
     - Home: index.md
     - Installation: install.md

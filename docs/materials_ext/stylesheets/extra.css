@@ -1,0 +1,22 @@
+/* raleway-regular - latin */
+
+:root {
+  --md-text-font: Verdana, sans-serif;
+  --md-code-font: Verdana, sans-serif;
+ font-weight: normal;
+ color: #000;
+}
+h1, h2, h3, h4, h5, h6 {
+ font-family: Arial, Helvetica, sans-serif;
+ font-weight: bold;
+ color: #3a4e59;
+}
+.md-main__inner {
+ margin-top: 0em;
+ border: 0 solid black;
+ background-color: white;
+}
+
+.md-container {
+ background-color: white;
+}
