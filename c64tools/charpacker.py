@@ -76,7 +76,7 @@ def main(arguments=None):
     """
     import pygame
     from optparse import OptionParser
-    optParser = OptionParser(usage="""usage:\n  %prog <MEMORY_DUMP>\n  %prog [options]""")
+    optParser = OptionParser(usage="""usage:\n  %prog <MEMORY_DUMP>\n  %prog [options]""", version="charpacker 0.18.0")
     optParser.add_option("-f", "--file", dest="file", default=None, help="Defines the image to load and charpack")
     optParser.add_option("-s", "--screen-output", dest="screen", default=None, help="Defines the name of the file to save the screen at")
     optParser.add_option("-c", "--charset-output", dest="charset", default=None, help="Defines the name of the file to save the charset at")

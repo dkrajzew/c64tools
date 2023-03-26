@@ -44,7 +44,7 @@ def main(arguments=None):
     * __--file/-f _&lt;FILE&gt;[,&lt;FILE&gt;]*___: the file(s) to load, separated by ‘,’
     * __--output/-o _&lt;FILE&gt;___: the name of the file to write the memory to
     """
-    optParser = OptionParser(usage="""usage:\n  %prog <MEMORY_DUMP>\n  %prog [options]""")
+    optParser = OptionParser(usage="""usage:\n  %prog <MEMORY_DUMP>\n  %prog [options]""", version="filemerge 0.18.0")
     optParser.add_option("-f", "--file", dest="file", default=None, help="Defines the files to load, separated by a ','")
     optParser.add_option("-o", "--output", dest="output", default=None, help="Defines the name of the file to write")
     options, remaining_args = optParser.parse_args(args=arguments)

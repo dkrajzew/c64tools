@@ -81,7 +81,7 @@ def main(arguments=None):
     """
     import pygame
     from optparse import OptionParser
-    optParser = OptionParser(usage="""usage:\n  %prog [options]""")
+    optParser = OptionParser(usage="""usage:\n  %prog [options]""", version="charset2png 0.18.0")
     optParser.add_option("-f", "--file", dest="file", default=None, help="Defines the memory to extract the charset from")
     optParser.add_option("-o", "--output", dest="output", default=None, help="Defines the name of the file to save the charset image at")
     optParser.add_option("-a", "--address", dest="address", type="int", default=None, help="Defines the address to read the character set from")

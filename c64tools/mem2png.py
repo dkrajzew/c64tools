@@ -57,7 +57,7 @@ def main(arguments=None):
         show = True
     else:
         from optparse import OptionParser
-        optParser = OptionParser(usage="""usage:\n  %prog <MEMORY_DUMP>\n  %prog [options]""")
+        optParser = OptionParser(usage="""usage:\n  %prog <MEMORY_DUMP>\n  %prog [options]""", version="mem2png 0.18.0")
         optParser.add_option("-f", "--file", dest="file", default=None, help="Defines the memory dump file to load")
         #optParser.add_option("-s", "--show", dest="show", action="store_true", default=False, help="Show the dump after loading")
         optParser.add_option("-o", "--output", dest="store", default=None, help="Defines the name/path of the output file")
