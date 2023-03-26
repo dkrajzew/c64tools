@@ -55,6 +55,7 @@ def test_main_help(capsys):
   mem2png [options]
 
 Options:
+  --version             show program's version number and exit
   -h, --help            show this help message and exit
   -f FILE, --file=FILE  Defines the memory dump file to load
   -o STORE, --output=STORE

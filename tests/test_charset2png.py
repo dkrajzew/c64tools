@@ -53,6 +53,7 @@ def test_main_help(capsys):
   charset2png [options]
 
 Options:
+  --version             show program's version number and exit
   -h, --help            show this help message and exit
   -f FILE, --file=FILE  Defines the memory to extract the charset from
   -o OUTPUT, --output=OUTPUT

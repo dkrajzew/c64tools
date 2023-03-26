@@ -55,6 +55,7 @@ def test_main_help(capsys):
   filemerge [options]
 
 Options:
+  --version             show program's version number and exit
   -h, --help            show this help message and exit
   -f FILE, --file=FILE  Defines the files to load, separated by a ','
   -o OUTPUT, --output=OUTPUT
