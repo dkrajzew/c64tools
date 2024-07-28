@@ -31,8 +31,6 @@ def test_main_empty(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert patchName(captured.out) == """pygame 2.1.2 (SDL 2.0.18, Python 3.8.5)
-Hello from the pygame community. https://www.pygame.org/contribute.html\n"""
     assert patchName(captured.err) == """Usage: usage:
   charpacker <MEMORY_DUMP>
   charpacker [options]

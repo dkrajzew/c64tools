@@ -1,35 +1,44 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from __future__ import print_function
-# ===================================================================
-# c64tools - c64 Python helper
-#
-# charset2png - Extracts a character set at a given address from a given memory dump.
-#
-# --file/-f: the memory dump to load
-# --output/-o: the name of the file to write the character set to
-# --address/-a: the address to extract the character set from
-# --number/-n: the number of characters to extract
-# --pattern/-p: pattern of multi-char character sets
-# --width/-w: the width of the image to generate to build
-# --divider/-d: the height of a divider space between the lines
-# --inverse/-i: invert the characters
-# --background/-b: set the background color, default: #000000
-# --foreground/-c: set the foreground color, default: #ffffff
-# --multicolor1/-1: Sets the multi color 1, default: #c0c0c0
-# --multicolor2/-2: Sets the multi color 2, default: #808080
-# --multicolor/-m: Uses multicolor mode
-# --quiet/-q: do not show a window, just write the image
-#
-# (c) Daniel Krajzewicz 2016-2023
-# daniel@krajzewicz.de
+# ===========================================================================
+"""c64tools - charset2png - Extracts a character set at a given address from a given memory dump.
+
+--file/-f: the memory dump to load
+--output/-o: the name of the file to write the character set to
+--address/-a: the address to extract the character set from
+--number/-n: the number of characters to extract
+--pattern/-p: pattern of multi-char character sets
+--width/-w: the width of the image to generate to build
+--divider/-d: the height of a divider space between the lines
+--inverse/-i: invert the characters
+--background/-b: set the background color, default: #000000
+--foreground/-c: set the foreground color, default: #ffffff
+--multicolor1/-1: Sets the multi color 1, default: #c0c0c0
+--multicolor2/-2: Sets the multi color 2, default: #808080
+--multicolor/-m: Uses multicolor mode
+--quiet/-q: do not show a window, just write the image
+
+(c) Daniel Krajzewicz 2016-2024
+daniel@krajzewicz.de
+"""
+# ===========================================================================
+__author__     = "Daniel Krajzewicz"
+__copyright__  = "Copyright 2016-2024, Daniel Krajzewicz"
+__credits__    = ["Daniel Krajzewicz"]
+__license__    = "BSD"
+__version__    = "0.18.0"
+__maintainer__ = "Daniel Krajzewicz"
+__email__      = "daniel@krajzewicz.de"
+__status__     = "Development"
+# ===========================================================================
 # - https://github.com/dkrajzew/c64tools
 # - http://www.krajzewicz.de/docs/c64tools/index.html
 # - http://www.krajzewicz.de
-#
-# Available under the BSD license.
-# ===================================================================
+# ===========================================================================
 
 
-# --- imports -------------------------------------------------------
+# --- imports ---------------------------------------------------------------
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
@@ -37,7 +46,7 @@ import c64tools
 import math
 
 
-# --- methods -------------------------------------------------------
+# --- methods ---------------------------------------------------------------
 def convertColor(color):
     """Converts a given hex color, optionally lead by a '#', into
         an RGB tuple.

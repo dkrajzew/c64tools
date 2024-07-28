@@ -1,33 +1,42 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from __future__ import print_function
-# ===================================================================
-# c64tools - c64 Python helper
-#
-# mem2png - A c64 memory dump visualiser that can export the dump to an image.
-#
-# Either one argument - the file to load - must be supported or the following options
-#
-# --file/-f: the memory dump to load
-# --output/-o: the image file to write
-# --width/-w: the width of the window / image in characters
-#
-# (c) Daniel Krajzewicz 2016-2023
-# daniel@krajzewicz.de
+# ===========================================================================
+"""c64tools - mem2png - A c64 memory dump visualiser that can export the dump to an image.
+
+Either one argument - the file to load - must be supported or the following options
+
+--file/-f: the memory dump to load
+--output/-o: the image file to write
+--width/-w: the width of the window / image in characters
+
+(c) Daniel Krajzewicz 2016-2024
+daniel@krajzewicz.de
+"""
+# ===========================================================================
+__author__     = "Daniel Krajzewicz"
+__copyright__  = "Copyright 2016-2024, Daniel Krajzewicz"
+__credits__    = ["Daniel Krajzewicz"]
+__license__    = "BSD"
+__version__    = "0.18.0"
+__maintainer__ = "Daniel Krajzewicz"
+__email__      = "daniel@krajzewicz.de"
+__status__     = "Development"
+# ===========================================================================
 # - https://github.com/dkrajzew/c64tools
 # - http://www.krajzewicz.de/docs/c64tools/index.html
 # - http://www.krajzewicz.de
-#
-# Available under the BSD license.
-# ===================================================================
+# ===========================================================================
 
 
-# --- imports -------------------------------------------------------
+# --- imports ---------------------------------------------------------------
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 import c64tools
 
 
-# --- methods -------------------------------------------------------
+# --- methods ---------------------------------------------------------------
 # -- main
 def main(arguments=None):
     """Loads the memory dump, saves its display and shows it.

@@ -27,7 +27,7 @@ Loads an image from “logo.png”, charpacks it, and writes the resulting scree
 
 A window will be shown, similar to the one shown in the following image.
 
-![Charpacker window](charpacker1.gif "Charpacker window")
+![Charpacker window](charpacker1.gif#full "Charpacker window")
 
 The window shows the loaded image three-wise. 
 

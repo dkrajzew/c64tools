@@ -40,7 +40,7 @@ Extracts the 64 first characters from the character set located at address 32000
 
 The resulting image (“bb_1_1x1.png”) looks like that:
 
-![BrainBreak 1×1 charset](bb_1_1x1.png "BrainBreak 1×1 charset")
+![BrainBreak 1×1 charset](bb_1_1x1.png#full "BrainBreak 1×1 charset")
 
 ```console
 charset2png -f nowonder_6.bin --foreground #000000 --background #ffffff -o nowonder_6_1_2x2.png -a 2048 -n 64 -w 32 -p "0-64;128-192" -i -q

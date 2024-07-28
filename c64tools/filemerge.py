@@ -1,34 +1,43 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from __future__ import print_function
-# ===================================================================
-# c64tools - c64 Python helper
-#
-# filemerge - Joins a set of files into one.
-#
-# Loads the files given and stores them at the designated
-# (described by the first two bytes) position in memory.
-# Saves the so obtained memory part, together with the
-# starting address.
-#
-# --file/-f: the file(s) to load, separated by a ','
-# --output/-o: the `name of the file to write
-#
-# (c) Daniel Krajzewicz 2016-2023
-# daniel@krajzewicz.de
+# ===========================================================================
+"""c64tools - filemerge - Joins a set of files into one.
+
+Loads the files given and stores them at the designated
+(described by the first two bytes) position in memory.
+Saves the so obtained memory part, together with the
+starting address.
+
+--file/-f: the file(s) to load, separated by a ','
+--output/-o: the `name of the file to write
+
+(c) Daniel Krajzewicz 2016-2024
+daniel@krajzewicz.de
+"""
+# ===========================================================================
+__author__     = "Daniel Krajzewicz"
+__copyright__  = "Copyright 2016-2024, Daniel Krajzewicz"
+__credits__    = ["Daniel Krajzewicz"]
+__license__    = "BSD"
+__version__    = "0.18.0"
+__maintainer__ = "Daniel Krajzewicz"
+__email__      = "daniel@krajzewicz.de"
+__status__     = "Development"
+# ===========================================================================
 # - https://github.com/dkrajzew/c64tools
 # - http://www.krajzewicz.de/docs/c64tools/index.html
 # - http://www.krajzewicz.de
-#
-# Available under the BSD license.
-# ===================================================================
+# ===========================================================================
 
 
-# --- imports -------------------------------------------------------
+# --- imports ---------------------------------------------------------------
 import sys
 from optparse import OptionParser
 
 
 
-# --- methods -------------------------------------------------------
+# --- methods ---------------------------------------------------------------
 # -- main
 def main(arguments=None):
     """Initialises an empty memory, loads subsequently the defined files

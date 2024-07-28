@@ -1,35 +1,44 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from __future__ import print_function
-# ===================================================================
-# c64tools - c64 Python helper
-#
-# Some classes that represent c64 structures.
-# This file can also be imported as a module.
-# It contains the following classes:
-# - Window - a basic pygame window for displaying stuff
-# - Memory - a basic pygame window for displaying stuff
-# - Bitmap - A c64 bitmap representation
-# - Char - The representation of a single c64 character
-# - Screen - The representation of c64 screen
-# - Methods for writing binary contents
-#
-# TODO: remove dependency on pygame
-# TODO: refactor binary writer helper methods
-# TODO: add a Sprite class
-#
-# (c) Daniel Krajzewicz 2016-2023
-# daniel@krajzewicz.de
+# ===========================================================================
+"""c64tools - c64 Python helper.
+
+Some classes that represent c64 structures.
+This file can also be imported as a module.
+It contains the following classes:
+- Window - a basic pygame window for displaying stuff
+- Memory - a basic pygame window for displaying stuff
+- Bitmap - A c64 bitmap representation
+- Char - The representation of a single c64 character
+- Screen - The representation of c64 screen
+- Methods for writing binary contents
+
+TODO: remove dependency on pygame
+TODO: refactor binary writer helper methods
+TODO: add a Sprite class
+
+(c) Daniel Krajzewicz 2016-2024
+daniel@krajzewicz.de
+"""
+# ===========================================================================
+__author__     = "Daniel Krajzewicz"
+__copyright__  = "Copyright 2016-2024, Daniel Krajzewicz"
+__credits__    = ["Daniel Krajzewicz"]
+__license__    = "BSD"
+__version__    = "0.18.0"
+__maintainer__ = "Daniel Krajzewicz"
+__email__      = "daniel@krajzewicz.de"
+__status__     = "Development"
+# ===========================================================================
 # - https://github.com/dkrajzew/c64tools
 # - http://www.krajzewicz.de/docs/c64tools/index.html
 # - http://www.krajzewicz.de
-#
-# Available under the BSD license.
-# ===================================================================
+# ===========================================================================
 
 
-# --- imports -------------------------------------------------------
-
-
-# --- Window class --------------------------------------------------
+# --- class definitions -----------------------------------------------------
+# --- Window class ----------------------------------------------------------
 class Window(object):
     """A plain pygame window. Nothing special about it."""
 
@@ -72,7 +81,7 @@ class Window(object):
 
 
 
-# --- Memory class --------------------------------------------------
+# --- Memory class ----------------------------------------------------------
 class Memory:
     """The representation of a c64 memory."""
 
@@ -149,7 +158,7 @@ class Memory:
 
 
 
-# --- Bitmap class --------------------------------------------------
+# --- Bitmap class ----------------------------------------------------------
 class Bitmap:
     """The representation of a c64 bitmap."""
 
@@ -250,7 +259,7 @@ class Bitmap:
 
 
 
-# --- Char class ----------------------------------------------------
+# --- Char class ------------------------------------------------------------
 class Char:
     """A single c64 character"""
 
@@ -345,7 +354,7 @@ class Char:
             self.data[i] ^= 255
 
 
-# --- Screen class --------------------------------------------------
+# --- Screen class ----------------------------------------------------------
 class Screen:
     """The representation of a c64 screen"""
 
@@ -388,7 +397,7 @@ class Screen:
 
 
 
-# --- Helper methods ------------------------------------------------
+# --- Helper methods --------------------------------------------------------
 def open2Write(fileName):
     """Opens a file for writing.
 
