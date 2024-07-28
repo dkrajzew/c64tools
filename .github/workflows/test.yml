@@ -1,6 +1,6 @@
-# This workflow tests degrotesque on push
+# This workflow tests c64tools on push
 
-name: test-degrotesque
+name: test-c64tools
 
 on: [push]
 
