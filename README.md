@@ -1,7 +1,7 @@
 [![License: BSD](https://img.shields.io/badge/License-BSD-green.svg)](https://github.com/dkrajzew/c64tools/blob/master/LICENSE)
 [![PyPI version](https://badge.fury.io/py/c64tools.svg)](https://pypi.python.org/pypi/c64tools)
 [![Downloads](https://pepy.tech/badge/c64tools)](https://pepy.tech/project/c64tools)
-[![Coverage Status](https://coveralls.io/repos/github/dkrajzew/c64tools /badge.svg?branch=main)](https://coveralls.io/github/dkrajzew/c64tools ?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/dkrajzew/c64tools/badge.svg?branch=main)](https://coveralls.io/github/dkrajzew/c64tools?branch=main)
 [![Documentation Status](https://readthedocs.org/projects/c64tools/badge/?version=latest)](https://c64tools.readthedocs.io/en/latest/?badge=latest)
 
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVQQWZKB6FDES)
