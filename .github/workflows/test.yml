@@ -31,7 +31,7 @@ jobs:
           flag-name: run-${{ join(matrix.*, '-') }}
           parallel: true
       - name: Report
-        run: coveralls -r 6uZ8cqjKhOF8OzDKWVfOmCt6xI5pSI8aH 
+        run: coveralls -r SGIaV77wglJylRjoE4uWp2YdgufL5oQZc 
   
   finish:
     needs: test
