@@ -49,6 +49,7 @@ setuptools.setup(
             'filemerge = c64tools.filemerge:main'
         ]
     },
+    install_requires = [ "pygame==2.6.0" ],
     # see https://pypi.org/classifiers/
     classifiers=[
         "Development Status :: 4 - Beta",
