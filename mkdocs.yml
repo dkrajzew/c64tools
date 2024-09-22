@@ -2,7 +2,7 @@ site_name: c64tools
 site_url: https://github.com/dkrajzew/c64tools
 site_description: c64 Python helper. 
 site_author: Daniel Krajzewicz
-docs_dir: ./mkdocs
+docs_dir: ./docs
 
 repo_url: https://github.com/dkrajzew/c64tools.git
 edit_uri: ""

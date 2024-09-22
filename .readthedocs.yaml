@@ -12,9 +12,9 @@ build:
     python: "3.11"
 
 mkdocs:
-  configuration: docs/mkdocs4readthedocs.yml
+  configuration: ./mkdocs4readthedocs.yml
   fail_on_warning: false
   
 python:
    install:
-   - requirements: requirements.txt
+   - requirements: requirements-readthedocs.txt
