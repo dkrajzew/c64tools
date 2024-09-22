@@ -43,10 +43,10 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     entry_points = {
         'console_scripts': [
-            'charpacker = c64tools.charpacker:main',
-            'charset2png = c64tools.charset2png:main',
-            'mem2png = c64tools.mem2png:main',
-            'filemerge = c64tools.filemerge:main'
+            'charpacker = src.charpacker:main',
+            'charset2png = src.charset2png:main',
+            'mem2png = src.mem2png:main',
+            'filemerge = src.filemerge:main'
         ]
     },
     install_requires = [ "pygame==2.6.0" ],
@@ -55,7 +55,6 @@ setuptools.setup(
         "Development Status :: 4 - Beta",
         "Environment :: Console",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",

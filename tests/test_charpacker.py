@@ -13,6 +13,9 @@ from __future__ import print_function
 # Available under the BSD license.
 # ===================================================================
 import sys
+import os
+sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
+import charpacker
 
 
 # --- helper functions ----------------------------------------------
@@ -23,10 +26,9 @@ def patchName(test):
 # --- test functions ------------------------------------------------
 def test_main_empty(capsys):
     """Test behaviour if no arguments are given"""
-    import c64tools.charpacker
     try:
-        c64tools.charpacker.main([])
-        assert False
+        charpacker.main([])
+        assert False # pragma: no cover
     except SystemExit as e:
         assert type(e)==type(SystemExit())
         assert e.code==2
@@ -41,10 +43,9 @@ charpacker: error: no input file(s) given...
 
 def test_main_help(capsys):
     """Test behaviour when help is wished"""
-    import c64tools.charpacker
     try:
-        c64tools.charpacker.main(["--help"])
-        assert False
+        charpacker.main(["--help"])
+        assert False # pragma: no cover
     except SystemExit as e:
         assert type(e)==type(SystemExit())
         assert e.code==0

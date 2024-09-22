@@ -47,7 +47,7 @@ plugins:
     - mkdocstrings:
         handlers:
             python:
-                paths: [../c64tools]
+                paths: [./src]
                 options:
                     filters: [""]
                     show_source: False

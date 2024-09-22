@@ -13,6 +13,9 @@ from __future__ import print_function
 # Available under the BSD license.
 # ===================================================================
 import sys
+import os
+sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
+import charset2png
 
 
 # --- helper functions ----------------------------------------------
@@ -23,10 +26,9 @@ def patchName(test):
 # --- test functions ------------------------------------------------
 def test_main_empty(capsys):
     """Test behaviour if no arguments are given"""
-    import c64tools.charset2png
     try:
-        c64tools.charset2png.main([])
-        assert False
+        charset2png.main([])
+        assert False # pragma: no cover
     except SystemExit as e:
         assert type(e)==type(SystemExit())
         assert e.code==2
@@ -41,10 +43,9 @@ charset2png: error: missing options; Please start with --help for advice.
 
 def test_main_help(capsys):
     """Test behaviour when help is wished"""
-    import c64tools.charset2png
     try:
-        c64tools.charset2png.main(["--help"])
-        assert False
+        charset2png.main(["--help"])
+        assert False # pragma: no cover
     except SystemExit as e:
         assert type(e)==type(SystemExit())
         assert e.code==0
