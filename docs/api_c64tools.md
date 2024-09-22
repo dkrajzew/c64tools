@@ -1,7 +1,7 @@
 Charpacker
 ==========
 
-::: __init__
+::: src.c64tools
     docstring_style: "google"
     filters: [""]
     show_source: False

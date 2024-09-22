@@ -47,7 +47,7 @@ plugins:
     - mkdocstrings:
         handlers:
             python:
-                paths: [./src]
+                paths: [./]
                 options:
                     filters: [""]
                     show_source: False
