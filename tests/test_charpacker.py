@@ -4,7 +4,7 @@ from __future__ import print_function
 #
 # charpacker tests
 #
-# (c) Daniel Krajzewicz 2016-2023
+# (c) Daniel Krajzewicz 2016-2024
 # daniel@krajzewicz.de
 # - https://github.com/dkrajzew/c64tools
 # - http://www.krajzewicz.de/docs/c64tools/index.html
