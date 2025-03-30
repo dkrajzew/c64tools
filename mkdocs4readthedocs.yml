@@ -31,14 +31,12 @@ nav:
         - charpacker: api_charpacker.md
         - charset2png: api_charset2png.md
         - mem2png: api_mem2png.md
-    - Developer Docs:
-        - How To Release: release.md
 
 markdown_extensions:
     - admonition
     - sane_lists
   
-copyright: "&copy; Copyright 2016&ndash;2024 Daniel Krajzewicz."
+copyright: "&copy; Copyright 2016&ndash;2025 Daniel Krajzewicz."
 
 use_directory_urls: false
 

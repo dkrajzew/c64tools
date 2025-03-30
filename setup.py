@@ -3,7 +3,7 @@
 #
 # Setup module
 #
-# (c) Daniel Krajzewicz 2016-2024
+# (c) Daniel Krajzewicz 2016-2025
 # daniel@krajzewicz.de
 # - https://github.com/dkrajzew/c64tools
 # - http://www.krajzewicz.de/docs/c64tools/index.html
