@@ -4,7 +4,7 @@ from __future__ import print_function
 #
 # charset2png tests
 #
-# (c) Daniel Krajzewicz 2016-2024
+# (c) Daniel Krajzewicz 2016-2025
 # daniel@krajzewicz.de
 # - https://github.com/dkrajzew/c64tools
 # - http://www.krajzewicz.de/docs/c64tools/index.html
@@ -34,10 +34,11 @@ def test_main_empty(capsys):
         assert e.code==2
     captured = capsys.readouterr()
     assert patchName(captured.out) == ""
-    assert patchName(captured.err) == """Usage: usage:
-  charset2png [options]
-
-charset2png: error: missing options; Please start with --help for advice.
+    assert patchName(captured.err) == """usage: chrset2png [-h] [--version] [-o OUTPUT] [-n NUM] [-p PATTERN]
+                  [-w WIDTH] [-d DIVIDER] [-i] [-b BACKGROUND] [-c FOREGROUND]
+                  [-1 MULTICOLOR1] [-2 MULTICOLOR2] [-m] [-s]
+                  INPUT_FILE ADDRESS
+chrset2png: error: the following arguments are required: INPUT_FILE, ADDRESS
 """
 
 
@@ -50,36 +51,42 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patchName(captured.out) == """Usage: usage:
-  charset2png [options]
+    assert patchName(captured.out) == """usage: chrset2png [-h] [--version] [-o OUTPUT] [-n NUM] [-p PATTERN]
+                  [-w WIDTH] [-d DIVIDER] [-i] [-b BACKGROUND] [-c FOREGROUND]
+                  [-1 MULTICOLOR1] [-2 MULTICOLOR2] [-m] [-s]
+                  INPUT_FILE ADDRESS
 
-Options:
-  --version             show program's version number and exit
+Extracts a character set at a given address from a given memory dump.
+
+positional arguments:
+  INPUT_FILE            the memory dump to load
+  ADDRESS               the address to extract the character set from
+
+options:
   -h, --help            show this help message and exit
-  -f FILE, --file=FILE  Defines the memory to extract the charset from
-  -o OUTPUT, --output=OUTPUT
-                        Defines the name of the file to save the charset image
-                        at
-  -a ADDRESS, --address=ADDRESS
-                        Defines the address to read the character set from
-  -n NUM, --number=NUM  Defines how many characters shall be extracted
-  -p PATTERN, --pattern=PATTERN
-                        Defines the pattern of the character set
-  -w WIDTH, --width=WIDTH
-                        Defines the width of the image in chars (default: 32)
-  -d DIVIDER, --divider=DIVIDER
-                        Defines the height of the dividing empty space between
+  --version             show program's version number and exit
+  -o OUTPUT, --output OUTPUT
+                        the name of the file to save the charset image into
+  -n NUM, --number NUM  the number of characters to extract (default: 256)
+  -p PATTERN, --pattern PATTERN
+                        defines the pattern of the character set
+  -w WIDTH, --width WIDTH
+                        sets the width of the image in chars (default: 32)
+  -d DIVIDER, --divider DIVIDER
+                        sets the height of the dividing empty space between
                         line (default: 4)
-  -i, --inverse         Inverse the character set
-  -b BACKGROUND, --background=BACKGROUND
-                        Sets the background color
-  -c FOREGROUND, --foreground=FOREGROUND
-                        Sets the foreground color
-  -1 MULTICOLOR1, --multicolor1=MULTICOLOR1
-                        Sets the multi color 1
-  -2 MULTICOLOR2, --multicolor2=MULTICOLOR2
-                        Sets the multi color 2
-  -m, --multicolor      Uses multicolor mode
-  -q, --quiet           Do not show a window, just convert
+  -i, --inverse         invert the character set
+  -b BACKGROUND, --background BACKGROUND
+                        sets the background color
+  -c FOREGROUND, --foreground FOREGROUND
+                        sets the foreground color
+  -1 MULTICOLOR1, --multicolor1 MULTICOLOR1
+                        sets the multi color 1
+  -2 MULTICOLOR2, --multicolor2 MULTICOLOR2
+                        sets the multi color 2
+  -m, --multicolor      use multicolor mode
+  -s, --show            show the result after conversion
+
+(c) Daniel Krajzewicz 2016-2025
 """
 

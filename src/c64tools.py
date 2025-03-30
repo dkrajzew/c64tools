@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from __future__ import print_function
-# ===========================================================================
 """c64tools - c64 Python helper.
 
 Some classes that represent c64 structures.
 This file can also be imported as a module.
 It contains the following classes:
+
 - Window - a basic pygame window for displaying stuff
 - Memory - a basic pygame window for displaying stuff
 - Bitmap - A c64 bitmap representation
@@ -17,13 +16,10 @@ It contains the following classes:
 TODO: remove dependency on pygame
 TODO: refactor binary writer helper methods
 TODO: add a Sprite class
-
-(c) Daniel Krajzewicz 2016-2024
-daniel@krajzewicz.de
 """
 # ===========================================================================
 __author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2016-2024, Daniel Krajzewicz"
+__copyright__  = "Copyright 2016-2025, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
 __license__    = "BSD"
 __version__    = "0.18.0"
@@ -35,6 +31,13 @@ __status__     = "Development"
 # - http://www.krajzewicz.de/docs/c64tools/index.html
 # - http://www.krajzewicz.de
 # ===========================================================================
+
+
+# --- imports ---------------------------------------------------------------
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.realpath(__file__)))
+
 
 
 # --- class definitions -----------------------------------------------------

@@ -1,11 +1,18 @@
 ChangeLog for c64tools
 ======================
 
-&copy; Daniel Krajzewicz 2016&ndash;2023
+&copy; Daniel Krajzewicz 2016&ndash;2025
 
 <https://github.com/dkrajzew/c64tools>
 
 <http://www.krajzewicz.de/docs/c64tools/index.html>
+
+
+c64tools-0.20.0 (to come)
+-------------------------
+
+* Working on the documentation
+* replaced OptionParser by ArgumentParser
 
 
 c64tools-0.18.0 (26.03.2023)

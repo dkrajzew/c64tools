@@ -1,30 +1,34 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from __future__ import print_function
-# ===========================================================================
 """c64tools - charset2png - Extracts a character set at a given address from a given memory dump.
 
---file/-f: the memory dump to load
---output/-o: the name of the file to write the character set to
---address/-a: the address to extract the character set from
---number/-n: the number of characters to extract
---pattern/-p: pattern of multi-char character sets
---width/-w: the width of the image to generate to build
---divider/-d: the height of a divider space between the lines
---inverse/-i: invert the characters
---background/-b: set the background color, default: #000000
---foreground/-c: set the foreground color, default: #ffffff
---multicolor1/-1: Sets the multi color 1, default: #c0c0c0
---multicolor2/-2: Sets the multi color 2, default: #808080
---multicolor/-m: Uses multicolor mode
---quiet/-q: do not show a window, just write the image
+Arguments
+---------
 
-(c) Daniel Krajzewicz 2016-2024
-daniel@krajzewicz.de
+* INPUT_FILE: the memory dump to load
+* ADDRESS: the address to extract the character set from
+
+Options
+-------
+
+* --output/-o FILE: the name of the file to save the charset image into
+* --number/-n INT: the number of characters to extract (default: 256)
+* --pattern/-p PATTERN: defines the pattern of the character set
+* --width/-w WIDTH: sets the width of the image in chars (default: 32)
+* --divider/-d INT: sets the height of the dividing empty space between line (default: 4)
+* --inverse/-i__: invert the characters
+* --background/-b COLOR: sets the background color, default: #000000
+* --foreground/-c COLOR: sets the foreground color, default: #ffffff
+* --multicolor1/-1 COLOR: sets the multi color 1, default: #c0c0c0
+* --multicolor2/-2 COLOR: sets the multi color 2, default: #808080
+* --multicolor/-m__: use multicolor mode
+* --show/-s__: Show the result after conversion
+* -h, --help: show a help screen
+* --version: show program's version number and exit
 """
 # ===========================================================================
 __author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2016-2024, Daniel Krajzewicz"
+__copyright__  = "Copyright 2016-2025, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
 __license__    = "BSD"
 __version__    = "0.18.0"
@@ -42,8 +46,12 @@ __status__     = "Development"
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
-import c64tools
+import argparse
+import configparser
 import math
+import pygame
+import c64tools
+from typing import List
 
 
 # --- methods ---------------------------------------------------------------
@@ -64,94 +72,74 @@ def convertColor(color):
 
 
 # -- main
-def main(arguments=None):
+def main(arguments : List[str] = None) -> int:
     """Loads the memory dump, extracts the character set saves its display and shows it.
 
     Args:
         arguments (List[str]): The command line arguments
-
-    Options
-    -------
-
-    * __--file/-f _&lt;FILE&gt;___: the memory dump to load
-    * __--output/-o _&lt;FILE&gt;___: the name of the file to write the character set to
-    * __--address/-a _&lt;INT&gt;___: the address to extract the character set from
-    * __--number/-n _&lt;INT&gt;___: the number of characters to extract
-    * __--pattern/-p _&lt;PATTERN&gt;___: pattern of multi-char character sets
-    * __--width/-w _&lt;INT&gt;___: the width of the image to generate to build
-    * __--divider/-d _&lt;INT&gt;___: the height of a divider space between the lines
-    * __--inverse/-i__: invert the characters
-    * __--background/-b _&lt;COLOR&gt;___: set the background color, default: #000000
-    * __--foreground/-c _&lt;COLOR&gt;___: set the foreground color, default: #ffffff
-    * __--multicolor1/-1 _&lt;COLOR&gt;___: set the multi color 1, default: #c0c0c0
-    * __--multicolor2/-2 _&lt;COLOR&gt;___: set the multi color 2, default: #808080
-    * __--multicolor/-m__: use multicolor mode
-    * __--quiet/-q__: do not show a window, just write the image
     """
-    import pygame
-    from optparse import OptionParser
-    optParser = OptionParser(usage="""usage:\n  %prog [options]""", version="charset2png 0.18.0")
-    optParser.add_option("-f", "--file", dest="file", default=None, help="Defines the memory to extract the charset from")
-    optParser.add_option("-o", "--output", dest="output", default=None, help="Defines the name of the file to save the charset image at")
-    optParser.add_option("-a", "--address", dest="address", type="int", default=None, help="Defines the address to read the character set from")
-    optParser.add_option("-n", "--number", dest="num", type="int", default=256, help="Defines how many characters shall be extracted")
-    optParser.add_option("-p", "--pattern", dest="pattern", default="0", help="Defines the pattern of the character set")
-    optParser.add_option("-w", "--width", dest="width", type="int", default=32, help="Defines the width of the image in chars (default: 32)")
-    optParser.add_option("-d", "--divider", dest="divider", default=4, help="Defines the height of the dividing empty space between line (default: 4)")
-    optParser.add_option("-i", "--inverse", dest="inverse", action="store_true", help="Inverse the character set")
-    optParser.add_option("-b", "--background", dest="background", default="#000000", help="Sets the background color")
-    optParser.add_option("-c", "--foreground", dest="foreground", default="#ffffff", help="Sets the foreground color")
-    optParser.add_option("-1", "--multicolor1", dest="multicolor1", default="#c0c0c0", help="Sets the multi color 1")
-    optParser.add_option("-2", "--multicolor2", dest="multicolor2", default="#808080", help="Sets the multi color 2")
-    optParser.add_option("-m", "--multicolor", dest="multicolor", action="store_true", help="Uses multicolor mode")
-    optParser.add_option("-q", "--quiet", dest="quiet", action="store_true", help="Do not show a window, just convert")
-    options, remaining_args = optParser.parse_args(args=arguments)
-    ifile = options.file
-    ofile = options.output
-    address = options.address
-    if not ifile or not ofile or not address:
-        optParser.error("missing options; Please start with --help for advice.")
-        return
+    parser = argparse.ArgumentParser(prog="chrset2png", 
+        description="Extracts a character set at a given address from a given memory dump.",
+        epilog='(c) Daniel Krajzewicz 2016-2025')
+    parser.add_argument('--version', action='version', version='%(prog)s 0.18.0')
+    parser.add_argument("input", metavar="INPUT_FILE", default=None, help="the memory dump to load")
+    parser.add_argument("address", metavar="ADDRESS", type=int, default=None, help="the address to extract the character set from")
+    parser.add_argument("-o", "--output", dest="output", default=None, help="the name of the file to save the charset image into")
+    parser.add_argument("-n", "--number", dest="num", type=int, default=256, help="the number of characters to extract (default: 256)")
+    parser.add_argument("-p", "--pattern", dest="pattern", default="0", help="defines the pattern of the character set")
+    parser.add_argument("-w", "--width", dest="width", type=int, default=32, help="sets the width of the image in chars (default: 32)")
+    parser.add_argument("-d", "--divider", dest="divider", type=int, default=4, help="sets the height of the dividing empty space between line (default: 4)")
+    parser.add_argument("-i", "--inverse", dest="inverse", action="store_true", help="invert the character set")
+    parser.add_argument("-b", "--background", dest="background", default="#000000", help="sets the background color")
+    parser.add_argument("-c", "--foreground", dest="foreground", default="#ffffff", help="sets the foreground color")
+    parser.add_argument("-1", "--multicolor1", dest="multicolor1", default="#c0c0c0", help="sets the multi color 1")
+    parser.add_argument("-2", "--multicolor2", dest="multicolor2", default="#808080", help="sets the multi color 2")
+    parser.add_argument("-m", "--multicolor", dest="multicolor", action="store_true", help="use multicolor mode")
+    parser.add_argument("-s", "--show", dest="show", action="store_true", help="show the result after conversion")
+    args = parser.parse_args(arguments)
+    ofile = args.output
+    if not args.output or not args.show:
+        raise argparse.ArgumentTypeError("Either --show or the output file (--output <FILE>) must be set.")
     # load the memory dump
     mem = c64tools.Memory()
-    mem.load(ifile)
+    mem.load(args.input)
 
     # build the surface to fill and save
-    pattern = options.pattern.split(";")
+    pattern = args.pattern.split(";")
     for i,l in enumerate(pattern):
         pattern[i] = pattern[i].split("-")
     rowsPerChar = len(pattern)
     colsPerChar = len(pattern[0])
-    width = int(options.width*8)
-    height = math.ceil(float(options.num) / float(options.width))
-    height = int(height*8*rowsPerChar+(max(1, height)-1)*options.divider)
+    width = int(args.width*8)
+    height = math.ceil(float(args.num) / float(args.width))
+    height = int(height*8*rowsPerChar+(max(1, height)-1)*args.divider)
     s = pygame.Surface((width, height))
-    bgColor = convertColor(options.background)
-    fgColor = convertColor(options.foreground)
-    multi1Color = convertColor(options.multicolor1)
-    multi2Color = convertColor(options.multicolor2)
+    bgColor = convertColor(args.background)
+    fgColor = convertColor(args.foreground)
+    multi1Color = convertColor(args.multicolor1)
+    multi2Color = convertColor(args.multicolor2)
     s.fill(bgColor)
-    addr = options.address
+    addr = args.address
     line = 0
-    for i in range(0, options.num):
+    for i in range(0, args.num):
         srcBase = addr + i*8
-        dstX = ((i*colsPerChar)%options.width)*8
-        dstLine = int(float(i*colsPerChar)/float(options.width))
-        dstY = dstLine*rowsPerChar*8 + dstLine*options.divider
+        dstX = ((i*colsPerChar)%args.width)*8
+        dstLine = int(float(i*colsPerChar)/float(args.width))
+        dstY = dstLine*rowsPerChar*8 + dstLine*args.divider
         for lp in pattern:
             oX = 0
             for cp in lp:
                 src = srcBase + int(cp)*8
                 char = mem.charAt(src)
-                if options.inverse:
+                if args.inverse:
                     char.inverse()
-                if options.multicolor: char.drawMulticolorAt(s, dstX+oX, dstY, fgColor, None, multi1Color, multi2Color)
+                if args.multicolor: char.drawMulticolorAt(s, dstX+oX, dstY, fgColor, None, multi1Color, multi2Color)
                 else: char.drawAt(s, dstX+oX, dstY, fgColor, None)
                 oX += 8
             dstY += 8
-    pygame.image.save(s, ofile)
-    print ("Written %s chars to %s" % (options.num, ofile))
-    if not options.quiet:
+    pygame.image.save(s, args.output)
+    print ("Written %s chars to %s" % (args.num, args.output))
+    if args.show:
         w = c64tools.Window(width, height, "charset")
         w.screen.blit(s, (0, 0))
         while (w.show):
@@ -162,5 +150,5 @@ def main(arguments=None):
 
 # -- main check
 if __name__ == "__main__":
-  main(sys.argv)
+    sys.exit(main(sys.argv[1:])) # pragma: no cover
 

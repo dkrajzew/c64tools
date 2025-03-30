@@ -4,7 +4,7 @@ from __future__ import print_function
 #
 # charpacker tests
 #
-# (c) Daniel Krajzewicz 2016-2024
+# (c) Daniel Krajzewicz 2016-2025
 # daniel@krajzewicz.de
 # - https://github.com/dkrajzew/c64tools
 # - http://www.krajzewicz.de/docs/c64tools/index.html
@@ -33,11 +33,8 @@ def test_main_empty(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert patchName(captured.err) == """Usage: usage:
-  charpacker <MEMORY_DUMP>
-  charpacker [options]
-
-charpacker: error: no input file(s) given...
+    assert patchName(captured.err) == """usage: charpacker [-h] [--version] [-s SCREEN] [-c CHARSET] INPUT_IMAGE
+charpacker: error: the following arguments are required: INPUT_IMAGE
 """
 
 
@@ -50,17 +47,21 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patchName(captured.out) == """Usage: usage:
-  charpacker <MEMORY_DUMP>
-  charpacker [options]
+    assert patchName(captured.out) == """usage: charpacker [-h] [--version] [-s SCREEN] [-c CHARSET] INPUT_IMAGE
 
-Options:
-  --version             show program's version number and exit
+A char packer.
+
+positional arguments:
+  INPUT_IMAGE           the image to load and charpack
+
+options:
   -h, --help            show this help message and exit
-  -f FILE, --file=FILE  Defines the image to load and charpack
-  -s SCREEN, --screen-output=SCREEN
-                        Defines the name of the file to save the screen at
-  -c CHARSET, --charset-output=CHARSET
-                        Defines the name of the file to save the charset at
+  --version             show program's version number and exit
+  -s SCREEN, --screen-output SCREEN
+                        the name of the file to save the screen at
+  -c CHARSET, --charset-output CHARSET
+                        the name of the file to save the charset at
+
+(c) Daniel Krajzewicz 2016-2025
 """
 

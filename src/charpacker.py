@@ -1,22 +1,26 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from __future__ import print_function
-# ===========================================================================
-"""c64tools - mem2png - A char packer.
+"""c64tools - charpacker - A char packer.
 
-Either one argument - the file to load - must be supported
-or the following options
+Loads an image and charpacks it. Saves optionally the screen and the character
+data. Shows the result.
 
---file/-f: the memory dump to load
---output/-o: the image file to write
---width/-w: the width of the window / image in characters
+Arguments
+---------
 
-(c) Daniel Krajzewicz 2016-2024
-daniel@krajzewicz.de
+* IMAGE_FILE: the image to load and charpack
+
+Options
+-------
+
+* --screen-output/-s OUTPUT_FILE: the name of the file to save the screen at
+* --charset-output/-c OUTPUT_FILE: the name of the file to save the charset at
+* -h, --help: show a help screen
+* --version: show program's version number and exit
 """
 # ===========================================================================
 __author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2016-2024, Daniel Krajzewicz"
+__copyright__  = "Copyright 2016-2025, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
 __license__    = "BSD"
 __version__    = "0.18.0"
@@ -34,7 +38,11 @@ __status__     = "Development"
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
+import argparse
+import configparser
+import pygame
 import c64tools
+from typing import List
 
 
 # --- methods ---------------------------------------------------------------
@@ -46,7 +54,7 @@ def charpack(bitmap, ret=None):
     a character list and a screen as the second parameter.
 
     Args:
-        bitmap (Bitmap instance): the c64 bitmap to charpack
+        bitmap (Bitmap): the c64 bitmap to charpack
         ret (Tuple[List[Char], Screen]): optional charpack result for continuing
 
     Returns:
@@ -68,34 +76,23 @@ def charpack(bitmap, ret=None):
 
 
 # -- main
-def main(arguments=None):
+def main(arguments : List[str] = None) -> int:
     """Loads an image file, charpacks it, saves the obtained screen and character
     set and shows the original image, its bitmap representation, and the charpacking
     result.
 
     Args:
         arguments (List[str]): The command line arguments
-
-    Options
-    -------
-
-    * __--file/-f _&lt;IMAGE_FILE_TO_LOAD&gt;___: the image to charpack
-    * __--screen-output/-s _&lt;SCREEN_OUTPUT_FILENAME&gt;___: the name of the file to write the screen to
-    * __--charset-output/-c _&lt;CHARSET_OUTPUT_FILENAME&gt;___: the name of the file to write the charset
     """
-    import pygame
-    from optparse import OptionParser
-    optParser = OptionParser(usage="""usage:\n  %prog <MEMORY_DUMP>\n  %prog [options]""", version="charpacker 0.18.0")
-    optParser.add_option("-f", "--file", dest="file", default=None, help="Defines the image to load and charpack")
-    optParser.add_option("-s", "--screen-output", dest="screen", default=None, help="Defines the name of the file to save the screen at")
-    optParser.add_option("-c", "--charset-output", dest="charset", default=None, help="Defines the name of the file to save the charset at")
-    options, remaining_args = optParser.parse_args(args=arguments)
-    ifile = options.file
-    ofileScreen = options.screen
-    ofileCharset = options.charset
-    if not ifile:
-        optParser.error("no input file(s) given...")
-        sys.exit()
+    parser = argparse.ArgumentParser(prog="charpacker", description="A char packer.",
+        epilog='(c) Daniel Krajzewicz 2016-2025')
+    parser.add_argument('--version', action='version', version='%(prog)s 0.18.0')
+    parser.add_argument("input", metavar="INPUT_IMAGE", default=None, help="the image to load and charpack")
+    parser.add_argument("-s", "--screen-output", dest="screen", default=None, help="the name of the file to save the screen at")
+    parser.add_argument("-c", "--charset-output", dest="charset", default=None, help="the name of the file to save the charset at")
+    args = parser.parse_args(arguments)
+    ofileScreen = args.screen
+    ofileCharset = args.charset
 
     w = c64tools.Window(320, 600, "charpacker")
     # load and show the original image
@@ -135,5 +132,5 @@ def main(arguments=None):
 
 # -- main check
 if __name__ == "__main__":
-    main(sys.argv)
+    sys.exit(main(sys.argv[1:])) # pragma: no cover
 

@@ -4,7 +4,7 @@ from __future__ import print_function
 #
 # filemerge tests
 #
-# (c) Daniel Krajzewicz 2016-2024
+# (c) Daniel Krajzewicz 2016-2025
 # daniel@krajzewicz.de
 # - https://github.com/dkrajzew/c64tools
 # - http://www.krajzewicz.de/docs/c64tools/index.html
@@ -34,11 +34,8 @@ def test_main_empty(capsys):
         assert e.code==2
     captured = capsys.readouterr()
     assert patchName(captured.out) == ""
-    assert patchName(captured.err) == """Usage: usage:
-  filemerge <MEMORY_DUMP>
-  filemerge [options]
-
-filemerge: error: no input file(s) given...
+    assert patchName(captured.err) == """usage: filemerge [-h] [--version] OUTPUT_FILE INPUT_FILE [INPUT_FILE ...]
+filemerge: error: the following arguments are required: OUTPUT_FILE, INPUT_FILE
 """
 
 
@@ -51,15 +48,18 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patchName(captured.out) == """Usage: usage:
-  filemerge <MEMORY_DUMP>
-  filemerge [options]
+    assert patchName(captured.out) == """usage: filemerge [-h] [--version] OUTPUT_FILE INPUT_FILE [INPUT_FILE ...]
 
-Options:
-  --version             show program's version number and exit
-  -h, --help            show this help message and exit
-  -f FILE, --file=FILE  Defines the files to load, separated by a ','
-  -o OUTPUT, --output=OUTPUT
-                        Defines the name of the file to write
+Joins a set of files into one.
+
+positional arguments:
+  OUTPUT_FILE  Defines the name of the file to write
+  INPUT_FILE   Defines the files to load
+
+options:
+  -h, --help   show this help message and exit
+  --version    show program's version number and exit
+
+(c) Daniel Krajzewicz 2016-2025
 """
 

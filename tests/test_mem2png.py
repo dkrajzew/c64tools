@@ -4,7 +4,7 @@ from __future__ import print_function
 #
 # mem2png tests
 #
-# (c) Daniel Krajzewicz 2016-2024
+# (c) Daniel Krajzewicz 2016-2025
 # daniel@krajzewicz.de
 # - https://github.com/dkrajzew/c64tools
 # - http://www.krajzewicz.de/docs/c64tools/index.html
@@ -34,11 +34,8 @@ def test_main_empty(capsys):
         assert e.code==2
     captured = capsys.readouterr()
     assert patchName(captured.out) == ""
-    assert patchName(captured.err) == """Usage: usage:
-  mem2png <MEMORY_DUMP>
-  mem2png [options]
-
-mem2png: error: No input file(s) given...
+    assert patchName(captured.err) == """usage: mem2png [-h] [--version] [-s] [-o STORE] [-w WIDTH] MEMORY_FILE
+mem2png: error: the following arguments are required: MEMORY_FILE
 """
 
 
@@ -51,17 +48,22 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patchName(captured.out) == """Usage: usage:
-  mem2png <MEMORY_DUMP>
-  mem2png [options]
+    assert patchName(captured.out) == """usage: mem2png [-h] [--version] [-s] [-o STORE] [-w WIDTH] MEMORY_FILE
 
-Options:
-  --version             show program's version number and exit
+A c64 memory dump visualiser that can export the dump to an image.
+
+positional arguments:
+  MEMORY_FILE           the memory dump file to load
+
+options:
   -h, --help            show this help message and exit
-  -f FILE, --file=FILE  Defines the memory dump file to load
-  -o STORE, --output=STORE
-                        Defines the name/path of the output file
-  -w WIDTH, --width=WIDTH
-                        Defines the width of the window in chars
+  --version             show program's version number and exit
+  -s, --show            show the memory dump
+  -o STORE, --output STORE
+                        the name/path of the output file
+  -w WIDTH, --width WIDTH
+                        the width of the window in chars (the default is 128)
+
+(c) Daniel Krajzewicz 2016-2025
 """
 
