@@ -4,7 +4,7 @@ Legal Information
 Impressum
 ---------
 
-These pages were made by Daniel Krajzewicz, 2016&ndash;2023.
+These pages were made by Daniel Krajzewicz, 2016&ndash;2025.
 
 
 Disclaimer
