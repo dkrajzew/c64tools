@@ -70,3 +70,16 @@ options:
 (c) Daniel Krajzewicz 2016-2025
 """
 
+
+def test_main_version(capsys):
+    """Test behaviour if no arguments are given"""
+    try:
+        mem2png.main(["--version"])
+        assert False # pragma: no cover
+    except SystemExit as e:
+        assert type(e)==type(SystemExit())
+        assert e.code==0
+    captured = capsys.readouterr()
+    assert patchName(captured.out) == """mem2png 0.18.0
+"""
+    assert patchName(captured.err) == ""

@@ -37,11 +37,11 @@ def test_main_empty(capsys):
         assert e.code==2
     captured = capsys.readouterr()
     assert patchName(captured.out) == ""
-    assert patchName(captured.err) == """usage: chrset2png [-h] [--version] [-o OUTPUT] [-n NUM] [-p PATTERN]
-                  [-w WIDTH] [-d DIVIDER] [-i] [-b BACKGROUND] [-c FOREGROUND]
-                  [-1 MULTICOLOR1] [-2 MULTICOLOR2] [-m] [-s]
-                  INPUT_FILE ADDRESS
-chrset2png: error: the following arguments are required: INPUT_FILE, ADDRESS
+    assert patchName(captured.err) == """usage: charset2png [-h] [--version] [-o OUTPUT] [-n NUM] [-p PATTERN]
+                   [-w WIDTH] [-d DIVIDER] [-i] [-b BACKGROUND]
+                   [-c FOREGROUND] [-1 MULTICOLOR1] [-2 MULTICOLOR2] [-m] [-s]
+                   INPUT_FILE ADDRESS
+charset2png: error: the following arguments are required: INPUT_FILE, ADDRESS
 """
 
 
@@ -54,10 +54,10 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patchName(captured.out) == """usage: chrset2png [-h] [--version] [-o OUTPUT] [-n NUM] [-p PATTERN]
-                  [-w WIDTH] [-d DIVIDER] [-i] [-b BACKGROUND] [-c FOREGROUND]
-                  [-1 MULTICOLOR1] [-2 MULTICOLOR2] [-m] [-s]
-                  INPUT_FILE ADDRESS
+    assert patchName(captured.out) == """usage: charset2png [-h] [--version] [-o OUTPUT] [-n NUM] [-p PATTERN]
+                   [-w WIDTH] [-d DIVIDER] [-i] [-b BACKGROUND]
+                   [-c FOREGROUND] [-1 MULTICOLOR1] [-2 MULTICOLOR2] [-m] [-s]
+                   INPUT_FILE ADDRESS
 
 Extracts a character set at a given address from a given memory dump.
 
@@ -93,3 +93,16 @@ options:
 (c) Daniel Krajzewicz 2016-2025
 """
 
+
+def test_main_version(capsys):
+    """Test behaviour if no arguments are given"""
+    try:
+        charset2png.main(["--version"])
+        assert False # pragma: no cover
+    except SystemExit as e:
+        assert type(e)==type(SystemExit())
+        assert e.code==0
+    captured = capsys.readouterr()
+    assert patchName(captured.out) == """charset2png 0.18.0
+"""
+    assert patchName(captured.err) == ""

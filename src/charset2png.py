@@ -78,7 +78,7 @@ def main(arguments : List[str] = None) -> int:
     Args:
         arguments (List[str]): The command line arguments
     """
-    parser = argparse.ArgumentParser(prog="chrset2png", 
+    parser = argparse.ArgumentParser(prog="charset2png", 
         description="Extracts a character set at a given address from a given memory dump.",
         epilog='(c) Daniel Krajzewicz 2016-2025')
     parser.add_argument('--version', action='version', version='%(prog)s 0.18.0')
