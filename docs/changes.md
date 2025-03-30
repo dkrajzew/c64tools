@@ -13,6 +13,9 @@ c64tools-0.20.0 (to come)
 
 * Working on the documentation
 * replaced OptionParser by ArgumentParser
+    * some of the options have been transfered to arguments
+* changes in __charset2png.py__
+    * the option **--quiet** has been replaced by the option **--show**
 
 
 c64tools-0.18.0 (26.03.2023)

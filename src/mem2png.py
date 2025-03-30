@@ -12,9 +12,9 @@ Arguments
 Options
 -------
 
-* --show/-s OUTPUT_FILE: show the memory dump
-* --output/-o OUTPUT_FILE: the name/path of the output file
-* --width/-w INT: the width of the window in chars (the default is 128)
+* --show/-s: show the memory dump
+* --output/-o OUTPUT_FILE: the name of the output file
+* --width/-w INT: the width of the window in chars (default: 128)
 * -h, --help: show a help screen
 * --version: show program's version number and exit
 """
@@ -72,8 +72,8 @@ def main(arguments : List[str] = None) -> int:
         parser.add_argument('--version', action='version', version='%(prog)s 0.18.0')
         parser.add_argument("input", metavar="MEMORY_FILE", default=None, help="the memory dump file to load")
         parser.add_argument("-s", "--show", dest="show", action="store_true", default=False, help="show the memory dump")
-        parser.add_argument("-o", "--output", dest="store", default=None, help="the name/path of the output file")
-        parser.add_argument("-w", "--width", dest="width", type=int, default=128, help="the width of the window in chars (the default is 128)")
+        parser.add_argument("-o", "--output", dest="store", default=None, help="the name of the output file")
+        parser.add_argument("-w", "--width", dest="width", type=int, default=128, help="the width of the window in chars (default: 128)")
         args = parser.parse_args(arguments)
         ifile = args.input
         ofile = args.store

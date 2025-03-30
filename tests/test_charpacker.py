@@ -58,9 +58,9 @@ options:
   -h, --help            show this help message and exit
   --version             show program's version number and exit
   -s SCREEN, --screen-output SCREEN
-                        the name of the file to save the screen at
+                        the name of the file to save the screen to
   -c CHARSET, --charset-output CHARSET
-                        the name of the file to save the charset at
+                        the name of the file to save the charset to
 
 (c) Daniel Krajzewicz 2016-2025
 """

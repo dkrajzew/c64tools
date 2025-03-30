@@ -53,8 +53,8 @@ def test_main_help(capsys):
 Joins a set of files into one.
 
 positional arguments:
-  OUTPUT_FILE  Defines the name of the file to write
-  INPUT_FILE   Defines the files to load
+  OUTPUT_FILE  the name of the file to write
+  INPUT_FILE   the files to load
 
 options:
   -h, --help   show this help message and exit

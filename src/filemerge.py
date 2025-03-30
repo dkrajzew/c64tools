@@ -11,8 +11,8 @@ starting address.
 Arguments
 ---------
 
-* OUTPUT_FILE: Defines the name of the file to write
-* INPUT_FILE(s): Defines the files to load
+* OUTPUT_FILE: the name of the file to write
+* INPUT_FILE(s): the files to load
 
 Options
 -------
@@ -56,8 +56,8 @@ def main(arguments : List[str] = None) -> int:
     parser = argparse.ArgumentParser(prog="filemerge", description="Joins a set of files into one.",
         epilog='(c) Daniel Krajzewicz 2016-2025')
     parser.add_argument('--version', action='version', version='%(prog)s 0.18.0')
-    parser.add_argument("output", metavar="OUTPUT_FILE", default=None, help="Defines the name of the file to write")
-    parser.add_argument("files", metavar="INPUT_FILE", nargs='+', default=None, help="Defines the files to load")
+    parser.add_argument("output", metavar="OUTPUT_FILE", default=None, help="the name of the file to write")
+    parser.add_argument("files", metavar="INPUT_FILE", nargs='+', default=None, help="the files to load")
     args = parser.parse_args(arguments)
     if not args.file:
         optParser.error("no input file(s) given...")

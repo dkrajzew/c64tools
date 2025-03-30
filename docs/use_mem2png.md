@@ -1,31 +1,35 @@
-Using “mem2png.py”
-==================
+# Using “mem2png.py”
 
 “mem2png.py” shows a memory dump, optionally saving it as a png-file. When moving over the window, the memory address below the cursor position will be shown and additionally, the character address, both in decimal as well as in hexadecimal number system. You may use this information for extracting a character set using “charset2png.py”.
 
 
-Options
--------
+## Arguments and options
 
-The tool has to be started with either one option — the memory dump to load — or the following ones:
+The file to load must be supported. Either **--show** or **--output _&lt;IMAGE_TO_SAVE&gt;_** must be set.
 
-* __--file/-f _&lt;MEMORY_DUMP_TO_LOAD&gt;___: the memory dump to load
-* __--output/-o _&lt;IMAGE_TO_SAVE&gt;___: the file name to save the memory image to
-* __--width/-w _&lt;DISPLAY_WIDTH_IN_CHARACTERS&gt;___: the width of the display in characters (the default is 128)
+### Arguments
+
+* ***&lt;MEMORY_FILE&gt;***: the memory dump file to load
+
+### Options
+
+* __--show/-s__: show the memory dump
+* __--output/-o _&lt;IMAGE_TO_SAVE&gt;___: the name of the output file
+* __--width/-w _&lt;DISPLAY_WIDTH_IN_CHARACTERS&gt;___: the width of the window in chars (default: 128)
 
 
 Examples
 --------
 
 ```console
-mem2png -f bb_hex_game.bin 
+mem2png bb_hex_game.bin 
 ```
 
 Loads the memory dump “bb_hex_game.bin” and shows it.
 
 
 ```console
-mem2png -f bb_hex_game.bin -o bb_game.png
+mem2png -o bb_game.png bb_hex_game.bin
 ```
 
 Loads the memory dump “bb_hex_game.bin”, renders it as an image and saves the image to “bb_game.png”. Shows the image, which may look as the folowing one:

@@ -60,9 +60,9 @@ options:
   --version             show program's version number and exit
   -s, --show            show the memory dump
   -o STORE, --output STORE
-                        the name/path of the output file
+                        the name of the output file
   -w WIDTH, --width WIDTH
-                        the width of the window in chars (the default is 128)
+                        the width of the window in chars (default: 128)
 
 (c) Daniel Krajzewicz 2016-2025
 """
