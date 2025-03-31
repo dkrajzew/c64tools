@@ -50,7 +50,7 @@ import argparse
 import configparser
 import math
 import pygame
-import c64tools
+import structures
 from typing import List
 
 
@@ -102,7 +102,7 @@ def main(arguments : List[str] = None) -> int:
         print ("charset2png: error: either --show or the output file (--output <FILE>) must be set.", file=sys.stderr)
         return 2
     # load the memory dump
-    mem = c64tools.Memory()
+    mem = structures.Memory()
     mem.load(args.input)
 
     # build the surface to fill and save
@@ -143,7 +143,7 @@ def main(arguments : List[str] = None) -> int:
     pygame.image.save(s, args.output)
     print ("Written %s chars to %s" % (args.num, args.output))
     if args.show:
-        w = c64tools.Window(width, height, "charset")
+        w = structures.Window(width, height, "charset")
         w.screen.blit(s, (0, 0))
         while (w.show):
             pygame.display.flip()

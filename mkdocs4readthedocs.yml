@@ -26,7 +26,7 @@ nav:
         - mem2png: use_mem2png.md
         - filemerge: use_filemerge.md
     - Code Docs:
-        - c64tools: api_c64tools.md
+        - structures: api_structures.md
         - filemerge: api_filemerge.md
         - charpacker: api_charpacker.md
         - charset2png: api_charset2png.md

@@ -40,7 +40,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 import argparse
 import configparser
-import c64tools
+import structures
 from typing import List
 
 
@@ -87,9 +87,9 @@ def main(arguments : List[str] = None) -> int:
     INFO = 40
     ys = int(65536/xs)
     xs = xs*8
-    w = c64tools.Window(xs, ys+INFO)
+    w = structures.Window(xs, ys+INFO)
     w.background.fill((0,0,0))
-    mem = c64tools.Memory()
+    mem = structures.Memory()
     mem.load(ifile)
     mem.draw_at(w.background, 0, 0, int(xs/8))
     pygame.gfxdraw.line(w.background, 0, ys, xs, ys, (255,0,0))

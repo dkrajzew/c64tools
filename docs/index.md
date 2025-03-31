@@ -12,7 +12,7 @@ Introduction
 
 __c64tools__ is a [Python](https://www.python.org/) library that helps in dealing with Commodore c64 graphics and memory.
 
-The major module is named “[c64tools.py](api_c64tools.md)”. It contains classes that represent major c64 artifacts — memory, bitmap, char, screen, etc. These classes usually support loading, drawing, and being extracted from a pygame surface.
+The major module is named “[structures.py](api_structures.md)”. It contains classes that represent major c64 artifacts — memory, bitmap, char, screen, etc. These classes usually support loading, drawing, and being extracted from a pygame surface.
 
 In addition, you may find some applications which use this module:
 

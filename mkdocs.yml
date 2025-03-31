@@ -31,7 +31,7 @@ nav:
         - filemerge: use_filemerge.md
     - Links: links.md
     - Code Docs:
-        - c64tools: api_c64tools.md
+        - structures: api_structures.md
         - filemerge: api_filemerge.md
         - charpacker: api_charpacker.md
         - charset2png: api_charset2png.md

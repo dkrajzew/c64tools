@@ -41,7 +41,7 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 import argparse
 import configparser
 import pygame
-import c64tools
+import structures
 from typing import List
 
 
@@ -61,7 +61,7 @@ def charpack(bitmap, ret=None):
         (Tuple[List[Char], Screen]): The obtained characters and the screen
     """
     if ret==None:
-        ret = [[], c64tools.Screen()]
+        ret = [[], structures.Screen()]
     for row in range(0, 25):
         for col in range(0, 40):
             found = False
@@ -95,12 +95,12 @@ def main(arguments : List[str] = None) -> int:
     ofile_screen = args.screen
     ofile_charset = args.charset
 
-    w = c64tools.Window(320, 600, "charpacker")
+    w = structures.Window(320, 600, "charpacker")
     # load and show the original image
     pic = pygame.image.load(args.input)
     w.screen.blit(pic, (0, 0))
     # build and draw the bitmap
-    bo = c64tools.Bitmap()
+    bo = structures.Bitmap()
     bo.from_surface(w.screen, 0, 0) #
     bo.draw_at(w.screen, 0, 200)
     # charpack
@@ -122,7 +122,7 @@ def main(arguments : List[str] = None) -> int:
         print ("Charpacking failed, needed %s chars." % len(chars))
     if args.show:
         # rebuild the bitmap and show it
-        bn = c64tools.Bitmap()
+        bn = structures.Bitmap()
         bn.from_c64_screen(screen, chars)
         bn.draw_at(w.screen, 0, 400)
         pygame.display.update()
