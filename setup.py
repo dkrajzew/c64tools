@@ -41,7 +41,7 @@ setuptools.setup(
         'Tracker': 'https://github.com/dkrajzew/c64tools/issues',
         'Discussions': 'https://github.com/dkrajzew/c64tools/discussions',
     },
-    license='BSD',
+    license='BSD-3-Clause',
     # add modules
     packages = ["c64tools", "tests"],
     package_data={
@@ -72,6 +72,6 @@ setuptools.setup(
         "Topic :: Other/Nonlisted Topic",
         "Topic :: Multimedia :: Graphics"
     ],
-    python_requires='>=2.7, <4',
+    python_requires='>=3, <4',
 )
 
