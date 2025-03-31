@@ -23,7 +23,7 @@ __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2016-2025, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
 __license__    = "BSD"
-__version__    = "0.18.0"
+__version__    = "0.20.0"
 __maintainer__ = "Daniel Krajzewicz"
 __email__      = "daniel@krajzewicz.de"
 __status__     = "Development"
@@ -86,7 +86,7 @@ def main(arguments : List[str] = None) -> int:
     """
     parser = argparse.ArgumentParser(prog="charpacker", description="A char packer.",
         epilog='(c) Daniel Krajzewicz 2016-2025')
-    parser.add_argument('--version', action='version', version='%(prog)s 0.18.0')
+    parser.add_argument('--version', action='version', version='%(prog)s 0.20.0')
     parser.add_argument("input", metavar="INPUT_IMAGE", default=None, help="the image to load and charpack")
     parser.add_argument("-S", "--screen-output", dest="screen", default=None, help="the name of the file to save the screen to")
     parser.add_argument("-C", "--charset-output", dest="charset", default=None, help="the name of the file to save the charset to")

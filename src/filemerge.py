@@ -25,7 +25,7 @@ __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2016-2025, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
 __license__    = "BSD"
-__version__    = "0.18.0"
+__version__    = "0.20.0"
 __maintainer__ = "Daniel Krajzewicz"
 __email__      = "daniel@krajzewicz.de"
 __status__     = "Development"
@@ -55,7 +55,7 @@ def main(arguments : List[str] = None) -> int:
     """
     parser = argparse.ArgumentParser(prog="filemerge", description="Joins a set of files into one.",
         epilog='(c) Daniel Krajzewicz 2016-2025')
-    parser.add_argument('--version', action='version', version='%(prog)s 0.18.0')
+    parser.add_argument('--version', action='version', version='%(prog)s 0.20.0')
     parser.add_argument("output", metavar="OUTPUT_FILE", default=None, help="the name of the file to write")
     parser.add_argument("files", metavar="INPUT_FILE", nargs='+', default=None, help="the files to load")
     args = parser.parse_args(arguments)
