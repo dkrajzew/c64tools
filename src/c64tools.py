@@ -245,7 +245,7 @@ class Memory:
             for xh in range(0, cols):
                 offset = xh*8 + yh*8*cols
                 char = Char(self.data[offset:offset+8])
-                char.drawAt(surface, x+xh*8, y+yh*8, fgColor, bgColor)
+                char.draw_at(surface, x+xh*8, y+yh*8, fgColor, bgColor)
 
 
     def char_at(self, addr : int) -> Char:
