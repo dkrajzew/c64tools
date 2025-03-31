@@ -5,3 +5,6 @@ mkdocstrings
 mkdocstrings-python
 pytest
 coverage
+build
+twine
+
