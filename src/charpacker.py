@@ -13,8 +13,8 @@ Arguments
 Options
 -------
 
-* --screen-output/-s OUTPUT_FILE: the name of the file to save the screen at
-* --charset-output/-c OUTPUT_FILE: the name of the file to save the charset at
+* --screen-output/-S OUTPUT_FILE: the name of the file to save the screen at
+* --charset-output/-C OUTPUT_FILE: the name of the file to save the charset at
 * -h, --help: show a help screen
 * --version: show program's version number and exit
 """
@@ -88,15 +88,16 @@ def main(arguments : List[str] = None) -> int:
         epilog='(c) Daniel Krajzewicz 2016-2025')
     parser.add_argument('--version', action='version', version='%(prog)s 0.18.0')
     parser.add_argument("input", metavar="INPUT_IMAGE", default=None, help="the image to load and charpack")
-    parser.add_argument("-s", "--screen-output", dest="screen", default=None, help="the name of the file to save the screen to")
-    parser.add_argument("-c", "--charset-output", dest="charset", default=None, help="the name of the file to save the charset to")
+    parser.add_argument("-S", "--screen-output", dest="screen", default=None, help="the name of the file to save the screen to")
+    parser.add_argument("-C", "--charset-output", dest="charset", default=None, help="the name of the file to save the charset to")
+    parser.add_argument("-s", "--show", dest="show", action="store_true", help="show the result")
     args = parser.parse_args(arguments)
-    ofileScreen = args.screen
-    ofileCharset = args.charset
+    ofile_screen = args.screen
+    ofile_charset = args.charset
 
     w = c64tools.Window(320, 600, "charpacker")
     # load and show the original image
-    pic = pygame.image.load(ifile)
+    pic = pygame.image.load(args.input)
     w.screen.blit(pic, (0, 0))
     # build and draw the bitmap
     bo = c64tools.Bitmap()
@@ -106,29 +107,30 @@ def main(arguments : List[str] = None) -> int:
     chars, screen = charpack(bo)
     if len(chars)<257:
         print ("Charpacking succesfull, needed %s chars." % len(chars))
-        if ofileScreen:
+        if ofile_screen:
             print ("saving screen...")
-            f = open(ofileScreen, "wb")
+            f = open(ofile_screen, "wb")
             f.write(bytearray(screen.data))
             f.close()
-        if ofileCharset:
+        if ofile_charset:
             print ("saving charset...")
-            f = open(ofileCharset, "wb")
+            f = open(ofile_charset, "wb")
             for c in chars:
                 f.write(bytearray(c.data))
             f.close()
     else:
         print ("Charpacking failed, needed %s chars." % len(chars))
-    # rebuild the bitmap and show it
-    bn = c64tools.Bitmap()
-    bn.from_c64_screen(screen, chars)
-    bn.draw_at(w.screen, 0, 400)
-    # show all
-    pygame.display.update()
-    while ( w.show ):
-        w.run()
-    pygame.quit()
-
+    if args.show:
+        # rebuild the bitmap and show it
+        bn = c64tools.Bitmap()
+        bn.from_c64_screen(screen, chars)
+        bn.draw_at(w.screen, 0, 400)
+        pygame.display.update()
+        while ( w.show ):
+            w.run()
+        pygame.quit()
+    return 0
+    
 
 # -- main check
 if __name__ == "__main__":
