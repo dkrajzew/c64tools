@@ -24,7 +24,9 @@ jobs:
           pip install coveralls
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Test with coverage/pytest
-        run: coverage run -m pytest
+        run: |
+          cd tests
+          coverage run -m pytest
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@v2
         with:
