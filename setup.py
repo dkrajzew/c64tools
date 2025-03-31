@@ -43,10 +43,8 @@ setuptools.setup(
     },
     license='BSD',
     # add modules
-    packages=setuptools.find_packages(),
-    packages = ["c64tools", "data", "tests"],
+    packages = ["c64tools", "tests"],
     package_data={
-        'data': ['entry1.txt', 'entry2.txt', 'template.html'],
         'tests': ['ata_1.bin', 'chr_out.bin', 'scr_out.bin',
             'mem2.bin', 'mem2_1.bin', 'mem2_2.bin',
             'test.hir.gif', 'ata_1_1_1x1.png', 'ata_1_2_1x2.png',
@@ -67,7 +65,6 @@ setuptools.setup(
         "Environment :: Console",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
         "Intended Audience :: Other Audience",
         "Topic :: Artistic Software",
