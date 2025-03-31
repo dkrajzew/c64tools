@@ -18,13 +18,14 @@ __status__     = "Development"
 import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
+from pathlib import Path
 import util
 import charset2png
 
 
 # --- helper functions ----------------------------------------------
-def pname(text):
-    return util.pname(text, "charset2png")
+def pname(text, path="<DIR>"):
+    return util.pname(text, "charset2png", path)
 
 
 # --- test functions ------------------------------------------------
@@ -108,3 +109,38 @@ def test_main_version(capsys):
     assert pname(captured.out) == """charset2png 0.18.0
 """
     assert pname(captured.err) == ""
+
+
+def test_missing_action(capsys, tmp_path):
+    """Example test"""
+    util.copy(tmp_path, ["ata_1.bin"])
+    ret = charset2png.main(["--foreground", "#000000", "--background", "#ffffff", "-n", "64", "-w", "32", "-i", str(tmp_path / "ata_1.bin"), "35328"])
+    assert ret==2
+    captured = capsys.readouterr()
+    assert pname(captured.out, tmp_path) == ""
+    assert pname(captured.err) == """charset2png: error: either --show or the output file (--output <FILE>) must be set.
+"""
+    
+
+def test_example1(capsys, tmp_path):
+    """Example test"""
+    util.copy(tmp_path, ["ata_1.bin"])
+    ret = charset2png.main(["--foreground", "#000000", "--background", "#ffffff", "-o", str(tmp_path / "ata_1_1_1x1.png"), "-n", "64", "-w", "32", "-i", str(tmp_path / "ata_1.bin"), "35328"])
+    assert ret==0
+    captured = capsys.readouterr()
+    assert pname(captured.out, tmp_path) == """Written 64 chars to <DIR>/ata_1_1_1x1.png
+"""
+    assert pname(captured.err) == ""
+    assert util.fread(tmp_path / "ata_1_1_1x1.png") == util.fread(Path(util.TEST_PATH) / "ata_1_1_1x1.png")
+
+
+def test_example2(capsys, tmp_path):
+    """Example test"""
+    util.copy(tmp_path, ["ata_1.bin"])
+    ret = charset2png.main(["--foreground", "#000000", "--background", "#ffffff", "-o", str(tmp_path / "ata_1_2_1x2.png"), "-n", "64", "-w", "32", "-i", "-p", "0;64", str(tmp_path / "ata_1.bin"), "51208"])
+    assert ret==0
+    captured = capsys.readouterr()
+    assert pname(captured.out, tmp_path) == """Written 64 chars to <DIR>/ata_1_2_1x2.png
+"""
+    assert pname(captured.err) == ""
+    assert util.fread(tmp_path / "ata_1_2_1x2.png") == util.fread(Path(util.TEST_PATH) / "ata_1_2_1x2.png")

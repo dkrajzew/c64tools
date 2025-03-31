@@ -18,6 +18,7 @@ __status__     = "Development"
 import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
+from pathlib import Path
 import util
 import filemerge
 
@@ -81,5 +82,16 @@ def test_main_version(capsys):
     assert pname(captured.out) == """filemerge 0.18.0
 """
     assert pname(captured.err) == ""
+
+
+def test_example1(capsys, tmp_path):
+    """Example test"""
+    util.copy(tmp_path, ["mem2_1.bin", "mem2_2.bin"])
+    ret = filemerge.main([str(tmp_path / "mem2.bin"), str(tmp_path / "mem2_1.bin"), str(tmp_path / "mem2_2.bin")])
+    assert ret==0
+    captured = capsys.readouterr()
+    assert pname(captured.out) == ""
+    assert pname(captured.err) == ""
+    assert util.fread(tmp_path / "mem2.bin") == util.fread(Path(util.TEST_PATH) / "mem2.bin")
 
 

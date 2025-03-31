@@ -18,13 +18,14 @@ __status__     = "Development"
 import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
+from pathlib import Path
 import util
 import mem2png
 
 
 # --- helper functions ----------------------------------------------
-def pname(text):
-    return util.pname(text, "mem2png")
+def pname(text, path="<DIR>"):
+    return util.pname(text, "mem2png", path)
 
 
 # --- test functions ------------------------------------------------
@@ -85,3 +86,25 @@ def test_main_version(capsys):
     assert pname(captured.out) == """mem2png 0.18.0
 """
     assert pname(captured.err) == ""
+
+
+def test_missing_action(capsys, tmp_path):
+    """Example test"""
+    util.copy(tmp_path, ["ata_1.bin"])
+    ret = mem2png.main([str(tmp_path / "ata_1.bin")])
+    assert ret==2
+    captured = capsys.readouterr()
+    assert pname(captured.out) == ""
+    assert pname(captured.err) == """mem2png: error: --show or the output file (--output <FILE>) must be set.
+"""
+
+
+def test_example1(capsys, tmp_path):
+    """Example test"""
+    util.copy(tmp_path, ["ata_1.bin"])
+    ret = mem2png.main(["--output", str(tmp_path / "mem1.png"), str(tmp_path / "ata_1.bin")])
+    assert ret==0
+    captured = capsys.readouterr()
+    assert pname(captured.out) == ""
+    assert pname(captured.err) == ""
+    assert util.fread(tmp_path / "mem1.png") == util.fread(Path(util.TEST_PATH) / "mem1.png")

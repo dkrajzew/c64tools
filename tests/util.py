@@ -18,10 +18,23 @@ __status__     = "Development"
 import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
+import shutil
 import mem2png
+TEST_PATH = os.path.split(__file__)[0]
 
 
 # --- helper functions ----------------------------------------------
 def pname(string, name, path="<DIR>"):
     string = string.replace(str(path), "<DIR>").replace("\\", "/")
     return string.replace("__main__.py", name).replace("pytest", name).replace("optional arguments", "options")
+
+
+def copy(tmp_path, files):
+    for file in files:
+        shutil.copy(os.path.join((TEST_PATH), file), str(tmp_path / file))
+
+
+
+def fread(filepath):
+    with open(filepath, "rb") as fd:
+        return fd.read()

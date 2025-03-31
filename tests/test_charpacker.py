@@ -18,6 +18,7 @@ __status__     = "Development"
 import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
+from pathlib import Path
 import util
 import charpacker
 
@@ -38,7 +39,7 @@ def test_main_empty(capsys):
         assert e.code==2
     captured = capsys.readouterr()
     assert pname(captured.out) == ""
-    assert pname(captured.err) == """usage: charpacker [-h] [--version] [-s SCREEN] [-c CHARSET] INPUT_IMAGE
+    assert pname(captured.err) == """usage: charpacker [-h] [--version] [-S SCREEN] [-C CHARSET] [-s] INPUT_IMAGE
 charpacker: error: the following arguments are required: INPUT_IMAGE
 """
 
@@ -52,7 +53,7 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert pname(captured.out) == """usage: charpacker [-h] [--version] [-s SCREEN] [-c CHARSET] INPUT_IMAGE
+    assert pname(captured.out) == """usage: charpacker [-h] [--version] [-S SCREEN] [-C CHARSET] [-s] INPUT_IMAGE
 
 A char packer.
 
@@ -62,10 +63,11 @@ positional arguments:
 options:
   -h, --help            show this help message and exit
   --version             show program's version number and exit
-  -s SCREEN, --screen-output SCREEN
+  -S SCREEN, --screen-output SCREEN
                         the name of the file to save the screen to
-  -c CHARSET, --charset-output CHARSET
+  -C CHARSET, --charset-output CHARSET
                         the name of the file to save the charset to
+  -s, --show            show the result
 
 (c) Daniel Krajzewicz 2016-2025
 """
@@ -73,7 +75,7 @@ options:
 
 
 def test_main_version(capsys):
-    """Test behaviour if no arguments are given"""
+    """Test behaviour for version printing"""
     try:
         charpacker.main(["--version"])
         assert False # pragma: no cover
@@ -84,3 +86,18 @@ def test_main_version(capsys):
     assert pname(captured.out) == """charpacker 0.18.0
 """
     assert pname(captured.err) == ""
+
+
+def test_example1(capsys, tmp_path):
+    """Example test"""
+    util.copy(tmp_path, ["test.hir.gif"])
+    ret = charpacker.main(["--screen-output", str(tmp_path / "scr_out.bin"), "--charset-output", str(tmp_path / "chr_out.bin"), str(tmp_path / "test.hir.gif")])
+    assert ret==0
+    captured = capsys.readouterr()
+    assert pname(captured.out) == """Charpacking succesfull, needed 190 chars.
+saving screen...
+saving charset...
+"""
+    assert pname(captured.err) == ""
+    assert util.fread(tmp_path / "scr_out.bin") == util.fread(Path(util.TEST_PATH) / "scr_out.bin")
+    assert util.fread(tmp_path / "chr_out.bin") == util.fread(Path(util.TEST_PATH) / "chr_out.bin")
