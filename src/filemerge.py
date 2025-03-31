@@ -59,14 +59,10 @@ def main(arguments : List[str] = None) -> int:
     parser.add_argument("output", metavar="OUTPUT_FILE", default=None, help="the name of the file to write")
     parser.add_argument("files", metavar="INPUT_FILE", nargs='+', default=None, help="the files to load")
     args = parser.parse_args(arguments)
-    if not args.file:
-        optParser.error("no input file(s) given...")
-        sys.exit()
-    files = args.file.split(",")
     mem = bytearray([0]*65536)
     minAddr = 65536
     maxAddr = 0
-    for f in files:
+    for f in args.files:
         fd = open(f, "rb")
         vals = bytearray(fd.read())
         fd.close()
@@ -75,10 +71,10 @@ def main(arguments : List[str] = None) -> int:
         maxAddr = max(maxAddr, addr+len(vals)-2)
         mem = mem[:addr] + bytearray(vals[2:]) + mem[addr+len(vals)-2:]
     fd = open(args.output, "wb")
-    print (minAddr)
     fd.write(bytearray([minAddr%256, int(minAddr/256)]))
     fd.write(mem[minAddr:maxAddr])
     fd.close()
+    return 0
 
 
 # -- main check
