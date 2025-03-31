@@ -79,8 +79,10 @@ def main(arguments : List[str] = None) -> int:
         ofile = args.store
         show = args.show
         xs = args.width
+        show = args.show
         if not ofile and not show:
-            raise argparse.ArgumentTypeError("Either --show or the output file (--output <FILE>) must be set.")
+            print ("mem2png: error: --show or the output file (--output <FILE>) must be set.", file=sys.stderr)
+            return 2
     # build window and load and draw dump
     INFO = 40
     ys = int(65536/xs)
@@ -102,7 +104,7 @@ def main(arguments : List[str] = None) -> int:
         pygame.image.save(s, ofile)
 
     # run the display loop
-    if args.show:
+    if show:
         while (w.show):
             pygame.display.update()
             mx,my = pygame.mouse.get_pos()
@@ -115,6 +117,7 @@ def main(arguments : List[str] = None) -> int:
             pygame.display.flip()
             w.run()
     pygame.quit()
+    return 0
 
 
 # -- main check
