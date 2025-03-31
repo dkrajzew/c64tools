@@ -1,6 +1,6 @@
 # charpacker
 
-::: src.charpacker
+::: charpacker
     docstring_style: "google"
     filters: [""]
     show_source: False
