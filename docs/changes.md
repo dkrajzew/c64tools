@@ -8,8 +8,8 @@ ChangeLog for c64tools
 <http://www.krajzewicz.de/docs/c64tools/index.html>
 
 
-c64tools-0.20.0 (to come)
--------------------------
+c64tools-0.20.0 (31.03.2025)
+----------------------------
 
 * Working on the documentation
 * added type hints (where possible)
@@ -21,6 +21,7 @@ c64tools-0.20.0 (to come)
     * added the option **--show**
     * short options for **--screen-output** and **--charset-output** are now named **-S** and **-C**, respectively
 * added some tests
+* **debugged command line execution after install**
 
 
 c64tools-0.18.0 (26.03.2023)

@@ -8,8 +8,7 @@
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVQQWZKB6FDES)
 
 
-c64tools
-========
+# c64tools
 
 __c64tools__ is a [Python](https://www.python.org/) library that helps in dealing with Commodore c64 graphics and memory.
 
@@ -24,10 +23,10 @@ In addition, you may find some applications which use this module:
 * a [charset from memory dump extractor](http://www.krajzewicz.de/docs/c64tools/use_charset2png.html)
 * a [linking tool](http://www.krajzewicz.de/docs/c64tools/use_filemerge.html)
 
-Download and Installation
-=========================
 
-The __current version__ is [c64tools-0.18.0](https://github.com/dkrajzew/c64tools/releases/tag/0.18.0).
+# Download and Installation
+
+The __current version__ is [c64tools-0.20.0](https://github.com/dkrajzew/c64tools/releases/tag/0.20.0).
 
 You may __install c64tools__ using
 
@@ -39,12 +38,11 @@ You may __download a copy or fork the code__ at [c64tools&apos;s github page](ht
 
 Besides, you may __download the current release__ here:
 
-* [c64tools-0.18.0.zip](https://github.com/dkrajzew/c64tools/archive/refs/tags/0.18.0.zip)
-* [c64tools-0.18.0.tar.gz](https://github.com/dkrajzew/c64tools/archive/refs/tags/0.18.0.tar.gz)
+* [c64tools-0.20.0.zip](https://github.com/dkrajzew/c64tools/archive/refs/tags/0.20.0.zip)
+* [c64tools-0.20.0.tar.gz](https://github.com/dkrajzew/c64tools/archive/refs/tags/0.20.0.tar.gz)
 
 
-Links
-=====
+# Links
 
 * A complete documentation is located at:
    * <https://c64tools.readthedocs.io/en/latest/> and
@@ -54,7 +52,25 @@ Links
 * The issue tracker is located at: <https://github.com/dkrajzew/c64tools/issues>
 * The PyPI page is located at: <https://pypi.org/project/c64tools/>
 
-## Note
+
+# Changes
+
+## c64tools-0.20.0 (31.03.2025)
+
+* Working on the documentation
+* added type hints (where possible)
+* replaced OptionParser by ArgumentParser
+    * __some of the options have been transferred to arguments__
+* changes in __charset2png.py__
+    * the option **--quiet** has been replaced by the option **--show**
+* changes in __charpacker.py__
+    * added the option **--show**
+    * short options for **--screen-output** and **--charset-output** are now named **-S** and **-C**, respectively
+* added some tests
+* **debugged command line execution after install**
+
+
+# Note
 
 Let me know if you need any further information or advice. I am not actively developing __c64tools__ currently.
 
