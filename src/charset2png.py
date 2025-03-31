@@ -55,7 +55,7 @@ from typing import List
 
 
 # --- methods ---------------------------------------------------------------
-def convertColor(color):
+def convert_color(color):
     """Converts a given hex color, optionally lead by a '#', into
         an RGB tuple.
 
@@ -114,10 +114,10 @@ def main(arguments : List[str] = None) -> int:
     height = math.ceil(float(args.num) / float(args.width))
     height = int(height*8*rowsPerChar+(max(1, height)-1)*args.divider)
     s = pygame.Surface((width, height))
-    bgColor = convertColor(args.background)
-    fgColor = convertColor(args.foreground)
-    multi1Color = convertColor(args.multicolor1)
-    multi2Color = convertColor(args.multicolor2)
+    bgColor = convert_color(args.background)
+    fgColor = convert_color(args.foreground)
+    multi1Color = convert_color(args.multicolor1)
+    multi2Color = convert_color(args.multicolor2)
     s.fill(bgColor)
     addr = args.address
     line = 0
@@ -130,11 +130,13 @@ def main(arguments : List[str] = None) -> int:
             oX = 0
             for cp in lp:
                 src = srcBase + int(cp)*8
-                char = mem.charAt(src)
+                char = mem.char_at(src)
                 if args.inverse:
                     char.inverse()
-                if args.multicolor: char.drawMulticolorAt(s, dstX+oX, dstY, fgColor, None, multi1Color, multi2Color)
-                else: char.drawAt(s, dstX+oX, dstY, fgColor, None)
+                if args.multicolor: 
+                    char.draw_at_multicolor(s, dstX+oX, dstY, fgColor, None, multi1Color, multi2Color)
+                else: 
+                    char.draw_at(s, dstX+oX, dstY, fgColor, None)
                 oX += 8
             dstY += 8
     pygame.image.save(s, args.output)

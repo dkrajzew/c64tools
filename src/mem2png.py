@@ -89,7 +89,7 @@ def main(arguments : List[str] = None) -> int:
     w.background.fill((0,0,0))
     mem = c64tools.Memory()
     mem.load(ifile)
-    mem.drawAt(w.background, 0, 0, int(xs/8))
+    mem.draw_at(w.background, 0, 0, int(xs/8))
     pygame.gfxdraw.line(w.background, 0, ys, xs, ys, (255,0,0))
     w.screen.blit(w.background, (0, 0))
     pygame.font.init()

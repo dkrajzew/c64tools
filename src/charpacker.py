@@ -66,12 +66,12 @@ def charpack(bitmap, ret=None):
         for col in range(0, 40):
             found = False
             for j,c in enumerate(ret[0]):
-                if bitmap.charAt(col, row).same(c):
-                    ret[1].setCharAt(col, row, j)
+                if bitmap.char_at(col, row).same(c):
+                    ret[1].set_char_at(col, row, j)
                     found = True
             if not found:
-                ret[0].append(bitmap.charAt(col, row))
-                ret[1].setCharAt(col, row, len(ret[0])-1)
+                ret[0].append(bitmap.char_at(col, row))
+                ret[1].set_char_at(col, row, len(ret[0])-1)
     return ret
 
 
@@ -100,20 +100,20 @@ def main(arguments : List[str] = None) -> int:
     w.screen.blit(pic, (0, 0))
     # build and draw the bitmap
     bo = c64tools.Bitmap()
-    bo.fromSurface(w.screen, 0, 0) #
-    bo.drawAt(w.screen, 0, 200)
+    bo.from_surface(w.screen, 0, 0) #
+    bo.draw_at(w.screen, 0, 200)
     # charpack
     chars, screen = charpack(bo)
     if len(chars)<257:
         print ("Charpacking succesfull, needed %s chars." % len(chars))
         if ofileScreen:
             print ("saving screen...")
-            f = c64tools.open2Write(ofileScreen)
+            f = open(ofileScreen, "wb")
             f.write(bytearray(screen.data))
             f.close()
         if ofileCharset:
             print ("saving charset...")
-            f = c64tools.open2Write(ofileCharset)
+            f = open(ofileCharset, "wb")
             for c in chars:
                 f.write(bytearray(c.data))
             f.close()
@@ -121,8 +121,8 @@ def main(arguments : List[str] = None) -> int:
         print ("Charpacking failed, needed %s chars." % len(chars))
     # rebuild the bitmap and show it
     bn = c64tools.Bitmap()
-    bn.fromC64Screen(screen, chars)
-    bn.drawAt(w.screen, 0, 400)
+    bn.from_c64_screen(screen, chars)
+    bn.draw_at(w.screen, 0, 400)
     # show all
     pygame.display.update()
     while ( w.show ):

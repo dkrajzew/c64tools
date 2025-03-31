@@ -63,7 +63,7 @@ class Char:
             self.data = [0]*8
 
 
-    def drawAt(self, surface : pygame.Surface, x : int, y : int, fgColor : Tuple[int, int, int, int]=(255, 255, 255, 255), bgColor : Tuple[int, int, int, int]=(0, 0, 0, 255)):
+    def draw_at(self, surface : pygame.Surface, x : int, y : int, fgColor : Tuple[int, int, int, int]=(255, 255, 255, 255), bgColor : Tuple[int, int, int, int]=(0, 0, 0, 255)):
         """Draws this character (in hires) at the given surface and the given position.
 
         Args:
@@ -83,7 +83,7 @@ class Char:
                     surface.set_at((xl+x, yl+y), c)
 
 
-    def drawMulticolorAt(self, surface : pygame.Surface, x : int, y : int, fgColor : Tuple[int, int, int, int]=(255, 255, 255, 255), bgColor : Tuple[int, int, int, int]=(0, 0, 0, 255), multi1Color : Tuple[int, int, int, int]=(192, 192, 192, 255), multi2Color: Tuple[int, int, int, int]=(128, 128, 128, 255)):
+    def draw_at_multicolor(self, surface : pygame.Surface, x : int, y : int, fgColor : Tuple[int, int, int, int]=(255, 255, 255, 255), bgColor : Tuple[int, int, int, int]=(0, 0, 0, 255), multi1Color : Tuple[int, int, int, int]=(192, 192, 192, 255), multi2Color: Tuple[int, int, int, int]=(128, 128, 128, 255)):
         """Draws this character in multicolor at the given surface and the given position.
 
         Args:
@@ -125,7 +125,7 @@ class Char:
         return True
 
 
-    def writeInto(self, f):
+    def write(self, f):
         """Writes this character to a file.
 
         Args:
@@ -229,7 +229,7 @@ class Memory:
             self.data.extend([0]*rest)
 
 
-    def drawAt(self, surface : pygame.Surface, x : int, y : int, cols : int, fgColor : Tuple[int, int, int, int]=(255, 255, 255, 255), bgColor : Tuple[int, int, int, int]=(0, 0, 0, 255)):
+    def draw_at(self, surface : pygame.Surface, x : int, y : int, cols : int, fgColor : Tuple[int, int, int, int]=(255, 255, 255, 255), bgColor : Tuple[int, int, int, int]=(0, 0, 0, 255)):
         """Draws this memory at the given surface and the given position.
 
         Args:
@@ -248,7 +248,7 @@ class Memory:
                 char.drawAt(surface, x+xh*8, y+yh*8, fgColor, bgColor)
 
 
-    def charAt(self, addr : int) -> Char:
+    def char_at(self, addr : int) -> Char:
         """Returns the eight bytes at the given address as a char
 
         Args:
@@ -280,7 +280,7 @@ class Bitmap:
             self.data = [0]*(40*25*8)
 
 
-    def charAt(self, col : int, row : int) -> Char:
+    def char_at(self, col : int, row : int) -> Char:
         """Returns the Char representation of the character at the given position.
 
         Args:
@@ -294,7 +294,7 @@ class Bitmap:
         return Char(self.data[off:off+8])
 
 
-    def drawAt(self, surface : pygame.Surface, x : int, y : int, fgColor : Tuple[int, int, int, int]=(255, 255, 255, 255), bgColor : Tuple[int, int, int, int]=(0, 0, 0, 255)):
+    def draw_at(self, surface : pygame.Surface, x : int, y : int, fgColor : Tuple[int, int, int, int]=(255, 255, 255, 255), bgColor : Tuple[int, int, int, int]=(0, 0, 0, 255)):
         """Draws this bitmap at the given surface and the given position.
 
         Args:
@@ -316,7 +316,7 @@ class Bitmap:
                             surface.set_at((xh*8+xl+x, yh*8+yl+y), c)
 
 
-    def fromSurface(self, surface : pygame.Surface, x : int, y : int):
+    def from_surface(self, surface : pygame.Surface, x : int, y : int):
         """Generates the Bitmap from the given surface, starting at the given position.
 
         Please note that only white pixels are assumed to be set
@@ -340,7 +340,7 @@ class Bitmap:
                     self.data[yh*8*40+xh*8+yl] = v
 
 
-    def fromC64Screen(self, screen, chars : List[Char]):
+    def from_c64_screen(self, screen, chars : List[Char]):
         """Fills the bitmap using the given screen and character set information
 
         Args:
@@ -349,7 +349,7 @@ class Bitmap:
         """
         for yh in range(0, 25):
             for xh in range(0, 40):
-                char = screen.charAt(xh, yh)
+                char = screen.char_at(xh, yh)
                 for yl in range(0, 8):
                     v = 0
                     for xl in range(0, 8):
@@ -380,7 +380,7 @@ class Screen:
             self.data = [0]*(40*25)
 
 
-    def charAt(self, col : int, row : int) -> int:
+    def char_at(self, col : int, row : int) -> int:
         """Returns the caracter at the given position
 
         Args:
@@ -393,7 +393,7 @@ class Screen:
         return self.data[col+row*40]
 
 
-    def setCharAt(self, col : int, row : int, char : int):
+    def set_char_at(self, col : int, row : int, char : int):
         """Sets the given character at the given position
 
         Args:
@@ -402,55 +402,4 @@ class Screen:
             char (int): The character to set
         """
         self.data[col+row*40] = char
-
-
-
-# --- Helper methods --------------------------------------------------------
-def open2Write(filename : str):
-    """Opens a file for writing.
-
-    Args:
-        filename (str): The name of the file to open for writing
-
-    Returns:
-        (file): The flle opened for binary writing
-    """
-    return open(filename, "wb")
-
-
-def saveChars(filename, pos : int, chars : List[Char]):
-    """Saves the given characters.
-
-    Args:
-        filename (string): The name of the file to write the given characters to
-        pos (int): unused!
-        chars (List[Char]) : The characters to save
-
-    TODO: remove the pos-parameter
-    """
-    fb = open2Write(filename)
-    for c in chars:
-        c.writeInto(fb)
-    fb.close()
-
-
-def writeByte(f, b : int):
-    """Writes the given byte as a one-byte-bytearray.
-
-    Args:
-        f (file descriptor): The file to write the byte to
-        b (int): The byte to write
-    """
-    f.write(bytearray([b]))
-
-
-def writeBytes(f, bs : List[int]):
-    """Writes the given array as a bytearray.
-
-    Args:
-        f (file descriptor): The file to write the bytes to
-        bs (List[int]): The bytes to write
-    """
-    f.write(bytearray(bs))
-
 
