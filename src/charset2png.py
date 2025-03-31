@@ -98,8 +98,9 @@ def main(arguments : List[str] = None) -> int:
     parser.add_argument("-s", "--show", dest="show", action="store_true", help="show the result after conversion")
     args = parser.parse_args(arguments)
     ofile = args.output
-    if not args.output or not args.show:
-        raise argparse.ArgumentTypeError("Either --show or the output file (--output <FILE>) must be set.")
+    if not args.output and not args.show:
+        print ("charset2png: error: either --show or the output file (--output <FILE>) must be set.", file=sys.stderr)
+        return 2
     # load the memory dump
     mem = c64tools.Memory()
     mem.load(args.input)
@@ -148,6 +149,7 @@ def main(arguments : List[str] = None) -> int:
             pygame.display.flip()
             w.run()
     pygame.quit()
+    return 0
 
 
 # -- main check
