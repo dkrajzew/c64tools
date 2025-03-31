@@ -1,5 +1,4 @@
-Charpacker
-==========
+# filemerge
 
 ::: src.filemerge
     docstring_style: "google"

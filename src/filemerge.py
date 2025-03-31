@@ -4,7 +4,7 @@
 
 Loads the files given and stores them at the designated
 (described by the first two bytes) position in memory.
-Saves the so obtained memory part, together with the
+Saves the so obtained memory, together with the
 starting address.
 
 

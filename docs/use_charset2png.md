@@ -4,7 +4,7 @@
 
 You may alter the width of the generated image, given in the number of characters shown besides each other. Further options for limiting the number of characters to extract, for setting the background colour, for optionally inverting the character set, and for defining the height of the space between the lines exist.
 
-A special feature is the extraction of 1×2, 2×1, 2×2 or othe character sizes. For this purpose, you have to define how the characters are stored in the memory &mdash; the offsets to the lower / right parts of a character. This is done using the __--pattern__ option. Here, lines are divided using a “;”, characters using a “-”.
+A special feature is the extraction of 1×2, 2×1, 2×2 or other character sizes. For this purpose, you have to define how the characters are stored in the memory &mdash; the offsets to the lower / right parts of a character. This is done using the __--pattern__ option. Here, lines are divided using a “;”, characters using a “-”.
 
 
 ## Arguments and Options

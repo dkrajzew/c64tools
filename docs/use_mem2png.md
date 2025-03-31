@@ -1,6 +1,6 @@
 # Using “mem2png.py”
 
-“mem2png.py” shows a memory dump, optionally saving it as a png-file. When moving over the window, the memory address below the cursor position will be shown and additionally, the character address, both in decimal as well as in hexadecimal number system. You may use this information for extracting a character set using “charset2png.py”.
+“mem2png.py” shows a memory dump, optionally saving it as a png-file. When moving over the window, the memory address below the cursor position will be shown as well as the character address, both in decimal as well as in hexadecimal number systems. You may use this information for extracting a character set using “charset2png.py”.
 
 
 ## Arguments and options
@@ -34,7 +34,7 @@ Loads the memory dump “bb_hex_game.bin” and shows it.
 mem2png -o bb_game.png bb_hex_game.bin
 ```
 
-Loads the memory dump “bb_hex_game.bin”, renders it as an image and saves the image to “bb_game.png”. Shows the image, which may look as the folowing one:
+Loads the memory dump “bb_hex_game.bin”, renders it as an image and saves the image to “bb_game.png”. Shows the image, which may look as the following one:
 
 ![mem2png example](mem2png1.gif#full "mem2png example")
 

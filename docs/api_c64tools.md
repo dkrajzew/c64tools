@@ -1,5 +1,4 @@
-Charpacker
-==========
+# c64tools
 
 ::: src.c64tools
     docstring_style: "google"

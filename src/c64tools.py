@@ -12,10 +12,6 @@ It contains the following classes:
 - Char - The representation of a single c64 character
 - Screen - The representation of c64 screen
 - Methods for writing binary contents
-
-TODO: remove dependency on pygame
-TODO: refactor binary writer helper methods
-TODO: add a Sprite class
 """
 # ===========================================================================
 __author__     = "Daniel Krajzewicz"

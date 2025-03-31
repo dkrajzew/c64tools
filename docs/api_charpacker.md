@@ -1,5 +1,4 @@
-Charpacker
-==========
+# charpacker
 
 ::: src.charpacker
     docstring_style: "google"

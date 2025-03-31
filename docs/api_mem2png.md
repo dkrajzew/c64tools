@@ -1,5 +1,4 @@
-Charpacker
-==========
+# mem2png
 
 ::: src.mem2png
     docstring_style: "google"

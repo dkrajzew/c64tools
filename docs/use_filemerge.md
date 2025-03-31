@@ -21,4 +21,4 @@
 filemerge bb_game_disc.bin bb_hex_game.bin bb_prg_game_disc.bin
 ```
 
-Reads the files “bb_hex_game.bin” and “bb_prg_game_disc.bin” into an empty memory to the addresses defined by their first two bytes. Saves the resulting memory to “bb_game_disc.bin”.
+Reads the files “bb_hex_game.bin” and “bb_prg_game_disc.bin” into an empty memory to the addresses defined by the first two bytes stored in the files. Saves the resulting memory to “bb_game_disc.bin”.
