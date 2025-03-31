@@ -18,12 +18,13 @@ __status__     = "Development"
 import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
+import util
 import charset2png
 
 
 # --- helper functions ----------------------------------------------
-def patchName(test):
-    return test.replace("pytest", "charset2png").replace("__main__.py", "charset2png")
+def pname(text):
+    return util.pname(text, "charset2png")
 
 
 # --- test functions ------------------------------------------------
@@ -36,8 +37,8 @@ def test_main_empty(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert patchName(captured.out) == ""
-    assert patchName(captured.err) == """usage: charset2png [-h] [--version] [-o OUTPUT] [-n NUM] [-p PATTERN]
+    assert pname(captured.out) == ""
+    assert pname(captured.err) == """usage: charset2png [-h] [--version] [-o OUTPUT] [-n NUM] [-p PATTERN]
                    [-w WIDTH] [-d DIVIDER] [-i] [-b BACKGROUND]
                    [-c FOREGROUND] [-1 MULTICOLOR1] [-2 MULTICOLOR2] [-m] [-s]
                    INPUT_FILE ADDRESS
@@ -54,7 +55,7 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patchName(captured.out) == """usage: charset2png [-h] [--version] [-o OUTPUT] [-n NUM] [-p PATTERN]
+    assert pname(captured.out) == """usage: charset2png [-h] [--version] [-o OUTPUT] [-n NUM] [-p PATTERN]
                    [-w WIDTH] [-d DIVIDER] [-i] [-b BACKGROUND]
                    [-c FOREGROUND] [-1 MULTICOLOR1] [-2 MULTICOLOR2] [-m] [-s]
                    INPUT_FILE ADDRESS
@@ -92,7 +93,8 @@ options:
 
 (c) Daniel Krajzewicz 2016-2025
 """
-
+    assert pname(captured.err) == ""
+    
 
 def test_main_version(capsys):
     """Test behaviour if no arguments are given"""
@@ -103,6 +105,6 @@ def test_main_version(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patchName(captured.out) == """charset2png 0.18.0
+    assert pname(captured.out) == """charset2png 0.18.0
 """
-    assert patchName(captured.err) == ""
+    assert pname(captured.err) == ""

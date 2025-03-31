@@ -18,12 +18,13 @@ __status__     = "Development"
 import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
+import util
 import charpacker
 
 
 # --- helper functions ----------------------------------------------
-def patchName(test):
-    return test.replace("pytest", "charpacker").replace("__main__.py", "charpacker")
+def pname(text):
+    return util.pname(text, "charpacker")
 
 
 # --- test functions ------------------------------------------------
@@ -36,7 +37,8 @@ def test_main_empty(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert patchName(captured.err) == """usage: charpacker [-h] [--version] [-s SCREEN] [-c CHARSET] INPUT_IMAGE
+    assert pname(captured.out) == ""
+    assert pname(captured.err) == """usage: charpacker [-h] [--version] [-s SCREEN] [-c CHARSET] INPUT_IMAGE
 charpacker: error: the following arguments are required: INPUT_IMAGE
 """
 
@@ -50,7 +52,7 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patchName(captured.out) == """usage: charpacker [-h] [--version] [-s SCREEN] [-c CHARSET] INPUT_IMAGE
+    assert pname(captured.out) == """usage: charpacker [-h] [--version] [-s SCREEN] [-c CHARSET] INPUT_IMAGE
 
 A char packer.
 
@@ -67,6 +69,7 @@ options:
 
 (c) Daniel Krajzewicz 2016-2025
 """
+    assert pname(captured.err) == ""
 
 
 def test_main_version(capsys):
@@ -78,6 +81,6 @@ def test_main_version(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patchName(captured.out) == """charpacker 0.18.0
+    assert pname(captured.out) == """charpacker 0.18.0
 """
-    assert patchName(captured.err) == ""
+    assert pname(captured.err) == ""

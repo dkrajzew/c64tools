@@ -18,12 +18,13 @@ __status__     = "Development"
 import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
+import util
 import mem2png
 
 
 # --- helper functions ----------------------------------------------
-def patchName(test):
-    return test.replace("pytest", "mem2png").replace("__main__.py", "mem2png")
+def pname(text):
+    return util.pname(text, "mem2png")
 
 
 # --- test functions ------------------------------------------------
@@ -36,8 +37,8 @@ def test_main_empty(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert patchName(captured.out) == ""
-    assert patchName(captured.err) == """usage: mem2png [-h] [--version] [-s] [-o STORE] [-w WIDTH] MEMORY_FILE
+    assert pname(captured.out) == ""
+    assert pname(captured.err) == """usage: mem2png [-h] [--version] [-s] [-o STORE] [-w WIDTH] MEMORY_FILE
 mem2png: error: the following arguments are required: MEMORY_FILE
 """
 
@@ -51,7 +52,7 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patchName(captured.out) == """usage: mem2png [-h] [--version] [-s] [-o STORE] [-w WIDTH] MEMORY_FILE
+    assert pname(captured.out) == """usage: mem2png [-h] [--version] [-s] [-o STORE] [-w WIDTH] MEMORY_FILE
 
 A c64 memory dump visualiser that can export the dump to an image.
 
@@ -69,6 +70,7 @@ options:
 
 (c) Daniel Krajzewicz 2016-2025
 """
+    assert pname(captured.err) == ""
 
 
 def test_main_version(capsys):
@@ -80,6 +82,6 @@ def test_main_version(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patchName(captured.out) == """mem2png 0.18.0
+    assert pname(captured.out) == """mem2png 0.18.0
 """
-    assert patchName(captured.err) == ""
+    assert pname(captured.err) == ""

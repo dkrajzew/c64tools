@@ -18,12 +18,13 @@ __status__     = "Development"
 import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
+import util
 import filemerge
 
 
 # --- helper functions ----------------------------------------------
-def patchName(test):
-    return test.replace("pytest", "filemerge").replace("__main__.py", "filemerge")
+def pname(text):
+    return util.pname(text, "filemerge")
 
 
 # --- test functions ------------------------------------------------
@@ -36,8 +37,8 @@ def test_main_empty(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert patchName(captured.out) == ""
-    assert patchName(captured.err) == """usage: filemerge [-h] [--version] OUTPUT_FILE INPUT_FILE [INPUT_FILE ...]
+    assert pname(captured.out) == ""
+    assert pname(captured.err) == """usage: filemerge [-h] [--version] OUTPUT_FILE INPUT_FILE [INPUT_FILE ...]
 filemerge: error: the following arguments are required: OUTPUT_FILE, INPUT_FILE
 """
 
@@ -51,7 +52,7 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patchName(captured.out) == """usage: filemerge [-h] [--version] OUTPUT_FILE INPUT_FILE [INPUT_FILE ...]
+    assert pname(captured.out) == """usage: filemerge [-h] [--version] OUTPUT_FILE INPUT_FILE [INPUT_FILE ...]
 
 Joins a set of files into one.
 
@@ -65,6 +66,7 @@ options:
 
 (c) Daniel Krajzewicz 2016-2025
 """
+    assert pname(captured.err) == ""
 
 
 def test_main_version(capsys):
@@ -76,8 +78,8 @@ def test_main_version(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patchName(captured.out) == """filemerge 0.18.0
+    assert pname(captured.out) == """filemerge 0.18.0
 """
-    assert patchName(captured.err) == ""
+    assert pname(captured.err) == ""
 
 
