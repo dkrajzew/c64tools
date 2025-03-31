@@ -30,6 +30,8 @@ The tool has to be started with the following options set:
 * __--multicolor2/-2 _&lt;COLOR&gt;___: sets the multi color 2, default: #808080
 * __--multicolor/-m__: use multicolor mode
 * __--show/-s__: show the result after conversion
+* __--version__: prints the version information
+* __--help/-h__: prints the help screen
 
 
 ## Examples

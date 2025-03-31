@@ -15,14 +15,17 @@ The tool has to be started with the following options set:
 
 ### Options
 
-* __--screen-output/-s _&lt;SCREEN_OUTPUT_FILENAME&gt;___: the name of the file to save the screen to
-* __--charset-output/-c _&lt;CHARSET_OUTPUT_FILENAME&gt;___: the name of the file to save the charset to
+* __--screen-output/-S _&lt;SCREEN_OUTPUT_FILENAME&gt;___: the name of the file to save the screen to
+* __--charset-output/-C _&lt;CHARSET_OUTPUT_FILENAME&gt;___: the name of the file to save the charset to
+* __--show/-s__: shows the result
+* __--version__: prints the version information
+* __--help/-h__: prints the help screen
 
 
 ## Examples
 
 ```console
-charpacker -s screen.bin -c charset.bin logo.png
+charpacker --show -S screen.bin -C charset.bin logo.png
 ```
 
 Loads an image from “logo.png”, charpacks it, and writes the resulting screen to “screen.bin” and the resulting charset to “charset.bin”.

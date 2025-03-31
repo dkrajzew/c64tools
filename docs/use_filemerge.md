@@ -12,6 +12,8 @@
 
 ### Options
 
+* __--version__: prints the version information
+* __--help/-h__: prints the help screen
 
 ## Examples
 

@@ -16,6 +16,8 @@ The file to load must be supported. Either **--show** or **--output _&lt;IMAGE_T
 * __--show/-s__: show the memory dump
 * __--output/-o _&lt;IMAGE_TO_SAVE&gt;___: the name of the output file
 * __--width/-w _&lt;DISPLAY_WIDTH_IN_CHARACTERS&gt;___: the width of the window in chars (default: 128)
+* __--version__: prints the version information
+* __--help/-h__: prints the help screen
 
 
 Examples
