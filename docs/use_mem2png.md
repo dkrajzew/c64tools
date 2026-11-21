@@ -20,8 +20,7 @@ The file to load must be supported. Either **--show** or **--output _&lt;IMAGE_T
 * __--help/-h__: prints the help screen
 
 
-Examples
---------
+## Examples
 
 ```console
 mem2png bb_hex_game.bin 

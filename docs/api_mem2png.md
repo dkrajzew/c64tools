@@ -1,6 +1,6 @@
 # mem2png
 
-::: mem2png
+::: c64tools.mem2png
     docstring_style: "google"
     filters: [""]
     show_source: False

@@ -4,7 +4,7 @@ site_description: c64 Python helper.
 site_author: Daniel Krajzewicz
 docs_dir: ./docs
 
-repo_url: https://github.com/dkrajzew/c64tools.git
+repo_url: https://github.com/dkrajzew/c64tools
 edit_uri: ""
 
 theme:
@@ -30,7 +30,7 @@ nav:
         - mem2png: use_mem2png.md
         - filemerge: use_filemerge.md
     - Links: links.md
-    - Code Docs:
+    - API:
         - structures: api_structures.md
         - filemerge: api_filemerge.md
         - charpacker: api_charpacker.md
@@ -53,7 +53,7 @@ plugins:
     - mkdocstrings:
         handlers:
             python:
-                paths: [./c64tools]
+                paths: [./src]
                 options:
                     filters: [""]
                     show_source: False

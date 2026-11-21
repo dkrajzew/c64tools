@@ -19,15 +19,6 @@ Options
 * --version: show program's version number and exit
 """
 # ===========================================================================
-__author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2016-2025, Daniel Krajzewicz"
-__credits__    = ["Daniel Krajzewicz"]
-__license__    = "BSD"
-__version__    = "0.20.0"
-__maintainer__ = "Daniel Krajzewicz"
-__email__      = "daniel@krajzewicz.de"
-__status__     = "Development"
-# ===========================================================================
 # - https://github.com/dkrajzew/c64tools
 # - http://www.krajzewicz.de/docs/c64tools/index.html
 # - http://www.krajzewicz.de
@@ -35,13 +26,12 @@ __status__     = "Development"
 
 
 # --- imports ---------------------------------------------------------------
+from typing import List
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 import argparse
-import configparser
-import structures
-from typing import List
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import c64tools.structures as structures
 
 
 # --- methods ---------------------------------------------------------------
@@ -66,7 +56,7 @@ def main(arguments : List[str] = None) -> int:
         ifile = arguments[1]
         show = True
     else:
-        parser = argparse.ArgumentParser(prog="mem2png", 
+        parser = argparse.ArgumentParser(prog="mem2png",
             description="A c64 memory dump visualiser that can export the dump to an image.",
             epilog='(c) Daniel Krajzewicz 2016-2025')
         parser.add_argument('--version', action='version', version='%(prog)s 0.20.0')
@@ -105,12 +95,12 @@ def main(arguments : List[str] = None) -> int:
 
     # run the display loop
     if show:
-        while (w.show):
+        while w.show:
             pygame.display.update()
             mx,my = pygame.mouse.get_pos()
             char = (int(mx / 8) + (int(my/8)*int(xs/8))) * 8
             pygame.gfxdraw.filled_polygon(w.screen, [[0,ys+1], [xs,ys+1], [xs,ys+INFO], [0,ys+INFO], [0,ys+1]], (0,0,0))
-            textsurface = myfont.render('x=%s, y=%s' % (mx,my), False, (255,255,255))
+            textsurface = myfont.render(f"x={mx}, y={my}", False, (255,255,255))
             w.screen.blit(textsurface, (0, ys))
             textsurface = myfont.render('char address: %s (%x)' % (char, char), False, (255,255,255))
             w.screen.blit(textsurface, (0, ys+16))
@@ -118,6 +108,11 @@ def main(arguments : List[str] = None) -> int:
             w.run()
     pygame.quit()
     return 0
+
+
+def script_run() -> int:
+    """Execute from command line."""
+    sys.exit(main(sys.argv[1:])) # pragma: no cover
 
 
 # -- main check

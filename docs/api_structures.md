@@ -1,6 +1,6 @@
 # structures
 
-::: structures
+::: c64tools.structures
     docstring_style: "google"
     filters: [""]
     show_source: False

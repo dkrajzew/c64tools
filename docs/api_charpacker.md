@@ -1,6 +1,6 @@
 # charpacker
 
-::: charpacker
+::: c64tools.charpacker
     docstring_style: "google"
     filters: [""]
     show_source: False

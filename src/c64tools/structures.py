@@ -14,15 +14,6 @@ It contains the following classes:
 - Methods for writing binary contents
 """
 # ===========================================================================
-__author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2016-2025, Daniel Krajzewicz"
-__credits__    = ["Daniel Krajzewicz"]
-__license__    = "BSD"
-__version__    = "0.20.0"
-__maintainer__ = "Daniel Krajzewicz"
-__email__      = "daniel@krajzewicz.de"
-__status__     = "Development"
-# ===========================================================================
 # - https://github.com/dkrajzew/c64tools
 # - http://www.krajzewicz.de/docs/c64tools/index.html
 # - http://www.krajzewicz.de
@@ -30,12 +21,10 @@ __status__     = "Development"
 
 
 # --- imports ---------------------------------------------------------------
+from typing import List, Tuple
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 import pygame
-from typing import List
-from typing import Tuple
 
 
 
@@ -55,52 +44,52 @@ class Char:
             data (Tuple[int]): The character data (should be 8 bytes long)
         """
         self.data = data
-        if self.data==None:
+        if self.data is None:
             self.data = [0]*8
 
 
-    def draw_at(self, surface : pygame.Surface, x : int, y : int, fgColor : Tuple[int, int, int, int]=(255, 255, 255, 255), bgColor : Tuple[int, int, int, int]=(0, 0, 0, 255)):
+    def draw_at(self, surface : pygame.Surface, x : int, y : int, fg_color : Tuple[int, int, int, int]=(255, 255, 255, 255), bg_color : Tuple[int, int, int, int]=(0, 0, 0, 255)) -> None:
         """Draws this character (in hires) at the given surface and the given position.
 
         Args:
             surface (pygame.Surface): The surface to draw this memory to
             x (int): x-offset for drawing
             y (int): y-offset for drawing
-            fgColor (Tuple[int, int, int, int]): foreground color given as a tuple of four integers (rgba), may be None
-            bgColor (Tuple[int, int, int, int]): background color given as a tuple of four integers (rgba), may be None
+            fg_color (Tuple[int, int, int, int]): foreground color given as a tuple of four integers (rgba), may be None
+            bg_color (Tuple[int, int, int, int]): background color given as a tuple of four integers (rgba), may be None
         """
         for yl in range(0, 8):
             b = self.data[yl]
             for xl in range(0, 8):
-                c = bgColor
+                c = bg_color
                 if b&(2**(7-xl))!=0:
-                    c = fgColor
+                    c = fg_color
                 if c:
                     surface.set_at((xl+x, yl+y), c)
 
 
-    def draw_at_multicolor(self, surface : pygame.Surface, x : int, y : int, fgColor : Tuple[int, int, int, int]=(255, 255, 255, 255), bgColor : Tuple[int, int, int, int]=(0, 0, 0, 255), multi1Color : Tuple[int, int, int, int]=(192, 192, 192, 255), multi2Color: Tuple[int, int, int, int]=(128, 128, 128, 255)):
+    def draw_at_multicolor(self, surface : pygame.Surface, x : int, y : int, fg_color : Tuple[int, int, int, int]=(255, 255, 255, 255), bg_color : Tuple[int, int, int, int]=(0, 0, 0, 255), multi_color1 : Tuple[int, int, int, int]=(192, 192, 192, 255), multi_color2: Tuple[int, int, int, int]=(128, 128, 128, 255)) -> None:
         """Draws this character in multicolor at the given surface and the given position.
 
         Args:
             surface (pygame.Surface): The surface to draw this memory to
             x (int): x-offset for drawing
             y (int): y-offset for drawing
-            fgColor (Tuple[int, int, int, int]): foreground color given as a tuple of four integers (rgba), may be None
-            bgColor (Tuple[int, int, int, int]): background color given as a tuple of four integers (rgba), may be None
-            multi1Color (Tuple[int, int, int, int]): multi1 color given as a tuple of four integers (rgba), may be None
-            multi2Color (Tuple[int, int, int, int]): multi2 color given as a tuple of four integers (rgba), may be None
+            fg_color (Tuple[int, int, int, int]): foreground color given as a tuple of four integers (rgba), may be None
+            bg_color (Tuple[int, int, int, int]): background color given as a tuple of four integers (rgba), may be None
+            multi_color1 (Tuple[int, int, int, int]): multi1 color given as a tuple of four integers (rgba), may be None
+            multi_color2 (Tuple[int, int, int, int]): multi2 color given as a tuple of four integers (rgba), may be None
         """
         for yl in range(0, 8):
             b = self.data[yl]
             for xl in range(0, 4):
-                c = bgColor
+                c = bg_color
                 if b&(2**(7-xl*2))!=0 and b&(2**(7-xl*2-1))!=0:
-                    c = fgColor
+                    c = fg_color
                 elif b&(2**(7-xl*2))!=0 and b&(2**(7-xl*2-1))==0:
-                    c = multi1Color
+                    c = multi_color1
                 elif b&(2**(7-xl*2))==0 and b&(2**(7-xl*2-1))!=0:
-                    c = multi2Color
+                    c = multi_color2
                 if c:
                     surface.set_at((xl*2+x, yl+y), c)
                     surface.set_at((xl*2+x+1, yl+y), c)
@@ -115,13 +104,13 @@ class Char:
         Returns:
             (bool): Whether the given character is same as self
         """
-        for i,x in enumerate(self.data):
+        for i,_ in enumerate(self.data):
             if self.data[i]!=c.data[i]:
                 return False
         return True
 
 
-    def write(self, f):
+    def write(self, f) -> None:
         """Writes this character to a file.
 
         Args:
@@ -130,15 +119,15 @@ class Char:
         f.write(bytearray(self.data))
 
 
-    def inverse(self):
+    def inverse(self) -> None:
         """Inverses this character."""
-        for i,b in enumerate(self.data):
+        for i,_ in enumerate(self.data):
             self.data[i] ^= 255
             
             
             
 # --- Window class ----------------------------------------------------------
-class Window(object):
+class Window:
     """A plain pygame window. Nothing special about it."""
 
     def __init__(self, w : int, h : int, title : str = "c64 draw"):
@@ -163,7 +152,7 @@ class Window(object):
         pygame.display.update()
 
 
-    def run(self):
+    def run(self) -> None:
         """Processes the pygame window events.
 
         Should be called in a loop to process the occuring events.
@@ -199,7 +188,7 @@ class Memory:
             self.data = [0]*(65536)
 
 
-    def load(self, filename : str):
+    def load(self, filename : str) -> None:
         """Loads the given files as a memory dump.
 
         Reads the first two bytes as destination (starting address).
@@ -215,17 +204,17 @@ class Memory:
         """
         f = open(filename, "rb")
         ba = bytearray(f.read())
-        startingAddress = ba[0] + ba[1] * 256
+        starting_address = ba[0] + ba[1] * 256
         self.data = []
-        if startingAddress!=0:
-            self.data = [0] * startingAddress
+        if starting_address!=0:
+            self.data = [0] * starting_address
         self.data.extend(list(ba[2:]))
-        rest = 65536 - (startingAddress + len(ba) - 2)
+        rest = 65536 - (starting_address + len(ba) - 2)
         if rest>0:
             self.data.extend([0]*rest)
 
 
-    def draw_at(self, surface : pygame.Surface, x : int, y : int, cols : int, fgColor : Tuple[int, int, int, int]=(255, 255, 255, 255), bgColor : Tuple[int, int, int, int]=(0, 0, 0, 255)):
+    def draw_at(self, surface : pygame.Surface, x : int, y : int, cols : int, fg_color : Tuple[int, int, int, int]=(255, 255, 255, 255), bg_color : Tuple[int, int, int, int]=(0, 0, 0, 255)) -> None:
         """Draws this memory at the given surface and the given position.
 
         Args:
@@ -233,15 +222,15 @@ class Memory:
             x (int): x-offset for drawing
             y (int): y-offset for drawing
             cols (int): the number of (character) columns
-            fgColor (Tuple[int, int, int, int]): foreground color given as a tuple of four integers (rgba), may be None
-            bgColor (Tuple[int, int, int, int]): background color given as a tuple of four integers (rgba), may be None
+            fg_color (Tuple[int, int, int, int]): foreground color given as a tuple of four integers (rgba), may be None
+            bg_color (Tuple[int, int, int, int]): background color given as a tuple of four integers (rgba), may be None
         """
         hc = int(65536/8/cols) # rows in chars
         for yh in range(0, hc):
             for xh in range(0, cols):
                 offset = xh*8 + yh*8*cols
                 char = Char(self.data[offset:offset+8])
-                char.draw_at(surface, x+xh*8, y+yh*8, fgColor, bgColor)
+                char.draw_at(surface, x+xh*8, y+yh*8, fg_color, bg_color)
 
 
     def char_at(self, addr : int) -> Char:
@@ -272,7 +261,7 @@ class Bitmap:
             data (List[int]): The bitmap data
         """
         self.data = data
-        if self.data==None:
+        if self.data is None:
             self.data = [0]*(40*25*8)
 
 
@@ -290,29 +279,29 @@ class Bitmap:
         return Char(self.data[off:off+8])
 
 
-    def draw_at(self, surface : pygame.Surface, x : int, y : int, fgColor : Tuple[int, int, int, int]=(255, 255, 255, 255), bgColor : Tuple[int, int, int, int]=(0, 0, 0, 255)):
+    def draw_at(self, surface : pygame.Surface, x : int, y : int, fg_color : Tuple[int, int, int, int]=(255, 255, 255, 255), bg_color : Tuple[int, int, int, int]=(0, 0, 0, 255)) -> None:
         """Draws this bitmap at the given surface and the given position.
 
         Args:
             surface (pygame.Surface): The surface to draw this memory to
             x (int): x-offset for drawing
             y (int): y-offset for drawing
-            fgColor (Tuple[int, int, int, int]): foreground color given as a tuple of four integers (rgba), may be None
-            bgColor (Tuple[int, int, int, int]): background color given as a tuple of four integers (rgba), may be None
+            fg_color (Tuple[int, int, int, int]): foreground color given as a tuple of four integers (rgba), may be None
+            bg_color (Tuple[int, int, int, int]): background color given as a tuple of four integers (rgba), may be None
         """
         for yh in range(0, 25):
             for xh in range(0, 40):
                 for yl in range(0, 8):
                     b = self.data[yh*8*40+xh*8+yl]
                     for xl in range(0, 8):
-                        c = bgColor
+                        c = bg_color
                         if b&(2**(7-xl))!=0:
-                            c = fgColor
+                            c = fg_color
                         if c:
                             surface.set_at((xh*8+xl+x, yh*8+yl+y), c)
 
 
-    def from_surface(self, surface : pygame.Surface, x : int, y : int):
+    def from_surface(self, surface : pygame.Surface, x : int, y : int) -> None:
         """Generates the Bitmap from the given surface, starting at the given position.
 
         Please note that only white pixels are assumed to be set
@@ -336,7 +325,7 @@ class Bitmap:
                     self.data[yh*8*40+xh*8+yl] = v
 
 
-    def from_c64_screen(self, screen, chars : List[Char]):
+    def from_c64_screen(self, screen, chars : List[Char]) -> None:
         """Fills the bitmap using the given screen and character set information
 
         Args:
@@ -372,7 +361,7 @@ class Screen:
             data (List[int]): The screen data (should be 1000 bytes long)
         """
         self.data = data
-        if self.data==None:
+        if self.data is None:
             self.data = [0]*(40*25)
 
 
@@ -389,7 +378,7 @@ class Screen:
         return self.data[col+row*40]
 
 
-    def set_char_at(self, col : int, row : int, char : int):
+    def set_char_at(self, col : int, row : int, char : int) -> None:
         """Sets the given character at the given position
 
         Args:

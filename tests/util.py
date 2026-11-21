@@ -15,11 +15,8 @@ __status__     = "Development"
 # - http://www.krajzewicz.de/docs/c64tools/index.html
 # - http://www.krajzewicz.de
 # ===========================================================================
-import sys
 import os
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "c64tools"))
 import shutil
-import mem2png
 TEST_PATH = os.path.split(__file__)[0]
 
 

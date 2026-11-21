@@ -1,6 +1,6 @@
 # filemerge
 
-::: filemerge
+::: c64tools.filemerge
     docstring_style: "google"
     filters: [""]
     show_source: False

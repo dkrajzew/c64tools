@@ -1,6 +1,6 @@
 # charset2png
 
-::: charset2png
+::: c64tools.charset2png
     docstring_style: "google"
     filters: [""]
     show_source: False

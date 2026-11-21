@@ -17,10 +17,10 @@ __status__     = "Development"
 # ===========================================================================
 import sys
 import os
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "c64tools"))
 from pathlib import Path
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
 import util
-import charset2png
+import c64tools.charset2png as charset2png
 
 
 # --- helper functions ----------------------------------------------
@@ -128,7 +128,7 @@ def test_example1(capsys, tmp_path):
     ret = charset2png.main(["--foreground", "#000000", "--background", "#ffffff", "-o", str(tmp_path / "ata_1_1_1x1.png"), "-n", "64", "-w", "32", "-i", str(tmp_path / "ata_1.bin"), "35328"])
     assert ret==0
     captured = capsys.readouterr()
-    assert pname(captured.out, tmp_path) == """Written 64 chars to <DIR>/ata_1_1_1x1.png
+    assert pname(captured.out, tmp_path) == """Written 64 chars to '<DIR>/ata_1_1_1x1.png'
 """
     assert pname(captured.err) == ""
     assert util.fread(tmp_path / "ata_1_1_1x1.png") == util.fread(Path(util.TEST_PATH) / "ata_1_1_1x1.png")
@@ -140,7 +140,7 @@ def test_example2(capsys, tmp_path):
     ret = charset2png.main(["--foreground", "#000000", "--background", "#ffffff", "-o", str(tmp_path / "ata_1_2_1x2.png"), "-n", "64", "-w", "32", "-i", "-p", "0;64", str(tmp_path / "ata_1.bin"), "51208"])
     assert ret==0
     captured = capsys.readouterr()
-    assert pname(captured.out, tmp_path) == """Written 64 chars to <DIR>/ata_1_2_1x2.png
+    assert pname(captured.out, tmp_path) == """Written 64 chars to '<DIR>/ata_1_2_1x2.png'
 """
     assert pname(captured.err) == ""
     assert util.fread(tmp_path / "ata_1_2_1x2.png") == util.fread(Path(util.TEST_PATH) / "ata_1_2_1x2.png")

@@ -1,7 +1,8 @@
-[![License: BSD](https://img.shields.io/badge/License-BSD-green.svg)](https://github.com/dkrajzew/c64tools/blob/master/LICENSE)
-[![PyPI version](https://badge.fury.io/py/c64tools.svg)](https://pypi.python.org/pypi/c64tools)
+[![License: BSD](https://img.shields.io/badge/License-BSD-green.svg)](https://github.com/dkrajzew/c64tools/blob/main/LICENSE)
+[![PyPI version](https://badge.fury.io/py/c64tools.svg)](https://pypi.org/project/c64tools/)
 ![test](https://github.com/dkrajzew/c64tools/actions/workflows/test.yml/badge.svg)
-[![Downloads](https://pepy.tech/badge/c64tools)](https://pepy.tech/project/c64tools)
+[![Downloads](https://static.pepy.tech/badge/c64tools)](https://pepy.tech/projects/c64tools)
+[![Downloads](https://static.pepy.tech/badge/c64tools/week)](https://pepy.tech/projects/c64tools)
 [![Coverage Status](https://coveralls.io/repos/github/dkrajzew/c64tools/badge.svg?branch=main)](https://coveralls.io/github/dkrajzew/c64tools?branch=main)
 [![Documentation Status](https://readthedocs.org/projects/c64tools/badge/?version=latest)](https://c64tools.readthedocs.io/en/latest/?badge=latest)
 
@@ -42,6 +43,11 @@ Besides, you may __download the current release__ here:
 * [c64tools-0.20.0.tar.gz](https://github.com/dkrajzew/c64tools/archive/refs/tags/0.20.0.tar.gz)
 
 
+## License
+
+__c64tools__ is licensed under the [BSD license](license.md).
+
+
 # Links
 
 * A complete documentation is located at:
@@ -55,19 +61,15 @@ Besides, you may __download the current release__ here:
 
 # Changes
 
-## c64tools-0.20.0 (31.03.2025)
+## c64tools-0.22.0 (to come)
 
 * Working on the documentation
-* added type hints (where possible)
-* replaced OptionParser by ArgumentParser
-    * __some of the options have been transferred to arguments__
-* changes in __charset2png.py__
-    * the option **--quiet** has been replaced by the option **--show**
-* changes in __charpacker.py__
-    * added the option **--show**
-    * short options for **--screen-output** and **--charset-output** are now named **-S** and **-C**, respectively
-* added some tests
-* **debugged command line execution after install**
+* Patched installation - sane command line and inclusion
+* some linting
+
+## Older versions
+
+You may find the complete change log at [the grebakker documentation pages](https://c64tools.readthedocs.io/en/latest/).
 
 
 # Note

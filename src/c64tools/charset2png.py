@@ -27,15 +27,6 @@ Options
 * --version: show program's version number and exit
 """
 # ===========================================================================
-__author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2016-2025, Daniel Krajzewicz"
-__credits__    = ["Daniel Krajzewicz"]
-__license__    = "BSD"
-__version__    = "0.20.0"
-__maintainer__ = "Daniel Krajzewicz"
-__email__      = "daniel@krajzewicz.de"
-__status__     = "Development"
-# ===========================================================================
 # - https://github.com/dkrajzew/c64tools
 # - http://www.krajzewicz.de/docs/c64tools/index.html
 # - http://www.krajzewicz.de
@@ -43,31 +34,32 @@ __status__     = "Development"
 
 
 # --- imports ---------------------------------------------------------------
+from typing import List
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 import argparse
-import configparser
 import math
 import pygame
-import structures
-from typing import List
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import c64tools.structures as structures
 
 
 # --- methods ---------------------------------------------------------------
-def convert_color(color):
+def convert_color(color : str):
     """Converts a given hex color, optionally lead by a '#', into
         an RGB tuple.
 
     Args:
-        color (string): The hex color string
+        color (str): The hex color string
 
     Returns:
         (Tuple[int, int, int]): The converted color
     """
-    if not color: return None
+    if not color:
+        return None
     color = color.strip("#")
-    if len(color)==0: return None
+    if len(color)==0:
+        return None
     return tuple(int(color[i:i+2], 16) for i in (0, 2 ,4))
 
 
@@ -78,7 +70,7 @@ def main(arguments : List[str] = None) -> int:
     Args:
         arguments (List[str]): The command line arguments
     """
-    parser = argparse.ArgumentParser(prog="charset2png", 
+    parser = argparse.ArgumentParser(prog="charset2png",
         description="Extracts a character set at a given address from a given memory dump.",
         epilog='(c) Daniel Krajzewicz 2016-2025')
     parser.add_argument('--version', action='version', version='%(prog)s 0.20.0')
@@ -97,7 +89,6 @@ def main(arguments : List[str] = None) -> int:
     parser.add_argument("-m", "--multicolor", dest="multicolor", action="store_true", help="use multicolor mode")
     parser.add_argument("-s", "--show", dest="show", action="store_true", help="show the result after conversion")
     args = parser.parse_args(arguments)
-    ofile = args.output
     if not args.output and not args.show:
         print ("charset2png: error: either --show or the output file (--output <FILE>) must be set.", file=sys.stderr)
         return 2
@@ -107,52 +98,55 @@ def main(arguments : List[str] = None) -> int:
 
     # build the surface to fill and save
     pattern = args.pattern.split(";")
-    for i,l in enumerate(pattern):
+    for i,_ in enumerate(pattern):
         pattern[i] = pattern[i].split("-")
-    rowsPerChar = len(pattern)
-    colsPerChar = len(pattern[0])
+    rows_per_char = len(pattern)
+    cols_per_char = len(pattern[0])
     width = int(args.width*8)
     height = math.ceil(float(args.num) / float(args.width))
-    height = int(height*8*rowsPerChar+(max(1, height)-1)*args.divider)
+    height = int(height*8*rows_per_char+(max(1, height)-1)*args.divider)
     s = pygame.Surface((width, height))
-    bgColor = convert_color(args.background)
-    fgColor = convert_color(args.foreground)
-    multi1Color = convert_color(args.multicolor1)
-    multi2Color = convert_color(args.multicolor2)
-    s.fill(bgColor)
+    bg_color = convert_color(args.background)
+    fg_color = convert_color(args.foreground)
+    multi_color1 = convert_color(args.multicolor1)
+    multi_color2 = convert_color(args.multicolor2)
+    s.fill(bg_color)
     addr = args.address
-    line = 0
     for i in range(0, args.num):
-        srcBase = addr + i*8
-        dstX = ((i*colsPerChar)%args.width)*8
-        dstLine = int(float(i*colsPerChar)/float(args.width))
-        dstY = dstLine*rowsPerChar*8 + dstLine*args.divider
+        src_base = addr + i*8
+        dst_x = ((i*cols_per_char)%args.width)*8
+        dst_line = int(float(i*cols_per_char)/float(args.width))
+        dst_y = dst_line*rows_per_char*8 + dst_line*args.divider
         for lp in pattern:
-            oX = 0
+            x_offset = 0
             for cp in lp:
-                src = srcBase + int(cp)*8
+                src = src_base + int(cp)*8
                 char = mem.char_at(src)
                 if args.inverse:
                     char.inverse()
-                if args.multicolor: 
-                    char.draw_at_multicolor(s, dstX+oX, dstY, fgColor, None, multi1Color, multi2Color)
-                else: 
-                    char.draw_at(s, dstX+oX, dstY, fgColor, None)
-                oX += 8
-            dstY += 8
+                if args.multicolor:
+                    char.draw_at_multicolor(s, dst_x+x_offset, dst_y, fg_color, None, multi_color1, multi_color2)
+                else:
+                    char.draw_at(s, dst_x+x_offset, dst_y, fg_color, None)
+                x_offset += 8
+            dst_y += 8
     pygame.image.save(s, args.output)
-    print ("Written %s chars to %s" % (args.num, args.output))
+    print (f"Written {args.num} chars to '{args.output}'")
     if args.show:
         w = structures.Window(width, height, "charset")
         w.screen.blit(s, (0, 0))
-        while (w.show):
+        while w.show:
             pygame.display.flip()
             w.run()
     pygame.quit()
     return 0
 
 
+def script_run() -> int:
+    """Execute from command line."""
+    sys.exit(main(sys.argv[1:])) # pragma: no cover
+
+
 # -- main check
 if __name__ == "__main__":
     sys.exit(main(sys.argv[1:])) # pragma: no cover
-

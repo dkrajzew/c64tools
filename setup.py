@@ -43,19 +43,19 @@ setuptools.setup(
     },
     license='BSD-3-Clause',
     # add modules
-    packages = ["c64tools", "tests"],
-    package_data={
-        'tests': ['ata_1.bin', 'chr_out.bin', 'scr_out.bin',
-            'mem2.bin', 'mem2_1.bin', 'mem2_2.bin',
-            'test.hir.gif', 'ata_1_1_1x1.png', 'ata_1_2_1x2.png',
-            'mem1.png' ]
-    },
+    packages = ["c64tools"],#, "tests"],
+    #package_data={
+    #    'tests': ['ata_1.bin', 'chr_out.bin', 'scr_out.bin',
+    #        'mem2.bin', 'mem2_1.bin', 'mem2_2.bin',
+    #        'test.hir.gif', 'ata_1_1_1x1.png', 'ata_1_2_1x2.png',
+    #        'mem1.png' ]
+    #},
     entry_points = {
         'console_scripts': [
-            'charpacker = c64tools.charpacker:main',
-            'charset2png = c64tools.charset2png:main',
-            'mem2png = c64tools.mem2png:main',
-            'filemerge = c64tools.filemerge:main'
+            'charpacker = c64tools.charpacker:script_run',
+            'charset2png = c64tools.charset2png:script_run',
+            'mem2png = c64tools.mem2png:script_run',
+            'filemerge = c64tools.filemerge:script_run'
         ]
     },
     install_requires = [ "pygame==2.6.0" ],

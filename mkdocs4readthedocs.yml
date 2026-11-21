@@ -4,7 +4,7 @@ site_description: c64 Python helper.
 site_author: Daniel Krajzewicz
 docs_dir: ./docs
 
-repo_url: https://github.com/dkrajzew/c64tools.git
+repo_url: https://github.com/dkrajzew/c64tools
 edit_uri: ""
 
 theme:
@@ -16,21 +16,21 @@ theme:
 nav:
     - Home: index.md
     - Installation: install.md
-    - Links: links.md
-    - ChangeLog: changes.md
-    - License (BSD): license.md
-    - Legal: legal.md
     - Usage: 
         - charpacker: use_charpacker.md
         - charset2png: use_charset2png.md
         - mem2png: use_mem2png.md
         - filemerge: use_filemerge.md
-    - Code Docs:
+    - Links: links.md
+    - API:
         - structures: api_structures.md
         - filemerge: api_filemerge.md
         - charpacker: api_charpacker.md
         - charset2png: api_charset2png.md
         - mem2png: api_mem2png.md
+    - ChangeLog: changes.md
+    - License (BSD): license.md
+    - Legal: legal.md
 
 markdown_extensions:
     - admonition
@@ -45,7 +45,7 @@ plugins:
     - mkdocstrings:
         handlers:
             python:
-                paths: [./c64tools]
+                paths: [./src]
                 options:
                     filters: [""]
                     show_source: False

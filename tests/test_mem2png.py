@@ -17,10 +17,10 @@ __status__     = "Development"
 # ===========================================================================
 import sys
 import os
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "c64tools"))
 from pathlib import Path
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
 import util
-import mem2png
+import c64tools.mem2png as mem2png
 
 
 # --- helper functions ----------------------------------------------

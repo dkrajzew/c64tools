@@ -19,15 +19,6 @@ Options
 * --version: show program's version number and exit
 """
 # ===========================================================================
-__author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2016-2025, Daniel Krajzewicz"
-__credits__    = ["Daniel Krajzewicz"]
-__license__    = "BSD"
-__version__    = "0.20.0"
-__maintainer__ = "Daniel Krajzewicz"
-__email__      = "daniel@krajzewicz.de"
-__status__     = "Development"
-# ===========================================================================
 # - https://github.com/dkrajzew/c64tools
 # - http://www.krajzewicz.de/docs/c64tools/index.html
 # - http://www.krajzewicz.de
@@ -35,14 +26,13 @@ __status__     = "Development"
 
 
 # --- imports ---------------------------------------------------------------
+from typing import List
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 import argparse
-import configparser
 import pygame
-import structures
-from typing import List
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import c64tools.structures as structures
 
 
 # --- methods ---------------------------------------------------------------
@@ -60,7 +50,7 @@ def charpack(bitmap, ret=None):
     Returns:
         (Tuple[List[Char], Screen]): The obtained characters and the screen
     """
-    if ret==None:
+    if ret is None:
         ret = [[], structures.Screen()]
     for row in range(0, 25):
         for col in range(0, 40):
@@ -106,33 +96,35 @@ def main(arguments : List[str] = None) -> int:
     # charpack
     chars, screen = charpack(bo)
     if len(chars)<257:
-        print ("Charpacking succesfull, needed %s chars." % len(chars))
+        print (f"Charpacking succesfull, needed {len(chars)} chars.")
         if ofile_screen:
             print ("saving screen...")
-            f = open(ofile_screen, "wb")
-            f.write(bytearray(screen.data))
-            f.close()
+            with open(ofile_screen, "wb") as f:
+                f.write(bytearray(screen.data))
         if ofile_charset:
             print ("saving charset...")
-            f = open(ofile_charset, "wb")
-            for c in chars:
-                f.write(bytearray(c.data))
-            f.close()
+            with open(ofile_charset, "wb") as f:
+                for c in chars:
+                    f.write(bytearray(c.data))
     else:
-        print ("Charpacking failed, needed %s chars." % len(chars))
+        print (f"Charpacking failed, needed {len(chars)} chars.")
     if args.show:
         # rebuild the bitmap and show it
         bn = structures.Bitmap()
         bn.from_c64_screen(screen, chars)
         bn.draw_at(w.screen, 0, 400)
         pygame.display.update()
-        while ( w.show ):
+        while w.show:
             w.run()
         pygame.quit()
     return 0
-    
+
+
+def script_run() -> int:
+    """Execute from command line."""
+    sys.exit(main(sys.argv[1:])) # pragma: no cover
+
 
 # -- main check
 if __name__ == "__main__":
     sys.exit(main(sys.argv[1:])) # pragma: no cover
-
